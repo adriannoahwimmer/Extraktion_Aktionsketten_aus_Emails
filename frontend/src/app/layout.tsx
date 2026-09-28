@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       {/* suppressHydrationWarning: Browser-Erweiterungen (z.B. Grammarly) haengen

@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 "use client";
 
 import { useMemo } from "react";
@@ -20,9 +21,8 @@ const GATEWAY_HOEHE = 150;
 const CONTAINER_MAX_HOEHE = 1000;
 
 // Grobe Hoehenschaetzung eines Knotens aus seiner Textlaenge, damit dagre die
-// vertikalen Abstaende realistisch plant. Vorher war die Hoehe fest 90px -
-// lange deutsche action-Texte umbrechen aber auf 5-6 Zeilen, wodurch sich die
-// Knoten im Layout ueberlappten.
+// vertikalen Abstaende realistisch plant und sich Knoten mit langen,
+// mehrzeiligen action-Texten nicht ueberlappen.
 function schaetzeHoehe(n: ChainNode): number {
   if (n.type === "gateway") return GATEWAY_HOEHE;
   const text = n.action ?? n.label ?? "";

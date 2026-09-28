@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 "use client";
 
 import { useRouter } from "next/navigation";

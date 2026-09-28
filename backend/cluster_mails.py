@@ -1,42 +1,35 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 cluster_mails.py
 --------------------------------------------------
-Gruppiert Mails aus mails.jsonl automatisch nach Vorgang (Clustering statt
-Stichwortfilter), ohne die Anzahl der Cluster vorzugeben.
+Schritt 2 der Pipeline: gruppiert die Mails aus mails.jsonl automatisch nach
+Vorgang (Clustering statt Stichwortsuche), ohne die Anzahl der Cluster
+vorzugeben.
 
 Ablauf:
-  1. mails.jsonl laden und nach Body deduplizieren (Enron-Korpus enthaelt
+  1. mails.jsonl laden und nach Body deduplizieren (der Enron-Korpus enthaelt
      dieselbe Mail mehrfach in verschiedenen Postfaechern).
-  2. Jede Mail ueber die KIT-Toolbox embedden (mit lokalem Cache, damit ein
-     erneuter Lauf nicht alles neu embedded).
+  2. Jede Mail ueber die KIT-Toolbox einbetten (mit lokalem Cache, ein
+     erneuter Lauf bettet nur fehlende Mails ein).
   3. Dimensionsreduktion mit UMAP, dann Clustering mit HDBSCAN.
   4. Ergebnis nach clusters.jsonl schreiben + Konsolen-Report.
   5. Akzeptanztest: liegen die bekannten Burnet-Mails im selben Cluster?
+     (nur, wenn der Datensatz sie enthaelt)
 
-Einmalig vorbereiten:
-    pip install openai numpy "scikit-learn>=1.3" umap-learn
-    # KIT-Toolbox-API-Key setzen (PowerShell, gilt fuer diese Terminal-Sitzung):
-    #   $env:OPENAI_API_KEY = "sk-..."
-
-Ausfuehren (aus dem Ordner backend/):
-    cd backend
-    python cluster_mails.py
+Aufruf (aus backend/, API-Key in <Projekt>/.env):
+    python cluster_mails.py                        # Enron
+    python cluster_mails.py --batch-dir <ordner>   # Upload-Batch
 """
 
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 
 import numpy as np
 from openai import OpenAI
-
-try:
-    from sklearn.cluster import HDBSCAN
-    HDBSCAN_QUELLE = "sklearn"
-except ImportError:
-    from hdbscan import HDBSCAN
-    HDBSCAN_QUELLE = "hdbscan (Standalone-Paket)"
+from sklearn.cluster import HDBSCAN
 
 import umap
 
@@ -58,20 +51,18 @@ BATCH_SIZE = 32                # Mails pro Embedding-Request
 MAX_BODY_CHARS = 6000          # lange Bodies kappen (Token-Limits)
 
 UMAP_N_COMPONENTS = 5
-UMAP_N_NEIGHBORS = 15          # Stellschraube: groesser = globalere Struktur
+UMAP_N_NEIGHBORS = 15          # groesser = globalere Struktur
 UMAP_METRIC = "cosine"
 UMAP_RANDOM_STATE = 42
+UMAP_MIN_MAILS = 15            # darunter wird UMAP uebersprungen (zu wenige Punkte)
 
-HDBSCAN_MIN_CLUSTER_SIZE = 2   # klein, da Burnet-Prozess nur ~3 Mails hat.
-                                # Getestet: hoehere Werte (3+, auch mit
-                                # cluster_selection_method="leaf") verschmelzen
-                                # kleine falsche Cluster nur zu GROESSEREN
-                                # falschen Clustern statt sie ins Rauschen zu
-                                # verschieben (siehe tune_clustering.py).
-                                # Kleine falsche Cluster sind guenstiger/
-                                # harmloser - die eigentliche Qualitaetskontrolle
-                                # passiert ueber prozess_wahrscheinlichkeit
-                                # in extract_chains.py.
+# Klein gewaehlt, weil echte Vorgaenge oft nur 2-3 Mails umfassen (Burnet: 3).
+# Hoehere Werte verschieben schwache Cluster nicht ins Rauschen, sondern
+# verschmelzen sie zu groesseren Fehlclustern (Parameter-Sweep mit
+# tune_clustering.py, siehe docs/PIPELINE_DOKUMENTATION.md, 5.3). Kleine
+# Fehlcluster sind harmloser; die Qualitaetskontrolle uebernimmt das LLM
+# ueber prozess_wahrscheinlichkeit.
+HDBSCAN_MIN_CLUSTER_SIZE = 2
 
 
 # ------------------------------------------------------------------
@@ -127,7 +118,7 @@ def reduziere_dimension(vektoren: np.ndarray):
     wenige Datenpunkte fuer n_neighbors) wird UMAP uebersprungen und direkt auf
     den Roh-Embeddings geclustert."""
     n = len(vektoren)
-    if n < 15:
+    if n < UMAP_MIN_MAILS:
         print(f"Nur {n} Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.")
         return vektoren, False
 
@@ -213,9 +204,9 @@ def burnet_akzeptanztest(mails, labels):
 
     print(f"\nBurnet-Mails liegen in Cluster(n): {treffer_cluster}")
     if len(treffer_cluster) == 1 and -1 not in treffer_cluster:
-        print("Erfolg: alle Burnet-Mails liegen im selben Cluster.")
+        print("Bestanden: alle Burnet-Mails liegen im selben Cluster.")
     else:
-        print("Noch nicht gut: Burnet-Mails sind verstreut oder als Rauschen markiert.")
+        print("Nicht bestanden: Burnet-Mails sind verstreut oder als Rauschen markiert.")
 
 
 # ------------------------------------------------------------------
@@ -242,13 +233,11 @@ def main():
 
     if not MAILS_DATEI.exists():
         print(f"{MAILS_DATEI} nicht gefunden.")
-        return
+        sys.exit(1)
     if not os.environ.get("OPENAI_API_KEY"):
-        print("Kein OPENAI_API_KEY gesetzt.")
-        print('PowerShell:  $env:OPENAI_API_KEY = "sk-..."  (dein KIT-Toolbox-Key)')
-        return
-
-    print(f"HDBSCAN-Quelle: {HDBSCAN_QUELLE}")
+        print("Kein OPENAI_API_KEY gefunden. KIT-Toolbox-Key in <Projekt>/.env eintragen "
+              "(Vorlage: .env.example).")
+        sys.exit(1)
 
     mails = lade_mails(MAILS_DATEI)
     mails_dedup = dedupliziere(mails)

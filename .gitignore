@@ -14,19 +14,27 @@ node_modules/
 .next/
 out/
 
-# Daten & große Dateien
+# Rohdaten (Enron-Korpus, siehe README) & grosse Dateien
 data/
 *.csv
 *.parquet
 *.zip
+*.pst
+
+# Abgeleitete Daten der Enron-Pipeline (lokal neu erzeugbar)
+*.npy
+backend/mails.jsonl
+backend/clusters.jsonl
+backend/embeddings_ids.json
+backend/verarbeitet.json
+backend/beispiele/
+
+# Upload-Batches und daraus extrahierte Ketten (private Postfaecher)
+backend/batches/
+backend/chains/chain_b[0-9]*.json
 
 # OS / IDE
 .DS_Store
+Thumbs.db
 .idea/
 .vscode/
-# Abgeleitete Daten & Uploads
-*.npy
-*.pst
-backend/mails.jsonl
-backend/clusters.jsonl
-backend/batches/*/upload/

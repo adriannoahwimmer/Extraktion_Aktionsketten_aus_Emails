@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { holeChain } from "@/lib/chains";

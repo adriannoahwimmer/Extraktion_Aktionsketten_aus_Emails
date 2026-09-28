@@ -1,0 +1,2 @@
+# Beispiel-Postfach unveraendert auschecken (keine CRLF-Umwandlung)
+*.mbox -text

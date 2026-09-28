@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Von "next dev" erzeugte Hinweisdateien fuer KI-Coding-Agenten
+AGENTS.md
+CLAUDE.md

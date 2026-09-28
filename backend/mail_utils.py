@@ -1,7 +1,8 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 mail_utils.py
 --------------------------------------------------
-Gemeinsame Hilfsfunktionen fuer die Mail-Pipeline, an EINER Stelle, damit alle
+Gemeinsame Hilfsfunktionen fuer die Mail-Pipeline, an einer Stelle, damit alle
 Skripte exakt dasselbe Verhalten haben:
 
   - lade_mails / dedupliziere / normalisiere_body : mails.jsonl laden und nach
@@ -26,8 +27,8 @@ BURNET_PHRASEN = [
 ]
 
 # Adressmuster, die auf Massen-/Newsletter-Versender hindeuten (kein Dialog).
-# Bewusst NICHT "update"/"info" o.ae. - das matcht auch legitime interne
-# Systemadressen (z.B. enron_update@concureworkplace.com, ein echter Workflow).
+# Generische Begriffe wie "update" oder "info" fehlen bewusst: sie treffen auch
+# legitime Workflow-Systeme (z.B. enron_update@concureworkplace.com).
 BULK_SENDER_MUSTER = re.compile(
     r"(no-?reply|promo|newsletter|marketing|bounce|mailer-daemon|unsubscribe)@",
     re.IGNORECASE,
@@ -62,7 +63,8 @@ def normalisiere_betreff(betreff: str) -> str:
 
 
 def saeubere_body(text: str) -> str:
-    """Simples v1-Cleaning: Forward-/Original-Bloecke und Zitat-Zeilen raus.
+    """Entfernt zitierte Vorgaenger-Mails: alles ab einem Forward-/Original-
+    Message-Trenner sowie Zitatzeilen ("> ...").
 
     Wird sowohl vom Enron-CSV-Pfad (prepare_emails.py) als auch vom
     Mailbox-Pfad (parse_mailbox.py) genutzt, damit beide exakt dieselben

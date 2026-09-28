@@ -1,8 +1,9 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 parse_mailbox.py
 --------------------------------------------------
-Wandelt hochgeladene Postfach-Dateien in mails.jsonl um - dasselbe Schema,
-das auch prepare_emails.py (Enron-CSV) erzeugt:
+Schritt 1 im Upload-Weg: wandelt hochgeladene Postfach-Dateien in mails.jsonl
+um - dasselbe Schema, das auch prepare_emails.py (Enron-CSV) erzeugt:
 
     { "id", "from", "to", "date", "subject", "subject_norm", "body" }
 

@@ -1,15 +1,15 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { ActionChain } from "@/lib/types";
 
-// Bewusste Design-Entscheidung: Titel/Zusammenfassung/Tags/Wahrscheinlichkeit
-// sind normale Formularfelder, aber Akteure/Knoten/Flows/Quellen (verschachtelt,
-// mit vielen optionalen Feldern) werden als validiertes JSON bearbeitet statt
-// mit einem tief verschachtelten dynamischen Formular. Deutlich weniger Code,
-// gleiche Faehigkeiten - die schoene Visualisierung gibt es ja schon auf der
-// Ansichtsseite, hier geht es ums praezise Bearbeiten.
+// Formular zum Anlegen/Bearbeiten einer Aktionskette. Titel, Zusammenfassung,
+// Tags und Bewertung sind normale Formularfelder; Akteure, Knoten, Flows und
+// Quellen (verschachtelt, viele optionale Felder) werden als JSON bearbeitet
+// und vor dem Speichern geprueft. Die grafische Darstellung zeigt die
+// Ansichtsseite.
 
 export default function ChainForm({
   initial,
