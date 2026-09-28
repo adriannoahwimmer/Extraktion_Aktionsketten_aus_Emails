@@ -1,7 +1,7 @@
-// Liest/schreibt Aktionsketten direkt als JSON-Dateien in backend/chains/.
-// Bewusst kein separates DB-System - fuer ein lokales Seminar-Projekt reicht
-// das Dateisystem, und es ist derselbe Ordner, in den extract_chains.py
-// (Python-Pipeline) seine Ergebnisse schreibt.
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
+// Liest/schreibt Aktionsketten als JSON-Dateien in backend/chains/ - derselbe
+// Ordner, in den die Python-Pipeline (extract_chains.py) ihre Ergebnisse
+// schreibt. Eine separate Datenbank ist fuer den lokalen Betrieb nicht noetig.
 
 import { promises as fs } from "fs";
 import path from "path";

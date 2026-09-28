@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 // Entspricht dem Schema aus backend/extract_chains.py (SYSTEM_PROMPT).
 
 export interface ChainActor {
@@ -52,9 +53,9 @@ export interface ActionChain {
   sources?: ChainSource[];
 }
 
-// Eine Aktionskette wie sie im UI gehandhabt wird: Dateiname (slug, eindeutig
-// auf der Platte) + die eigentlichen Daten (das "id"-Feld darin ist NICHT
-// garantiert eindeutig, z.B. mehrfach "chain_001" in verschiedenen Dateien).
+// Eine Aktionskette, wie sie im UI gehandhabt wird: Dateiname (slug, eindeutig)
+// + die eigentlichen Daten. Das "id"-Feld in den Daten ist nicht garantiert
+// eindeutig (z.B. bei manuell angelegten oder kopierten Ketten).
 export interface StoredChain {
   slug: string;
   data: ActionChain;

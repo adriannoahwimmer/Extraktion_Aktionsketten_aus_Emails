@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 import { NextRequest, NextResponse } from "next/server";
 import { leseStatus } from "@/lib/batches";
 

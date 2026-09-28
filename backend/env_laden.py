@@ -1,12 +1,12 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 env_laden.py
 --------------------------------------------------
 Liest die Datei <Projektordner>/.env und setzt die darin stehenden Variablen
-(v.a. OPENAI_API_KEY, der KIT-Toolbox-Key) als Umgebungsvariablen - damit man
-den Key nicht in jedem neuen Terminal per  $env:OPENAI_API_KEY = "..."  setzen
-muss.
+(v.a. OPENAI_API_KEY, der KIT-Toolbox-Key) als Umgebungsvariablen, damit der
+Key nicht in jedem Terminal neu gesetzt werden muss.
 
-Wird einfach per  import env_laden  eingebunden (laedt beim Import).
+Einbinden per  import env_laden  (laedt beim Import).
 
 Regeln:
   - Format: eine Zeile pro Variable, NAME=Wert (Anfuehrungszeichen optional),

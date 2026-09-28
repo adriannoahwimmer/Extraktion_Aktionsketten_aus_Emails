@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 // Nimmt hochgeladene Postfach-Dateien entgegen, legt einen Batch-Ordner unter
 // backend/batches/<id>/ an und startet die Python-Pipeline (run_pipeline.py) als
 // abgekoppelten Kindprozess. Der Fortschritt landet in status.json im Batch-Ordner.
@@ -24,10 +25,10 @@ export interface BatchStatus {
   aktualisiert: string;
 }
 
-// Gibt es einen KIT-Toolbox-Key? Entweder als Umgebungsvariable (im Terminal
-// gesetzt) oder in <Projekt>/.env. Die Python-Skripte lesen dieselbe .env selbst
-// (backend/env_laden.py) - hier wird nur geprueft, damit der Upload sofort mit
-// klarer Meldung ablehnt, statt erst mitten in der Pipeline zu scheitern.
+// Gibt es einen KIT-Toolbox-Key? Entweder als Umgebungsvariable oder in
+// <Projekt>/.env. Die Python-Skripte lesen die .env selbst (backend/env_laden.py);
+// hier wird nur geprueft, damit ein Upload ohne Key sofort mit klarer Meldung
+// abgelehnt wird statt erst mitten in der Pipeline zu scheitern.
 export async function hatApiKey(): Promise<boolean> {
   if (process.env.OPENAI_API_KEY) return true;
   try {
@@ -44,7 +45,7 @@ function pythonPfad(): string {
     path.join(PROJEKT_ROOT, ".venv", "Scripts", "python.exe"),
     path.join(PROJEKT_ROOT, ".venv", "bin", "python"),
   ];
-  for (const k of kandidaten) if (existsSync(k)) return k;
+  for (const k of kandidaten) if (existsSync(/*turbopackIgnore: true*/ k)) return k;
   return "python";
 }
 
@@ -83,13 +84,11 @@ export async function starteBatch(
     );
   }
 
-  // Kein "detached": true - auf Windows hebelt die Kombination aus detached
-  // (neue Prozessgruppe) + windowsHide sich gegenseitig aus, dann poppt trotz
-  // windowsHide ein Konsolenfenster auf. Ohne detached bleibt windowsHide
-  // zuverlaessig; der Kindprozess laeuft dank stdio "ignore" + unref() trotzdem
-  // unabhaengig weiter, auch wenn der Dev-Server neu startet.
+  // Ohne "detached": auf Windows oeffnet detached trotz windowsHide ein
+  // Konsolenfenster. Dank stdio "ignore" + unref() laeuft der Kindprozess
+  // trotzdem unabhaengig vom Request weiter.
   const kind = spawn(
-    pythonPfad(),
+    /*turbopackIgnore: true*/ pythonPfad(),
     [path.join(BACKEND_DIR, "run_pipeline.py"), "--batch-dir", batchDir],
     {
       cwd: BACKEND_DIR,

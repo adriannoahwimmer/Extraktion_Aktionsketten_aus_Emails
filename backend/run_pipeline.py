@@ -1,7 +1,9 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 run_pipeline.py
 --------------------------------------------------
-Orchestriert die Pipeline fuer EINEN hochgeladenen Batch:
+Orchestriert die Pipeline fuer einen hochgeladenen Batch (wird vom Frontend
+gestartet, laesst sich aber auch direkt aufrufen):
 
     parse_mailbox.py  ->  cluster_mails.py  ->  extract_chains.py
 
@@ -92,13 +94,13 @@ def lauf(skript: str, batch_dir: Path, log, status: Status, zeilen_hook, extra_e
     cmd = [sys.executable, "-u", str(HIER / skript), "--batch-dir", str(batch_dir)]
     log.write(f"\n$ {' '.join(cmd)}\n")
     log.flush()
-    # PYTHONIOENCODING: an eine Pipe schreibt Python auf Windows sonst in cp1252 -
-    # ein Emoji im Betreff liess print() dann mit UnicodeEncodeError abbrechen.
+    # PYTHONIOENCODING: an eine Pipe schreibt Python auf Windows sonst in cp1252,
+    # und Zeichen ausserhalb davon (z.B. Emojis im Betreff) liessen print()
+    # mit UnicodeEncodeError abbrechen.
     env = {**os.environ, **(extra_env or {}), "PYTHONUNBUFFERED": "1",
            "PYTHONIOENCODING": "utf-8"}
-    # Windows: ein konsolenloser Prozess (run_pipeline.py laeuft via
-    # windowsHide aus dem Frontend) wuerde fuer jeden Kindprozess sonst eine
-    # neue, sichtbare (leere) Konsole aufmachen. CREATE_NO_WINDOW unterdrueckt das.
+    # Windows: run_pipeline.py laeuft (vom Frontend gestartet) ohne Konsole;
+    # ohne CREATE_NO_WINDOW oeffnete jeder Kindprozess ein leeres Konsolenfenster.
     creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
     proc = subprocess.Popen(
         cmd, cwd=HIER, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
@@ -153,9 +155,9 @@ def main():
         # Vorab: ohne KIT-Key koennen weder Embedding noch Extraktion laufen.
         if not os.environ.get("OPENAI_API_KEY"):
             raise RuntimeError(
-                "OPENAI_API_KEY nicht gefunden. Trage den KIT-Toolbox-Key einmalig in "
-                "die Datei .env im Projektordner ein (Zeile: OPENAI_API_KEY=dein-key) "
-                'oder setze ihn im Terminal: $env:OPENAI_API_KEY = "<key>".'
+                "OPENAI_API_KEY nicht gefunden. KIT-Toolbox-Key in die Datei .env "
+                "im Projektordner eintragen (Zeile: OPENAI_API_KEY=<key>, Vorlage: "
+                ".env.example)."
             )
 
         # 1) PARSE ----------------------------------------------------------
@@ -186,10 +188,7 @@ def main():
 
         lauf("cluster_mails.py", batch_dir, log, status, cluster_hook)
         if not (batch_dir / "clusters.jsonl").exists():
-            raise RuntimeError(
-                "Clustering hat keine clusters.jsonl erzeugt "
-                "(OPENAI_API_KEY gesetzt? siehe pipeline.log)"
-            )
+            raise RuntimeError("Clustering hat keine clusters.jsonl erzeugt (siehe pipeline.log).")
         n_cluster, n_rauschen = zaehle_cluster(batch_dir / "clusters.jsonl")
         status.zahlen(cluster=n_cluster, rauschen=n_rauschen)
         # 0 echte Cluster ist ok: extract_chains prueft Rauschen-Mails einzeln.

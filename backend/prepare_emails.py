@@ -1,24 +1,26 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 prepare_emails.py
 --------------------------------------------------
 Schritt 1 der Enron-Pipeline: liest die Enron-CSV (data/emails.csv), parst jede
 Zeile als Mail, saeubert den Body (gemeinsame Logik aus mail_utils) und schreibt
-alle Mails in EINE strukturierte Datei mails.jsonl - eine Mail pro Zeile als
-JSON-Objekt ({id, from, to, date, subject, subject_norm, body}). Genau dieses
-Format erwarten cluster_mails.py und extract_chains.py.
+alle Mails nach mails.jsonl - eine Mail pro Zeile als JSON-Objekt
+({id, from, to, date, subject, subject_norm, body}). Dieses Format erwarten
+cluster_mails.py und extract_chains.py.
 
-Fuer hochgeladene Postfaecher (.eml/.mbox/.pst) gibt es den Schwesterweg
-parse_mailbox.py, der dasselbe mails.jsonl-Schema erzeugt.
+Fuer hochgeladene Postfaecher (.eml/.mbox/.pst/.zip) erzeugt parse_mailbox.py
+dasselbe Schema.
 
-Ausfuehren (aus backend/):
+Aufruf (aus backend/):
     python prepare_emails.py
 
-Braucht KEINE Zusatzpakete.
+Nur Python-Standardbibliothek.
 """
 
 import csv
 import json
 import email
+import sys
 from email import policy
 from pathlib import Path
 
@@ -27,7 +29,7 @@ from mail_utils import normalisiere_betreff, saeubere_body
 # ------------------------------------------------------------------
 # Einstellungen
 # ------------------------------------------------------------------
-MAX_MAILS = 30000                      # so viele CSV-Zeilen anschauen
+MAX_MAILS = 30000                      # so viele CSV-Zeilen lesen (Ausschnitt des Korpus)
 MIN_BODY_LEN = 40                      # zu kurze Mails ueberspringen
 AUSGABE_DATEI = Path("mails.jsonl")    # hier landet das Ergebnis
 
@@ -50,8 +52,8 @@ def finde_csv():
 def main():
     csv_pfad = finde_csv()
     if csv_pfad is None:
-        print("emails.csv nicht gefunden. Lege sie in einen 'data'-Ordner.")
-        return
+        print("data/emails.csv nicht gefunden (Download-Hinweis siehe README.md).")
+        sys.exit(1)
 
     print(f"Lese aus: {csv_pfad}")
     geschrieben = 0

@@ -1,10 +1,11 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 /**
  * pst_to_jsonl.js
  * --------------------------------------------------
  * Liest eine Outlook-.pst-Datei und schreibt jede E-Mail als JSON-Zeile in eine
  * Ausgabedatei. Wird von backend/parse_mailbox.py aufgerufen, damit .pst-Dateien
- * OHNE externe Programme (readpst/libpst) und ohne C-Compiler eingelesen werden
- * koennen - reines JavaScript (Paket "pst-extractor"), laeuft ueberall wo Node
+ * ohne externe Programme (readpst/libpst) und ohne C-Compiler eingelesen werden
+ * koennen - reines JavaScript (Paket "pst-extractor"), laeuft ueberall, wo Node
  * laeuft (das Frontend braucht Node ohnehin).
  *
  * Aufruf:

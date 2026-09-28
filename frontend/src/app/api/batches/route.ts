@@ -1,3 +1,4 @@
+// Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 import { NextRequest, NextResponse } from "next/server";
 import { erzeugeBatchId, hatApiKey, starteBatch } from "@/lib/batches";
 
@@ -8,9 +9,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         fehler:
-          "OPENAI_API_KEY nicht gefunden. Trage den KIT-Key einmalig in die Datei " +
-          "'.env' im Projektordner ein (Zeile: OPENAI_API_KEY=dein-key) oder setze " +
-          'ihn im Terminal:  $env:OPENAI_API_KEY = "<KIT-Key>"',
+          "OPENAI_API_KEY nicht gefunden. Bitte den KIT-Toolbox-Key in die Datei " +
+          "'.env' im Projektordner eintragen (Zeile: OPENAI_API_KEY=<key>, Vorlage: " +
+          ".env.example) und den Server neu starten.",
       },
       { status: 503 }
     );

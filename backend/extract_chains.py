@@ -1,41 +1,30 @@
+# Erstellt mit Unterstuetzung von Claude Code (Anthropic).
 """
 extract_chains.py
 --------------------------------------------------
-Extrahiert Aktionsketten aus E-Mail-CLUSTERN mithilfe eines LLM.
+Schritt 3 der Pipeline: extrahiert Aktionsketten aus E-Mail-Clustern mithilfe
+eines LLM (KIT-Toolbox, OpenAI-kompatibler Endpunkt).
 
 Ablauf:
   1. Laedt mails.jsonl und clusters.jsonl (Ausgabe von cluster_mails.py).
-     clusters.jsonl enthaelt pro Mail auch einen chain_score (0..1,
-     guenstige Heuristik aus mail_utils.chain_wahrscheinlichkeit, OHNE
-     LLM-Kosten). Der Score korreliert kaum mit der tatsaechlichen
-     Prozess-Qualitaet (siehe Testlauf) - er dient daher NUR als billiger
-     Vorfilter, um offensichtlichen Spam/Newsletter (Score nahe 0, meist
-     Bulk-Versender-Treffer) VOR dem teuren LLM-Call auszusortieren. Er
-     priorisiert NICHT, welche Cluster "gut" sind - das entscheidet die
-     eigene Selbsteinschaetzung des LLM (prozess_wahrscheinlichkeit).
-  2. Waehlt eine Menge von Clustern aus: von allen Clustern mit
-     chain_score >= CHAIN_SCORE_MIN die TOP_N_CLUSTERS groessten, plus
-     automatisch jeden Cluster mit einer der bekannten Burnet-Testphrasen
-     (Kontrolle, auch wenn der Score niedrig waere). Rauschen (Cluster -1)
-     wird nie verarbeitet.
-  3. Schickt pro ausgewaehltem Cluster Schema + Mails an ein LLM
-     (KIT-Toolbox, OpenAI-kompatibel).
-  4. Bekommt je Cluster EINE ODER MEHRERE Aktionsketten zurueck ({"chains": [...]}),
-     ein Cluster kann mehrere unabhaengige Prozesse enthalten. Jede Kette wird
-     einzeln gespeichert unter backend/chains/chain_cluster_<id>_<k>.json
-     (k = 1, 2, ...). Alte Dateien desselben Clusters werden vorher geloescht.
+  2. Waehlt die zu verarbeitenden Gruppen aus (siehe waehle_cluster()):
+       - Standard (Enron):  die TOP_N_CLUSTERS groessten Cluster, die den
+         Spam-Vorfilter (chain_score >= CHAIN_SCORE_MIN) bestehen, plus jeder
+         Cluster mit einer Burnet-Testphrase (Kontroll-Cluster).
+       - --alle / --batch-dir:  alle Cluster plus einzelne Rauschen-Mails,
+         gedeckelt auf MAX_CLUSTER LLM-Aufrufe.
+     Der chain_score ist eine reine Metadaten-Heuristik und dient nur als
+     Vorfilter gegen offensichtlichen Spam. Die eigentliche Bewertung liefert
+     das LLM selbst (prozess_wahrscheinlichkeit).
+  3. Schickt pro Gruppe Schema + Mails an das LLM.
+  4. Erhaelt null, eine oder mehrere Aktionsketten ({"chains": [...]}) und
+     speichert jede einzeln unter chains/chain_<praefix>cluster_<id>_<k>.json.
 
-  Mit  python extract_chains.py --models  nur die verfuegbaren Modelle listen.
-  Ueber NUR_CLUSTER (unten) laesst sich der Lauf auf bestimmte Cluster begrenzen.
-
-Einmalig vorbereiten:
-    pip install openai
-    # KIT-Toolbox-API-Key setzen (PowerShell, gilt fuer diese Terminal-Sitzung):
-    #   $env:OPENAI_API_KEY = "sk-..."
-
-Ausfuehren (WICHTIG: aus dem Ordner, in dem mails.jsonl liegt, also backend/):
-    cd backend
-    python extract_chains.py
+Aufruf (aus backend/, API-Key in <Projekt>/.env):
+    python extract_chains.py                       # Enron, Stichprobe
+    python extract_chains.py --alle                # Enron, alle Cluster
+    python extract_chains.py --batch-dir <ordner>  # Upload-Batch
+    python extract_chains.py --models              # verfuegbare Modelle listen
 """
 
 import argparse
@@ -46,7 +35,7 @@ import time
 from pathlib import Path
 from email.utils import parsedate_to_datetime
 
-from openai import OpenAI   # pip install openai
+from openai import OpenAI
 
 import env_laden  # noqa: F401  - liest OPENAI_API_KEY aus <Projekt>/.env (vor MODEL/EXTRACT_MODEL)
 from mail_utils import lade_mails, dedupliziere, BURNET_PHRASEN, BULK_SENDER_MUSTER
@@ -54,72 +43,58 @@ from mail_utils import lade_mails, dedupliziere, BURNET_PHRASEN, BULK_SENDER_MUS
 # ------------------------------------------------------------------
 # Einstellungen
 # ------------------------------------------------------------------
-# KIT-Toolbox statt OpenAI: OpenAI-kompatibler Endpunkt am SCC.
+# KIT-Toolbox: OpenAI-kompatibler Endpunkt am SCC.
 BASE_URL = "https://ki-toolbox.scc.kit.edu/api/v1"
-# Modellname am KIT. Ueber client.models.list() abgefragte Optionen (Auswahl):
-#   google.claude-opus-4.8     <- aktuell gewaehlt: staerkstes Instruction-Following,
-#                                 haelt sich am zuverlaessigsten an "erfinde nichts"
-#   google.claude-sonnet-4.6   guenstiger, gut, aber neigt eher zum Ueberextrahieren
-#   google.gemini-2.5-flash    schnell/guenstig, erfand im Test bei Werbe-Mails
-#                               nicht belegte Empfaenger-Reaktionen
-#   azure.gpt-5-mini           guenstige Alternative
-# NICHT verwenden: "standard-extern"/"standard-local" (veraendern den Systemprompt).
-# Aktuelle Modellliste pruefen:  python extract_chains.py --models
-# Per Umgebungsvariable EXTRACT_MODEL ueberschreibbar (nutzt das Frontend beim Upload).
+# Extraktionsmodell. Per Umgebungsvariable EXTRACT_MODEL ueberschreibbar (das
+# Frontend setzt sie beim Upload). Verfuegbare Modelle: python extract_chains.py --models
+#   google.claude-sonnet-5     Standard: gutes Verhaeltnis aus Qualitaet und Kosten
+#   google.claude-opus-4.8     staerker, ca. 2,5x teurer
+# Nicht geeignet: "standard-extern"/"standard-local" (veraendern den Systemprompt).
 MODEL = os.environ.get("EXTRACT_MODEL") or "google.claude-sonnet-5"
 
-# Antwortlaenge. Grosse Cluster mit mehreren Ketten koennen viel JSON erzeugen -
-# zu niedrig => abgeschnittenes JSON => Cluster wird uebersprungen.
+# Obergrenze der Antwortlaenge. Grosse Cluster mit mehreren Ketten erzeugen viel
+# JSON, und das interne Reasoning des Modells zaehlt mit - zu knapp bemessen
+# fuehrt zu abgeschnittenen oder leeren Antworten.
 MAX_TOKENS = 16000
 
 MAILS_DATEI = Path("mails.jsonl")
 CLUSTERS_DATEI = Path("clusters.jsonl")
 AUSGABE_ORDNER = Path("chains")
 
-# Im Batch-Modus (--batch-dir) gesetzt: Praefix fuer die Ketten-Dateinamen, damit
-# ein Upload nie eine bestehende Datei ueberschreibt (chain_<batch_id>_cluster_...).
+# Batch-Modus (--batch-dir): Praefix fuer die Ketten-Dateinamen, damit ein Upload
+# nie eine bestehende Datei ueberschreibt (chain_<batch_id>_cluster_...).
 DATEI_PRAEFIX = ""
-# Batch-Modus: alle Cluster verarbeiten (kein NUR_CLUSTER / Burnet), aber
-# nie mehr als so viele LLM-Calls - Sicherung gegen versehentliche Grosslaeufe.
-# Der Deckel gilt fuer echte Cluster UND Einzelmails zusammen.
 BATCH_MODUS = False
+
+# Obergrenze der LLM-Aufrufe (Cluster + Einzelmails) fuer --alle und den
+# Batch-Modus - Schutz gegen versehentliche Grosslaeufe.
 MAX_CLUSTER = 300
 
-# Batch-Modus: eine EINZELNE Mail kann bereits eine vollstaendige Aktionskette
-# enthalten (Anweisung mit mehreren Schritten, Zustaendigkeiten). HDBSCAN wirft
-# solche Mails aber als "Rauschen" raus, weil sie mit keiner anderen gruppieren.
-# Darum werden Rauschen-Mails im Batch-Modus zusaetzlich einzeln ans LLM
-# geschickt - grob vorgefiltert, damit nicht jede FYI-/Werbemail einen Call
-# ausloest. Das LLM + die "min. 2 Knoten"-Regel entscheiden dann, ob wirklich
-# eine Kette drinsteckt.
-EINZELMAIL_MIN_BODY = 200     # kuerzere Mails gelten als zu duenn
+# Eine einzelne Mail kann bereits eine vollstaendige Aktionskette enthalten,
+# HDBSCAN markiert sie aber als Rauschen. Rauschen-Mails werden deshalb (bei
+# --alle und im Batch-Modus) einzeln ans LLM geschickt, sofern sie nicht von
+# einem Massenversender stammen und mindestens so lang sind:
+EINZELMAIL_MIN_BODY = 200
 
-# Stellschrauben: wie viele Cluster werden verarbeitet?
-# (Testlauf, um Kosten/Laufzeit klein zu halten. Der Burnet-Cluster wird
-# unabhaengig davon immer mitverarbeitet, siehe waehle_cluster().)
-TOP_N_CLUSTERS = 5        # die N groessten Cluster (nach dem Spam-Vorfilter)
+# Enron-Standardmodus: Stichprobe der N groessten Cluster (nach dem
+# Spam-Vorfilter). Der Burnet-Kontroll-Cluster kommt immer dazu.
+TOP_N_CLUSTERS = 5
 
-# Wenn gesetzt (nicht leer): NUR genau diese Cluster verarbeiten, alles andere
-# (TOP_N, Burnet-Kontrolle, Spam-Vorfilter) wird ignoriert. Fuer gezielte
-# Wiederholungslaeufe auf einzelnen Cluster-IDs. Leer lassen fuer den
-# Normalfall (TOP_N/--alle) - Cluster-IDs verschieben sich bei jedem
-# cluster_mails.py-Lauf neu, alte IDs hier sind nach einem Re-Clustering
-# hinfaellig.
+# Optional: nur genau diese Cluster-IDs verarbeiten (fuer gezielte
+# Wiederholungslaeufe). Leer = Normalbetrieb. Cluster-IDs gelten nur fuer
+# den jeweils aktuellen Lauf von cluster_mails.py.
 NUR_CLUSTER = set()
 
-# --alle (CLI-Flag): wie im Batch-Modus (Upload) ALLE Cluster + Einzelmails
-# verarbeiten statt TOP_N_CLUSTERS/Burnet-Kontrolle. Fuer einen vollstaendigen
-# Enron-Lauf statt einer Stichprobe. Gedeckelt auf MAX_CLUSTER LLM-Calls.
+# Per --alle gesetzt: alle Cluster + Einzelmails statt der Stichprobe.
 ALLE_VERARBEITEN = False
 
-# Billiger Vorfilter (keine LLM-Kosten): Cluster mit chain_score darunter
-# gelten als offensichtlicher Spam/Newsletter und werden gar nicht erst
-# ans LLM geschickt. Bewusst niedrig, da der Score sonst zu ungenau ist,
-# um echte Prozesse auszusortieren (siehe Docstring oben).
+# Spam-Vorfilter ohne LLM-Kosten: Cluster mit chain_score darunter (meist
+# Massenversender) werden nicht ans LLM geschickt. Bewusst niedrig, weil die
+# Heuristik zu ungenau ist, um echte Prozesse auszusortieren.
 CHAIN_SCORE_MIN = 0.05
 
 # ------------------------------------------------------------------
-# Die Anweisung ans LLM (inkl. deinem Schema)
+# Systemprompt inkl. Ausgabeschema
 # ------------------------------------------------------------------
 SYSTEM_PROMPT = """Du analysierst geschaeftliche E-Mail-Kommunikation und machst darin
 enthaltenes prozedurales Wissen explizit, als strukturierte Aktionsketten (JSON).
@@ -259,9 +234,9 @@ def gruppiere_nach_cluster(mails, zuordnung):
 
 
 def ergaenze_einzelmails(gruppen, mails, zuordnung):
-    """Batch-Modus: nimmt Rauschen-Mails (in keinem Cluster) als Einzel-'Cluster'
-    mit dem Schluessel 'e<mailnummer>' dazu. Grob vorgefiltert (kein Bulk-Sender,
-    Body lang genug), damit nicht jede FYI-/Werbemail einen LLM-Call ausloest."""
+    """Nimmt Rauschen-Mails (in keinem Cluster) als Einzel-Gruppen mit dem
+    Schluessel 'e<mailnummer>' dazu. Grob vorgefiltert (kein Massenversender,
+    Body lang genug), damit nicht jede FYI-/Werbemail einen LLM-Aufruf ausloest."""
     schon_drin = {m["id"] for ml in gruppen.values() for m in ml}
     dazu = 0
     for m in mails:
@@ -281,14 +256,15 @@ def ergaenze_einzelmails(gruppen, mails, zuordnung):
 
 
 def waehle_cluster(gruppen, cluster_scores, top_n_groesse, score_min):
-    """Spam-Vorfilter (chain_score < score_min raus), davon die groessten
-    top_n_groesse Cluster + jeder Cluster mit Burnet-Testphrase (Kontrolle,
-    unabhaengig vom Score).
+    """Waehlt die zu verarbeitenden Gruppen aus.
 
-    Ausnahme: ist NUR_CLUSTER gesetzt, werden genau diese Cluster verarbeitet
-    (soweit vorhanden) und sonst nichts."""
+    - --alle / Batch-Modus: alle Gruppen, groesste zuerst, bis MAX_CLUSTER.
+    - NUR_CLUSTER gesetzt: genau diese Cluster (soweit vorhanden).
+    - sonst: Spam-Vorfilter (chain_score < score_min raus), davon die
+      top_n_groesse groessten Cluster + jeder Cluster mit Burnet-Testphrase.
+
+    Gibt (ausgewaehlte IDs, Anzahl durch den Vorfilter verworfener Cluster) zurueck."""
     if BATCH_MODUS or ALLE_VERARBEITEN:
-        # Upload bzw. --alle: alle Cluster, groesste zuerst, gedeckelt auf MAX_CLUSTER.
         nach_groesse = sorted(gruppen.items(), key=lambda kv: -len(kv[1]))
         ausgewaehlt = {cid for cid, _ in nach_groesse[:MAX_CLUSTER]}
         if len(gruppen) > MAX_CLUSTER:
@@ -349,13 +325,9 @@ def baue_user_prompt(batch):
 
 
 def frage_llm(system: str, user: str) -> str:
-    """
-    Schickt die Anfrage ans LLM und gibt die Roh-Antwort (JSON-Text) zurueck.
-
-    >>> Das ist die EINZIGE Stelle, die du aendern musst, wenn du einen
-    >>> anderen Anbieter nutzt. Varianten unten als Kommentar.
-    """
-    # api_key wird aus der Umgebungsvariable OPENAI_API_KEY gelesen;
+    """Schickt die Anfrage ans LLM und gibt die Roh-Antwort (JSON-Text) zurueck.
+    Einzige Stelle mit Anbieter-spezifischem Code."""
+    # api_key kommt aus der Umgebungsvariable OPENAI_API_KEY,
     # base_url zeigt auf die KIT-Toolbox statt auf api.openai.com.
     client = OpenAI(base_url=BASE_URL)
 
@@ -364,19 +336,16 @@ def frage_llm(system: str, user: str) -> str:
         {"role": "user", "content": user},
     ]
 
-    # Optionale Parameter. Manche Modelle lehnen einzelne davon mit HTTP 400 ab:
-    #   - response_format: v.a. lokale KIT-Modelle
-    #   - temperature: neuere Modelle (z.B. claude-sonnet-5) erlauben nur den
-    #     Default und antworten sonst mit 400.
-    # Wir versuchen es zuerst mit allen und lassen bei einem 400 den jeweils
-    # genannten Parameter weg (der Systemprompt fordert ohnehin reines JSON).
+    # Optionale Parameter. Manche Modelle lehnen einzelne davon mit HTTP 400 ab
+    # (response_format v.a. lokale KIT-Modelle, temperature z.B. claude-sonnet-5).
+    # Der jeweils abgelehnte Parameter wird weggelassen und die Anfrage
+    # wiederholt; der Systemprompt fordert ohnehin reines JSON.
     optional = {
         "response_format": {"type": "json_object"},
-        "temperature": 0,   # deterministisch -> reproduzierbar fuer die Evaluation
+        "temperature": 0,
     }
-    # Transiente Fehler (kurze Verbindungsaussetzer zum Modell-Backend hinter
-    # der KIT-Toolbox, Rate-Limits, ueberlastete Server) sollen einen
-    # mehrstuendigen Lauf nicht abbrechen - mit Backoff erneut versuchen.
+    # Transiente Fehler (Verbindungsaussetzer, Rate-Limits, ueberlastete
+    # Server) sollen einen langen Lauf nicht abbrechen - mit Backoff wiederholen.
     TRANSIENT_MARKER = (
         "server connection error", "connection error", "timeout",
         "rate limit", "overloaded", "503", "502", "504", "429",
@@ -420,40 +389,12 @@ def frage_llm(system: str, user: str) -> str:
                 time.sleep(wartezeit)
                 continue
 
-            raise  # echter/anhaltender Fehler (falscher Key, Modell unbekannt, ...)
-
-    # --- ALTERNATIVE: OpenAI direkt (kostenpflichtig) ------------------
-    # client = OpenAI()          # ohne base_url -> geht an api.openai.com
-    # MODEL oben auf "gpt-4o" setzen und einen echten OpenAI-Key verwenden.
-
-    # --- ALTERNATIVE: Anthropic (Claude) -------------------------------
-    # pip install anthropic ; $env:ANTHROPIC_API_KEY = "..."
-    # from anthropic import Anthropic
-    # client = Anthropic()
-    # antwort = client.messages.create(
-    #     model="claude-sonnet-4-5",
-    #     max_tokens=2000,
-    #     system=system,
-    #     messages=[{"role": "user", "content": user}],
-    # )
-    # return antwort.content[0].text
-
-    # --- ALTERNATIVE: Lokal via Ollama (kostenlos) ---------------------
-    # pip install requests ; vorher: ollama pull llama3.1
-    # import requests
-    # r = requests.post("http://localhost:11434/api/chat", json={
-    #     "model": "llama3.1",
-    #     "messages": [{"role": "system", "content": system},
-    #                  {"role": "user", "content": user}],
-    #     "format": "json", "stream": False,
-    # })
-    # return r.json()["message"]["content"]
+            raise  # anhaltender Fehler (falscher Key, unbekanntes Modell, ...)
 
 
-def extrahiere_ketten(antwort_obj, cid):
-    """Holt die Ketten-Liste aus der LLM-Antwort. Akzeptiert das neue Format
-    {"chains": [...]}, eine nackte Liste, oder (Rueckwaertskompatibilitaet)
-    ein einzelnes Ketten-Objekt mit "nodes"."""
+def extrahiere_ketten(antwort_obj):
+    """Holt die Ketten-Liste aus der LLM-Antwort. Erwartet {"chains": [...]},
+    toleriert aber auch eine nackte Liste oder ein einzelnes Ketten-Objekt."""
     if isinstance(antwort_obj, dict) and isinstance(antwort_obj.get("chains"), list):
         ketten = antwort_obj["chains"]
     elif isinstance(antwort_obj, list):
@@ -467,9 +408,9 @@ def extrahiere_ketten(antwort_obj, cid):
 
 
 def schreibe_ketten(cid, ketten):
-    """Loescht die alten Ketten-Dateien DIESES Clusters (und, im Batch-Modus,
-    nur die mit diesem Batch-Praefix - andere Batches bleiben unberuehrt) und
-    schreibt eine Datei je Kette."""
+    """Loescht die alten Ketten-Dateien dieses Clusters (im Batch-Modus nur die
+    mit diesem Batch-Praefix - andere Batches bleiben unberuehrt) und schreibt
+    eine Datei je Kette."""
     basis = f"chain_{DATEI_PRAEFIX}cluster_{cid}"
     for alt in AUSGABE_ORDNER.glob(f"{basis}.json"):
         alt.unlink()
@@ -509,8 +450,8 @@ def _setze_batch_modus(batch_dir: Path):
 
 
 def _verarbeitet_datei() -> Path:
-    """Fortschritts-Marker liegt neben clusters.jsonl - also pro Batch-Ordner
-    eigenstaendig, beim Enron-Modus (--alle) eine gemeinsame Datei in backend/."""
+    """Fortschritts-Marker neben clusters.jsonl: pro Batch-Ordner eigenstaendig,
+    im Enron-Modus (--alle) eine Datei in backend/."""
     return CLUSTERS_DATEI.parent / "verarbeitet.json"
 
 
@@ -525,8 +466,8 @@ def lade_verarbeitet() -> set:
 
 
 def markiere_verarbeitet(cid):
-    """Merkt eine Gruppe als abgearbeitet (egal ob mit oder ohne Ergebnis),
-    damit ein Wiederholungslauf nach einem Abbruch nicht bei Null anfaengt."""
+    """Merkt eine Gruppe als abgearbeitet (mit oder ohne Ergebnis), damit ein
+    Wiederholungslauf nach einem Abbruch dort fortsetzt."""
     erledigt = lade_verarbeitet()
     erledigt.add(str(cid))
     _verarbeitet_datei().write_text(
@@ -535,10 +476,9 @@ def markiere_verarbeitet(cid):
 
 
 def verarbeite_gruppe(cid, batch, cluster_scores):
-    """Ein Cluster/eine Einzelmail: LLM fragen, JSON parsen, Ketten speichern.
-    Fehler werden geloggt, nie weitergereicht - ein Lauf ueber viele Gruppen
-    (--alle / --batch-dir) soll an einer einzelnen kaputten Gruppe nicht
-    komplett abbrechen."""
+    """Ein Cluster bzw. eine Einzelmail: LLM fragen, JSON parsen, Ketten
+    speichern. Fehler werden geloggt statt weitergereicht, damit eine einzelne
+    fehlerhafte Gruppe nicht den ganzen Lauf abbricht."""
     print(f"=== Cluster {cid} ({len(batch)} Mails, chain_score={cluster_scores.get(cid)}) ===")
     for m in batch:
         print(f"  - {m['id']} | {m.get('date','')} | Betreff: {m.get('subject','')!r}")
@@ -560,24 +500,29 @@ def verarbeite_gruppe(cid, batch, cluster_scores):
         print("Antwort war kein gueltiges JSON, ueberspringe Cluster:\n", roh[:2000])
         return
 
-    ketten = extrahiere_ketten(antwort_obj, cid)
+    ketten = extrahiere_ketten(antwort_obj)
     print(f"  {len(ketten)} Kette(n) erkannt.")
     schreibe_ketten(cid, ketten)
 
 
 def main():
-    if "--models" in sys.argv:
-        liste_modelle()
-        return
-
-    parser = argparse.ArgumentParser(description="Aktionsketten extrahieren (siehe Docstring).")
+    parser = argparse.ArgumentParser(description="Aktionsketten extrahieren (siehe Modul-Docstring).")
     parser.add_argument("--batch-dir", type=Path, default=None,
                         help="Upload-Batch; ohne Angabe: Enron-Modus im aktuellen Ordner.")
     parser.add_argument("--alle", action="store_true",
-                        help="Enron-Modus: alle Cluster + Einzelmails verarbeiten (wie Batch-Modus), "
-                             "statt TOP_N_CLUSTERS/Burnet-Kontrolle. Gedeckelt auf MAX_CLUSTER.")
+                        help="Enron-Modus: alle Cluster + Einzelmails verarbeiten statt der "
+                             "Stichprobe. Gedeckelt auf MAX_CLUSTER LLM-Aufrufe.")
     parser.add_argument("--models", action="store_true", help="verfuegbare Modelle listen")
     args = parser.parse_args()
+
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Kein OPENAI_API_KEY gefunden. KIT-Toolbox-Key in <Projekt>/.env eintragen "
+              "(Vorlage: .env.example).")
+        sys.exit(1)
+    if args.models:
+        liste_modelle()
+        return
+
     if args.batch_dir is not None:
         _setze_batch_modus(args.batch_dir)
     global ALLE_VERARBEITEN
@@ -586,14 +531,10 @@ def main():
 
     if not MAILS_DATEI.exists():
         print(f"{MAILS_DATEI} nicht gefunden.")
-        return
+        sys.exit(1)
     if not CLUSTERS_DATEI.exists():
         print(f"{CLUSTERS_DATEI} nicht gefunden. Erst cluster_mails.py ausfuehren.")
-        return
-    if not os.environ.get("OPENAI_API_KEY"):
-        print("Kein OPENAI_API_KEY gesetzt.")
-        print('PowerShell:  $env:OPENAI_API_KEY = "sk-..."  (dein KIT-Toolbox-Key)')
-        return
+        sys.exit(1)
 
     mails = dedupliziere(lade_mails(MAILS_DATEI))
     zuordnung, cluster_scores = lade_cluster_zuordnung(CLUSTERS_DATEI)
