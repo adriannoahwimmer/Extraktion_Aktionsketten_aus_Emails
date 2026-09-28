@@ -1,0 +1,227 @@
+{
+  "id": "cluster_1044_1",
+  "title": "GBN Houston Steering Committee - Eventplanung",
+  "summary": "Der GBN-Lenkungsausschuss (Chris, Glenn, Carolyn, Arrion) plant und koordiniert mehrere Veranstaltungen ueber mehrere Sitzungen hinweg, wobei Aufgaben wie Sponsorensuche, Rednerkontakt und Organisation an einzelne Personen delegiert werden.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Ueber mehrere Sitzungsprotokolle hinweg werden klare Zustaendigkeiten, delegierte Aufgaben und deren Fortschritt (unbestaetigt/bestaetigt) dokumentiert.",
+  "tags": [
+    "Eventplanung",
+    "Ehrenamt",
+    "GBN",
+    "Houston",
+    "Sponsoring"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Chris Johnson",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Glenn Sprenger",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Mike Hansen",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Carolyn",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "Arrion",
+      "type": "person"
+    },
+    {
+      "id": "a6",
+      "name": "Roger Bhalla",
+      "type": "person"
+    },
+    {
+      "id": "a7",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Chris weist Mike Hansen an, bei Ashford.com Interesse fuer einen High-Tech-Sprecher zu erfragen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Bedarf an High-Tech-Sprecher fuer September-Event"
+      ],
+      "outputs": [
+        "Kontaktaufnahme mit Ashford.com"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Will ask Mike Hansen to contact Ashford.com people to seek interest from high tech."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Glenn kontaktiert die lokale TBN-Kapitelleitung wegen Teilnahme am September-Event",
+      "actor": "a2",
+      "inputs": [],
+      "outputs": [
+        "Einladung der TBN"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I will be contacting the TBN and see if they would also like to attend."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Glenn fragt Roger nach Interesse an einem Technologie-Sprecher bei Compaq",
+      "actor": "a2",
+      "recipient": "a6",
+      "inputs": [
+        "Bedarf an Technologie-Sprecher"
+      ],
+      "outputs": [
+        "Rueckmeldung zu Sprecherinteresse"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Roger, any interest at Compaq?"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Glenn fragt Sally nach Interesse an einem Energie-Sprecher bei Enron",
+      "actor": "a2",
+      "recipient": "a7",
+      "inputs": [
+        "Bedarf an Energie-Sprecher"
+      ],
+      "outputs": [
+        "Rueckmeldung zu Sprecherinteresse"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Sally, any interest at Enron?"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Carolyn uebernimmt die organisatorische Vorbereitung (Set-up) des Events am 17. Mai",
+      "actor": "a4",
+      "inputs": [],
+      "outputs": [
+        "Event-Setup"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Carolyn is handling the set up."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Glenn bittet Arrion, Deed Vests Biografie an Chris und Glenn zu senden",
+      "actor": "a2",
+      "recipient": "a5",
+      "inputs": [],
+      "outputs": [
+        "Biografie des Redners"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Arrion: Please forward Deed's bio to Chris and I."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Glenn bittet Arrion, Professor Brandls Biografie an Carolyn zu senden",
+      "actor": "a2",
+      "recipient": "a5",
+      "inputs": [],
+      "outputs": [
+        "Biografie des Moderators"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Arrion: Please send Brandl's bio to Carolyn."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Carolyn leitet die Biografie des Moderators an die bestaetigten Panelisten weiter",
+      "actor": "a4",
+      "inputs": [
+        "Biografie des Moderators"
+      ],
+      "outputs": [
+        "Informierte Panelisten"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "She will mail to confirmed panel individuals so they may contact him and get feel for questions to be asked"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n7",
+      "to": "n8",
+      "condition": "Arrion hat Biografie an Carolyn gesendet"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "johnsoncb@aol.com",
+      "to": "roger.bhalla@compaq.com; sprenger@mail.utexas.net; chrissy.citzler@us.pwcglobal.com; laughingdog@webtv.net; monica.schafer@us.pwcglobal.com; maumus@tgroup.net; sally.beck@enron.com; mhansen@fulbright.com; donna_anderson@aimfunds.com",
+      "date": "2000-03-13",
+      "subject": "March 12th Mtg Write-Up"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sprenger@alumni.utexas.net",
+      "to": "",
+      "date": "2000-04-10",
+      "subject": "GBN Meeting, 09 April 2000"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "sprenger@alumni.utexas.net",
+      "to": "",
+      "date": "2000-05-07",
+      "subject": "Steering Committee Meeting - 07 May 2000"
+    }
+  ]
+}

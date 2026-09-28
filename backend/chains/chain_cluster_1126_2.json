@@ -1,0 +1,81 @@
+{
+  "id": "cluster_1126_2",
+  "title": "Promotion der Management Empowerment Series",
+  "summary": "Hector McLoughlin bittet Sally Beck, die Informationen zur HR Lunch and Learn Serie zu pruefen und schlaegt konkrete Schritte zur Bewerbung bei Managern und Direktoren vor.",
+  "prozess_wahrscheinlichkeit": 0.5,
+  "prozess_begruendung": "Die Mail beschreibt einen kurzen, aber konkreten zweistufigen Ablauf (Pruefung, dann Bewerbung ueber zwei Kanaele), jedoch mit nur einem Akteurpaar und ohne Rueckmeldung.",
+  "tags": [
+    "training",
+    "promotion",
+    "hr",
+    "kommunikation"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Hector McLoughlin",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Hector bittet Sally, die Informationen zur Lunch and Learn Serie zu pruefen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Programminformationen"
+      ],
+      "outputs": [
+        "Feedback"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please review it and let us know if there are any changes that you would like to make."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Hector schlaegt vor, die Serie per E-Mail an Manager und mit Hardcopy im Staff Meeting an Direktoren zu bewerben",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Feedback"
+      ],
+      "outputs": [
+        "Promotionsplan"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would suggest an e-mail to all Managers and Directors plus a hard copy at Monday's Staff Meeting for all Directors to disseminate."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "hector.mcloughlin@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-08-11",
+      "subject": "Management Empowerment Series"
+    }
+  ]
+}

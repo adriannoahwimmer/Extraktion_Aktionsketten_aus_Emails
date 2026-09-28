@@ -1,0 +1,125 @@
+{
+  "id": "cluster_1248_2",
+  "title": "OU Team Meeting - Terminkonflikt und Eskalation",
+  "summary": "Lexi Elliott laedt zum OU-Recruiting-Team-Meeting ein, Sally Beck meldet einen Terminkonflikt und informiert zusaetzlich ihren Vorgesetzten Mike McConnell darueber.",
+  "prozess_wahrscheinlichkeit": 0.5,
+  "prozess_begruendung": "Es ist ein klarer mehrstufiger Ablauf erkennbar (Einladung, Konfliktmeldung, Information des Vorgesetzten), aber die Zustaendigkeiten sind eher informell.",
+  "tags": [
+    "recruiting",
+    "terminkonflikt",
+    "eskalation",
+    "OU"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lexi Elliott",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Mike McConnell",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Lexi Elliott laedt das Team zum OU-Recruiting-Meeting ein",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Meeting-Einladung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "MARK YOUR CALENDAR:  University of Oklahoma Recruiting Team Meeting"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally Beck meldet einen Terminkonflikt und bittet um Zusammenfassung des Meetings",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Meeting-Einladung"
+      ],
+      "outputs": [
+        "Konfliktmeldung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I can't make 10:00 on September 7th.  I have a business review meeting scheduled with Jeff Skilling at that time."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Sally Beck informiert Mike McConnell ueber den Konflikt und ihr fortbestehendes Engagement",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Konfliktmeldung"
+      ],
+      "outputs": [
+        "Information an Vorgesetzten"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I have let Lexi know that I have a conflict with this meeting time -- I will be doing a business review meeting with Jeff Skilling"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Antwort auf Einladung"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "gleicher Konflikt wird eskaliert"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "lexi.elliott@enron.com",
+      "to": "team",
+      "date": "2000-08-25",
+      "subject": "OU Team Meeting"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "lexi.elliott@enron.com",
+      "date": "2000-08-25",
+      "subject": "Re: OU Team Meeting"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "mike.mcconnell@enron.com",
+      "date": "2000-08-25",
+      "subject": "OU Team Meeting"
+    }
+  ]
+}

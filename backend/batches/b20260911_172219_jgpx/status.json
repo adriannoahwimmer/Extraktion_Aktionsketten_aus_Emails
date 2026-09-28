@@ -1,0 +1,18 @@
+{
+  "batch_id": "b20260911_172219_jgpx",
+  "phase": "done",
+  "phasen_text": "Fertig",
+  "fortschritt": {
+    "aktuell": 5,
+    "gesamt": 5
+  },
+  "zahlen": {
+    "mails": 5,
+    "cluster": 0,
+    "rauschen": 5,
+    "ketten": 2
+  },
+  "fehler": null,
+  "gestartet": "2026-09-11T15:22:21Z",
+  "aktualisiert": "2026-09-11T15:25:37Z"
+}

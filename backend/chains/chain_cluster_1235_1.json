@@ -1,0 +1,117 @@
+{
+  "id": "cluster_1235_1",
+  "title": "Verteilung von Interview-Paketen vor Vorstellungsgespraechen",
+  "summary": "Shawn Grady versendet wiederholt Interview-Pakete an das Interviewpanel, bittet um Ausdruck der Unterlagen und laesst den Lebenslauf per Bote oder Hand zustellen.",
+  "prozess_wahrscheinlichkeit": 0.7,
+  "prozess_begruendung": "Klar wiederkehrender, mehrstufiger Ablauf mit fester Zustaendigkeit (Versand, Drucken, Zustellung) ueber mehrere Kandidaten hinweg.",
+  "tags": [
+    "recruiting",
+    "interview",
+    "koordination",
+    "enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Shawn Grady",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Interviewpanel (Kayne Coulter, Don Baughman, Juan Hernandez, Larry Jester, Johnny Palmer)",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Bote/Runner",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Interview-Paket an das Panel senden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kandidateninformationen"
+      ],
+      "outputs": [
+        "Interview-Paket"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please find the interview packet for the above-referenced candidate."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Unterlagen fuer das Gespraech ausdrucken",
+      "actor": "a2",
+      "recipient": null,
+      "inputs": [
+        "Interview-Paket"
+      ],
+      "outputs": [
+        "Ausgedruckte Unterlagen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please print all documents for your reference."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Lebenslauf per Bote zustellen",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [
+        "Papierform des Lebenslaufs"
+      ],
+      "outputs": [
+        "Zugestellter Lebenslauf"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "A hardcopy of the resume will be delivered via runner."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n1",
+      "to": "n3"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "shawn.grady@enron.com",
+      "to": "kayne.coulter@enron.com, don.baughman@enron.com, juan.hernandez@enron.com, larry.jester@enron.com, johnny.palmer@enron.com",
+      "date": "2001-01-05",
+      "subject": "Interview Schedule for Bruno Messer"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "shawn.grady@enron.com",
+      "to": "kayne.coulter@enron.com, don.baughman@enron.com, juan.hernandez@enron.com, larry.jester@enron.com",
+      "date": "2001-01-08",
+      "subject": "Interview Schedule for John Jamroz"
+    }
+  ]
+}

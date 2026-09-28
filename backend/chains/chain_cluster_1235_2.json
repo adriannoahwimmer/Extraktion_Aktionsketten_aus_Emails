@@ -1,0 +1,90 @@
+{
+  "id": "cluster_1235_2",
+  "title": "Terminierung und Bestaetigung von Telefoninterviews",
+  "summary": "Lydia Delgado plant Telefoninterviews mit Kandidaten und versendet anschliessend eine Bestaetigung mit Termin, Kontaktdaten und Lebenslauf an das Interviewteam.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Erkennbarer zweistufiger Ablauf (Terminierung, dann Bestaetigung mit Unterlagen) durch dieselbe Person fuer denselben Kandidaten.",
+  "tags": [
+    "recruiting",
+    "telefoninterview",
+    "koordination",
+    "enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lydia Delgado",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Interviewteam (Don Baughman, Juan Hernandez)",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Telefoninterview-Termin planen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kandidatenkontakt"
+      ],
+      "outputs": [
+        "Terminvorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "When: Wednesday, June 06, 2001 10:00 AM-11:00 AM"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Telefoninterview bestaetigen und Lebenslauf beifuegen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Terminvorschlag",
+        "Lebenslauf"
+      ],
+      "outputs": [
+        "Bestaetigte Terminuebersicht"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Shannon L. Burnham is confirmed for a telephone interview on Wednesday, June 6, 2001 @ 10:00am CST"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "lydia.delgado@enron.com",
+      "to": "don.baughman@enron.com, juan.hernandez@enron.com",
+      "date": "2001-06-05",
+      "subject": "Phone Screen  Interview - Shannon L. Burnham"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "lydia.delgado@enron.com",
+      "to": "don.baughman@enron.com, juan.hernandez@enron.com",
+      "date": "2001-06-05",
+      "subject": "Phone Interview Confirmation - Wednesday, June 6, 2001 - Shannon L. Burnhan"
+    }
+  ]
+}

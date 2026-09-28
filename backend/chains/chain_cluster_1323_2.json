@@ -1,0 +1,133 @@
+{
+  "id": "cluster_1323_2",
+  "title": "Pruefung eines Immobilienangebots mit Finanzierungsabstimmung",
+  "summary": "Phillip Allen prueft ein revidiertes Angebot von Jeff, korrigiert Einnahmen- und Ausgabenzahlen und stimmt die Finanzierungskonditionen mit Jim Murnane ab.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Die einzelne Mail beschreibt einen mehrstufigen Ablauf aus Pruefung, Korrektur und Ruecksprache mit einem Finanzierungsexperten, jedoch ohne Antwortmails der anderen Beteiligten.",
+  "tags": [
+    "immobilien",
+    "finanzierung",
+    "offer sheet",
+    "noi",
+    "kreditkonditionen"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Jeff",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Jim Murnane",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip prueft das revidierte Angebot und bestaetigt das effektive Einkommen abzueglich sonstiger Einnahmen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Revidiertes Offer Sheet"
+      ],
+      "outputs": [
+        "Korrigiertes effektives Einkommen"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "I reviewed your revised offer sheet.  I am OK with the effective income of $484K."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip korrigiert die Ausgaben um zusaetzliche Grundsteuer",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Ausgabenaufstellung"
+      ],
+      "outputs": [
+        "Korrigierte NOI-Berechnung"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "The expenses just need to reflect $20,000 more property taxes and the numbers should be right on."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip spricht mit Jim Murnane ueber die Finanzierungskonditionen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Korrigierte NOI"
+      ],
+      "outputs": [
+        "Ruecksprache zur Finanzierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "I spoke to Jim Murnane this afternoon."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Jim Murnane schaetzt Zinssatz und Amortisationsdauer fuer die Immobilie ein",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Ruecksprache von Phillip"
+      ],
+      "outputs": [
+        "Zinssatz 7,5%, 30 Jahre Amortisation"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "He feels this property would most likely warrant 7.5% and a 30 year amortization."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jsmith@austintx.com",
+      "date": "2001-12-17",
+      "subject": ""
+    }
+  ]
+}

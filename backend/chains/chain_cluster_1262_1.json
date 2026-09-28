@@ -1,0 +1,220 @@
+{
+  "id": "cluster_1262_1",
+  "title": "Verwaltung der Mietobjekte durch Phillip, Lucy, Wade und Gary",
+  "summary": "Phillip Allen koordiniert ueber mehrere Monate die Verwaltung seiner Mietobjekte: Lucy fuehrt das Tagesgeschaeft und berichtet, Gary leitet Wade bei Renovierungsarbeiten an, Wade uebernimmt normale Instandhaltung, und Lucy schickt regelmaessig den Rentroll an Phillip zur Bearbeitung.",
+  "prozess_wahrscheinlichkeit": 0.7,
+  "prozess_begruendung": "Klare, wiederkehrende Zustaendigkeiten (Lucy, Wade, Gary) und ein mehrstufiger Ablauf von Berichterstattung, Arbeitsanweisung und Rentroll-Bearbeitung sind ueber mehrere Mails hinweg belegt.",
+  "tags": [
+    "immobilienverwaltung",
+    "mietobjekte",
+    "instandhaltung",
+    "rentroll",
+    "aufgabenverteilung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Lucy",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Wade",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Gary",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip weist Lucy an, das Bankkonto einzurichten und taeglich per E-Mail ueber Leerstaende und Mieterarbeiten zu berichten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "taegliche Statusmail"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Try and email me every day with a note about what happened that day."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip will direkten Kontakt zu Wade aufnehmen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "Kontaktaufnahme mit Wade"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I want to speak to Wade myself."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip beauftragt Gary, Wade bei Renovierungsarbeiten anzuleiten",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [],
+      "outputs": [
+        "Zustaendigkeit fuer Renovierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I would like Gary to direct Wade on renovation tasks"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Lucy erteilt Wade Arbeitsauftraege fuer die normale Instandhaltung",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Arbeitsauftraege fuer Wade"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "you can give him work orders for normal maintenance"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Phillip weist Wade an, seine Fahrzeugsituation noch in dieser Woche zu klaeren",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "geloeste Fahrzeugsituation"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "You need to take care of it this week."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Lucy schickt Phillip den Rentroll und meldet offene Probleme",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Mietstatusdaten"
+      ],
+      "outputs": [
+        "Rentroll"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "what issues you need my help to deal with when you send the rentroll"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Phillip bearbeitet den erneut zugesandten Rentroll fuer die Woche",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Rentroll von Lucy"
+      ],
+      "outputs": [
+        "bearbeiteter Rentroll"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "Please resend it and I will roll it for this week this morning."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Phillip regelt Zustaendigkeiten fuer Wade"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "Aufgabenteilung zwischen Gary und Lucy"
+    },
+    {
+      "from": "n6",
+      "to": "n7",
+      "condition": "Rentroll wird erneut gesendet"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2000-05-24",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2000-06-13",
+      "subject": "Re: Wade"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2000-07-25",
+      "subject": "For Wade"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-01-30",
+      "subject": ""
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-03-14",
+      "subject": ""
+    }
+  ]
+}

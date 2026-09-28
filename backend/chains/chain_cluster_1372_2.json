@@ -1,0 +1,91 @@
+{
+  "id": "cluster_1372_2",
+  "title": "Marktanalyse fuer Immobilienentwicklung in San Marcos",
+  "summary": "K. Allen recherchiert Zonenaenderungen und ein moegliches Seniorenprojekt und erstellt anschliessend eine Angebots-/Nachfrageanalyse fuer den San-Marcos-Wohnungsmarkt, die weiter verfeinert werden soll.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Es ist ein mehrstufiger, iterativer Analyseprozess (Recherche, Tabelle erstellen, Fragen stellen, verfeinern) erkennbar, jedoch mit nur einem Akteurspaar und wenig expliziter Zustaendigkeitsverteilung.",
+  "tags": [
+    "marktanalyse",
+    "zoning",
+    "san marcos",
+    "immobilien"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "K. Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Greg Thorse",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "K. Allen recherchiert Zonenaenderungen in San Marcos und schlaegt Pruefung eines Seniorenprojekts vor",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Zeitungsartikel zu Sector-Two-Zoning-Plan"
+      ],
+      "outputs": [
+        "Vorschlag Seniorenprojekt pruefen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would like to explore the possibility of developing a seniors project"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "K. Allen erstellt Angebots-/Nachfragetabelle fuer San Marcos und fragt nach Fertigstellungsdaten konkurrierender Projekte",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Marktdaten Wohnungsangebot",
+        "Bevoelkerungs- und Beschaeftigungswachstum"
+      ],
+      "outputs": [
+        "Angebots-/Nachfragetabelle",
+        "Fragenkatalog"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "This spreadsheet is an attempt to outline supply & demand in San Marcos by unit."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "gthorse@keyad.com",
+      "date": "2001-06-26",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "gthorse@keyad.com",
+      "date": "2001-08-20",
+      "subject": ""
+    }
+  ]
+}

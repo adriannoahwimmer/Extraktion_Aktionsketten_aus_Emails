@@ -1,0 +1,69 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_172219_jgpx
+Lese attachments__1_.zip ...
+Fertig. 5 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_172219_jgpx\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_172219_jgpx
+HDBSCAN-Quelle: sklearn
+Mails vorher: 5  |  nach Deduplizierung: 5
+Embedde 5 neue Mails (Batch-Groesse 32) ...
+  5/5
+
+Reduziere Dimension (4096 -> 5) mit UMAP ...
+Nur 5 Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.
+Clustere mit HDBSCAN ...
+C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\sklearn\cluster\_hdbscan\hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+
+Ergebnis gespeichert in: C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_172219_jgpx\clusters.jsonl
+
+Cluster gefunden: 0
+Rauschen (Label -1): 5 von 5 Mails
+
+Groesste Cluster (bis zu 10), je 3 Beispiel-Betreffs + Chain-Score:
+
+--- Burnet-Akzeptanztest ---
+  Keine Mails mit den Burnet-Phrasen gefunden.
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_172219_jgpx
+5 Einzelmails (Rauschen) werden zusaetzlich einzeln geprueft.
+5 Gruppen (Cluster + ggf. Einzelmails).
+Verarbeite 5 Gruppen: ['e00000', 'e00001', 'e00002', 'e00003', 'e00004']
+
+=== Cluster e00000 (1 Mails, chain_score=None) ===
+  - mail_00000 | Sat, 29 Aug 2026 12:57:41 +0000 | Betreff: '[Jenkins] Build #2847 — UNSTABLE'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00001 (1 Mails, chain_score=None) ===
+  - mail_00001 | Sat, 29 Aug 2026 12:59:27 +0000 | Betreff: 'Ihre Karriere verdient mehr — Weiterbildung 2026'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00002 (1 Mails, chain_score=None) ===
+  - mail_00002 | Sat, 29 Aug 2026 12:56:58 +0000 | Betreff: 'Kaffeekasse'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00003 (1 Mails, chain_score=None) ===
+  - mail_00003 | Sat, 29 Aug 2026 12:56:31 +0000 | Betreff: 'Setup und wie wir hier arbeiten'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  1 Kette(n) erkannt.
+  -> chain_b20260911_172219_jgpx_cluster_e00003_1.json  (11 Knoten, prozess_wahrscheinlichkeit=0.85)
+
+=== Cluster e00004 (1 Mails, chain_score=None) ===
+  - mail_00004 | Sat, 29 Aug 2026 12:58:52 +0000 | Betreff: 'Vergessen zu erwähnen'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  1 Kette(n) erkannt.
+  -> chain_b20260911_172219_jgpx_cluster_e00004_1.json  (14 Knoten, prozess_wahrscheinlichkeit=0.9)
+
+
+Fertig: 2 Ketten.

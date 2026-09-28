@@ -1,0 +1,37 @@
+{
+  "id": "chain_001",
+  "title": "Vertragsfreigabe Gas-Deal",
+  "summary": "Ein Trader reicht einen Vertragsentwurf ein; Legal prüft ihn und leitet ihn bei Freigabe zur Unterschrift ans Management weiter, sonst zurück an den Trader.",
+  "tags": ["contract-approval", "legal-review"],
+  "actors": [
+    { "id": "a1", "name": "Trader",     "type": "role" },
+    { "id": "a2", "name": "Legal",      "type": "role" },
+    { "id": "a3", "name": "Management", "type": "role" }
+  ],
+  "nodes": [
+    { "id": "n1", "type": "task", "action": "Vertragsentwurf einreichen", "actor": "a1", "outputs": ["Vertragsentwurf"],
+      "evidence": [{ "source": "src_1", "span": "attached is the draft for review" }] },
+    { "id": "n2", "type": "task", "action": "Vertrag prüfen", "actor": "a2", "inputs": ["Vertragsentwurf"], "outputs": ["Prüfergebnis"],
+      "evidence": [{ "source": "src_2", "span": "legal has reviewed the terms" }] },
+    { "id": "n3", "type": "gateway", "gateway_type": "xor", "label": "Vertrag in Ordnung?" },
+    { "id": "n4", "type": "task", "action": "Zur Unterschrift weiterleiten", "actor": "a2", "recipient": "a3" },
+    { "id": "n5", "type": "task", "action": "Vertrag überarbeiten", "actor": "a1" }
+  ],
+  "flows": [
+    { "from": "n1", "to": "n2" },
+    { "from": "n2", "to": "n3" },
+    { "from": "n3", "to": "n4", "condition": "keine Einwände" },
+    { "from": "n3", "to": "n5", "condition": "Änderungen nötig" },
+    { "from": "n5", "to": "n2" }
+  ],
+  "sources": [
+    { "id": "src_1", "type": "email", "message_id": "<...>", "from": "trader@enron.com", "date": "2000-07-14", "subject": "Contract draft" },
+    { "id": "src_2", "type": "email", "message_id": "<...>", "from": "legal@enron.com",  "date": "2000-07-15", "subject": "RE: Contract draft" }
+  ],
+  "metadata": {
+    "created_at": "2000-07-15T10:00:00Z",
+    "extraction_model": "gpt-4o",
+    "status": "extracted",
+    "confidence": 0.82
+  }
+}

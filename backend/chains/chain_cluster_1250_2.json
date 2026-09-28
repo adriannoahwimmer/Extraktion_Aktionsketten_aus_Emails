@@ -1,0 +1,160 @@
+{
+  "id": "cluster_1250_2",
+  "title": "Beauftragung und Bezahlung von Immobiliengutachten fuer Sciullo Properties",
+  "summary": "Susan Bailey koordiniert mit West Penn Appraisers die Bewertung der Sciullo Properties, genehmigt Kosten, zahlt bestimmte Gutachten und klaert, wer fuer Objekte ausserhalb ihrer Beteiligung zahlen muss.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Die Mail beschreibt einen mehrstufigen Ablauf mit klaren Akteuren (Susan Bailey, WPA, Leonard/Dad) und einem Entscheidungspunkt zur Zahlungszustaendigkeit.",
+  "tags": [
+    "immobilienbewertung",
+    "gutachten",
+    "zahlung",
+    "koordination"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Susan Bailey",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Maria Pirro (West Penn Appraisers)",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Leonard",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Maria Pirro von West Penn Appraisers kontaktiert Susan Bailey und sendet die Gebuehrenuebersicht fuer die Sciullo Properties",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Gebuehrenuebersicht WPA"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "she is with West Penn Appraisers, Inc. (\"WPA\").  She faxed their fee schedule relating to the various Sciullo Properties"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Susan Bailey genehmigt die Kosten, woraufhin WPA mit der Arbeit beginnt",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Gebuehrenuebersicht WPA"
+      ],
+      "outputs": [
+        "Kostenfreigabe"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "signed off on my approval as to costs, so WPA is beginning their work"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Susan Bailey ueberweist WPA das Geld fuer die Burger-King- und Willow-Farms-Gutachten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kostenfreigabe"
+      ],
+      "outputs": [
+        "Bezahlung der Gutachten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I have sent to WPA the monies for the Burger King appraisal as well as the Willow Farms lots."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Sind Four Star oder Dan/Susan Partei bei der jeweiligen Immobilie?"
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Susan Bailey weist darauf hin, dass Leonard oder ihr Vater die Zahlung fuer nicht beteiligte Objekte uebernehmen muessen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "Zahlungsverantwortung geklaert"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "the payment of those appraisals must be handled probably by you or my Dad"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Susan Bailey sendet Leonard die WPA-Gebuehrenuebersicht zur Information ueber die betroffenen Objekte",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "WPA-Gebuehrenuebersicht an Leonard"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I will fax the WPA fee Schedule, so you know what properties constitute WPA's idea of the \"Sciullo Properties\"."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "condition": "keine Partei / Zahlung durch Leonard oder Dad"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "susan.bailey@enron.com",
+      "to": "cptdougie@aol.com",
+      "date": "2002-02-21",
+      "subject": "Sciullo Properties -- Appraisal"
+    }
+  ]
+}

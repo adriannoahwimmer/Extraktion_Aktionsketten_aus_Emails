@@ -1,0 +1,28 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260910_165307_2o8p
+Lese attachments__1_.zip ...
+Fertig. 5 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260910_165307_2o8p\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260910_165307_2o8p
+C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\sklearn\cluster\_hdbscan\hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+HDBSCAN-Quelle: sklearn
+Mails vorher: 5  |  nach Deduplizierung: 5
+Embedde 5 neue Mails (Batch-Groesse 32) ...
+  5/5
+
+Reduziere Dimension (4096 -> 5) mit UMAP ...
+Nur 5 Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.
+Clustere mit HDBSCAN ...
+
+Ergebnis gespeichert in: C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260910_165307_2o8p\clusters.jsonl
+
+Cluster gefunden: 0
+Rauschen (Label -1): 5 von 5 Mails
+
+Groesste Cluster (bis zu 10), je 3 Beispiel-Betreffs + Chain-Score:
+
+--- Burnet-Akzeptanztest ---
+  Keine Mails mit den Burnet-Phrasen gefunden.
+
+FEHLER: Keine Cluster gebildet - zu wenige/zu unterschiedliche Mails.

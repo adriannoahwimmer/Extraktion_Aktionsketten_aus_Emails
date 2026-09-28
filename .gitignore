@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Daten & große Dateien
+data/
+*.csv
+*.parquet
+*.zip
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+# Abgeleitete Daten & Uploads
+*.npy
+*.pst
+backend/mails.jsonl
+backend/clusters.jsonl
+backend/batches/*/upload/

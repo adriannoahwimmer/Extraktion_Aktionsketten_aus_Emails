@@ -1,0 +1,192 @@
+{
+  "id": "cluster_1345_1",
+  "title": "Eskalation und Bearbeitung der AEC Kundenanfrage",
+  "summary": "AEC (Kunde von Enron Canada) fordert seit Monaten eine detaillierte Aufschluesselung einer Transaktion; nach Eskalation durch den CEO von Enron Canada an Susan Harrison wird das Settlements-Team eingeschaltet, das die Daten liefert und den Fall schliesslich zur Zufriedenheit des Kunden loest.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Klare Eskalationskette mit konkreten Zustaendigkeiten (CEO -> Harrison -> Baxter/Settlements) und mehreren nachvollziehbaren Handlungsschritten bis zur Loesung.",
+  "tags": [
+    "Eskalation",
+    "Kundenanfrage",
+    "Settlements",
+    "AEC",
+    "Enron Canada"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Rob Milnthorp",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Susan Harrison",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Bryce Baxter",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Eskaliert die Kundenbeschwerde von AEC an Susan Harrison und bittet um Unterstuetzung",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Beschwerde von Bill Hogue (AEC)"
+      ],
+      "outputs": [
+        "Weiterleitung der Anfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Bill Hogue at AEC has now elevated the issue to me. Can you please assist Bill in getting the information he is requesting."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Trifft sich mit ihrem Team und veranlasst einen Anruf bei AEC",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Eskalation von Rob Milnthorp"
+      ],
+      "outputs": [
+        "Kontaktaufnahme mit AEC"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I met with my team members this morning and we have placed a call to AEC."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Kontaktiert AEC (Mike Bennett und Bill Hogue) und liefert erste Daten",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [
+        "Anweisung von Susan Harrison"
+      ],
+      "outputs": [
+        "Erste Monatsdaten geliefert"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Bryce Baxter and his team members have been in contact with Mike Bennett and Bill Hogue to understand their needs.  We have provided the initial information they requested"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Genehmigt AEC die Fortsetzung der Analyse fuer weitere Monate?",
+      "evidence": []
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Gibt Update an Rob Milnthorp und Sally Beck ueber den Fortschritt",
+      "actor": "a2",
+      "recipient": "a4",
+      "inputs": [
+        "Zwischenstand Settlements"
+      ],
+      "outputs": [
+        "Statusbericht"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I wanted to provide an update on our progress with AEC."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Bestaetigt, dass Bill Hogue mit der Antwort zufrieden ist",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Feedback von AEC"
+      ],
+      "outputs": [
+        "Bestaetigung der Problemloesung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Bill Hogue at AEC is extremely happy with the reponse that he has received."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Eskalation erhalten"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Team beauftragt"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "condition": "warten auf Genehmigung fuer weitere Analyse"
+    },
+    {
+      "from": "n5",
+      "to": "n6",
+      "condition": "Feedback von AEC erhalten"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "rob.milnthorp@enron.com",
+      "to": "susan.harrison@enron.com",
+      "date": "2000-06-28",
+      "subject": "AEC"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "susan.harrison@enron.com",
+      "to": "rob.milnthorp@enron.com, sally.beck@enron.com, brent.price@enron.com",
+      "date": "2000-07-07",
+      "subject": "AEC Issues"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "rob.milnthorp@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-07-11",
+      "subject": "Re: AEC Issues"
+    }
+  ]
+}

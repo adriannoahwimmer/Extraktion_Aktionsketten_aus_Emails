@@ -1,0 +1,290 @@
+{
+  "id": "cluster_1247_1",
+  "title": "Koordination der Wellesley-Recruiting-Kampagne",
+  "summary": "Geynille Dillingham koordiniert als Recruiterin die Wellesley-Kampagne ueber mehrere Monate: Teammeeting, Verteilung von Unterlagen, mehrfache Terminverschiebungen fuer Interviews sowie Ruecklaeufe der Teammitglieder zu Teilnahme und Terminkonflikten.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Die Kette zeigt einen klaren, wiederkehrenden Ablauf mit fester Zustaendigkeit (Recruiterin), mehreren Handlungsschritten (Meeting, Unterlagenverteilung, Terminrevisionen) und echten Reaktionen/Entscheidungen der Teammitglieder.",
+  "tags": [
+    "recruiting",
+    "terminkoordination",
+    "wellesley",
+    "hochschulmarketing"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Geynille Dillingham",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Christie Patrick",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Patti Thompson",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Geynille verteilt Protokoll des ersten Wellesley-Teammeetings mit Themen und offenen Punkten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Meeting-Protokoll"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would like to thank everyone for participating in the first Wellesley Team Meeting."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Geynille verschickt Praesentations- und Interviewunterlagen (Itinerary, Strategie) an das Team",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Meeting-Ergebnisse"
+      ],
+      "outputs": [
+        "Itinerary",
+        "Strategiepapier"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Please review the following attachments for details regarding the Presentation."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Geynille aendert die Interviewtermine erneut und informiert das Team ueber die Revision",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Terminkonflikte"
+      ],
+      "outputs": [
+        "Revidiertes Event-Formular"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "There has been some revisions to the Reception and Interview dates."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Geynille passt die Gesamtstrategie wegen weiterer Terminkonflikte an und bittet Team um Anpassung",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Terminkonflikte"
+      ],
+      "outputs": [
+        "Angepasste Strategie"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Due to scheduling conflicts the strategy has been adjusted."
+        }
+      ]
+    },
+    {
+      "id": "g1",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Wie reagiert das Teammitglied auf die revidierte Strategie?"
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Sally Beck meldet einen Terminkonflikt und bittet Patti Thompson, den Zeitplan zu drucken",
+      "actor": "a2",
+      "recipient": "a4",
+      "inputs": [
+        "Revidierte Strategie"
+      ],
+      "outputs": [
+        "Gedruckter Zeitplan"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "Please print Wellesley schedule - I think that I have a conflict with the date that they need me."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Christie Patrick bestaetigt ihre Teilnahme am Empfang und bittet Geynille um eine Zimmerreservierung",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Revidierte Strategie"
+      ],
+      "outputs": [
+        "Zimmerreservierungsanfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "would you please reserve a room for me (for the evening of the 4th) at the same location as the rest of the group will be staying?"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Geynille bestaetigt neue Interviewtermine und sucht weitere Interviewer fuer das Team",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Fortlaufende Terminkonflikte"
+      ],
+      "outputs": [
+        "Bestaetigte Interviewtermine",
+        "Interviewerliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "The rescheduled Wellesley interview dates are confirmed for March 13th and 14th."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Sally Beck sagt die neuen Termine wegen Frühjahrsferien ab",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Bestaetigte Interviewtermine"
+      ],
+      "outputs": [
+        "Absage"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "Unfortunately, these new dates don't work for me."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "g1"
+    },
+    {
+      "from": "g1",
+      "to": "n5",
+      "condition": "Terminkonflikt gemeldet"
+    },
+    {
+      "from": "g1",
+      "to": "n6",
+      "condition": "Teilnahme bestaetigt"
+    },
+    {
+      "from": "n4",
+      "to": "n7",
+      "condition": "naechste Terminrunde"
+    },
+    {
+      "from": "n7",
+      "to": "n8"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com",
+      "to": "cindy.olson@enron.com et al.",
+      "date": "2000-09-01",
+      "subject": "Wellesley Team Meeting Minutes"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com",
+      "to": "cindy.olson@enron.com et al.",
+      "date": "2000-09-21",
+      "subject": "Wellesley Information"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com",
+      "to": "cindy.olson@enron.com et al.",
+      "date": "2000-10-27",
+      "subject": "Wellesley Interviews - Revision"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com",
+      "to": "cindy.olson@enron.com et al.",
+      "date": "2001-02-02",
+      "subject": "Wellesley Revised Strategy"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "patti.thompson@enron.com",
+      "date": "2001-02-05",
+      "subject": "Wellesley Revised Strategy"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "christie.patrick@enron.com",
+      "to": "geynille.dillingham@enron.com",
+      "date": "2001-02-07",
+      "subject": "Re: Wellesley Revised Strategy"
+    },
+    {
+      "id": "src_7",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com / sally.beck@enron.com",
+      "to": "cindy.olson@enron.com et al.",
+      "date": "2001-03-07",
+      "subject": "Wellesley Interview reschedule dates"
+    }
+  ]
+}

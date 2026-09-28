@@ -1,0 +1,18 @@
+{
+  "batch_id": "b20260921_160904_9hib",
+  "phase": "error",
+  "phasen_text": "Fehler",
+  "fortschritt": {
+    "aktuell": 0,
+    "gesamt": 12
+  },
+  "zahlen": {
+    "mails": 12,
+    "cluster": 0,
+    "rauschen": 0,
+    "ketten": 0
+  },
+  "fehler": "cluster_mails.py endete mit Code 1 (siehe pipeline.log)",
+  "gestartet": "2026-09-21T14:09:06Z",
+  "aktualisiert": "2026-09-21T14:11:15Z"
+}

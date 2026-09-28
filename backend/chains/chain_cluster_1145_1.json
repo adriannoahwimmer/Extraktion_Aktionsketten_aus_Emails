@@ -1,0 +1,225 @@
+{
+  "id": "cluster_1145_1",
+  "title": "UT/Enron MBA Excellence Scholarship Auswahlprozess",
+  "summary": "Jaehrlicher Ablauf, bei dem Enron gemeinsam mit der University of Texas Bewerbungen prueft, Kandidaten interviewt, Gewinner der MBA-Excellence-Stipendien auswaehlt und anschliessend fuer Recruiting und Nachbetreuung sorgt.",
+  "prozess_wahrscheinlichkeit": 0.9,
+  "prozess_begruendung": "Der Ablauf enthaelt klare Zustaendigkeiten (Karen Marshall koordiniert, Sally Beck reviewt/interviewt) und eine mehrstufige, zeitlich getaktete Abfolge von Versand, Bewertung, Interview, Auswahl, Bekanntgabe und Nachbereitung.",
+  "tags": [
+    "stipendium",
+    "recruiting",
+    "universitaet",
+    "auswahlprozess",
+    "enron-ut"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Karen Marshall",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Bewerbungspaket der 16 Kandidaten zur Pruefung an das Enron-Team senden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "16 Bewerbungen"
+      ],
+      "outputs": [
+        "Bewerbungspaket an Team"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "In order to expedite the process, I am sending you  the package  with the 16 applicants for your review."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Bewerbungen pruefen und Top-8-Kandidaten in Rangfolge zurueckmelden",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Bewerbungspaket"
+      ],
+      "outputs": [
+        "Rangliste Top 8"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I will review the 16 applications and will rank order the top eight for you by the end of this week."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Interviews mit den Bewerbern auf dem Campus terminieren",
+      "actor": "a1",
+      "inputs": [
+        "Rangliste Top 8"
+      ],
+      "outputs": [
+        "Interviewtermine"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "March 19,  2001 - Schedule interviews on campus with Enron team and \nscholarship applicants"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Bewerber vor Ort in Austin interviewen",
+      "actor": "a2",
+      "inputs": [
+        "Interviewtermine"
+      ],
+      "outputs": [
+        "Interviewergebnisse"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I will be in Austin \ninterviewing 1st year MBA students for the Enron Scholarships."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Stipendiengewinner auswaehlen und bekannt geben",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Interviewergebnisse"
+      ],
+      "outputs": [
+        "Bekanntgabe der Gewinner"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I am pleased to announce the recipients of the 2001 University of Texas Enron \nMBA Excellence Scholarships"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Lebenslaeufe der interviewten Studenten an UT-Recruiter fuer kuenftige Einstellungen weiterleiten",
+      "actor": "a2",
+      "inputs": [
+        "Bekanntgabe der Gewinner"
+      ],
+      "outputs": [
+        "Lebenslaeufe an Recruiter"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I will find out who \nthe recruiter is for UT MBA's and I will get copies of the students' resumes \nand my notes on where they could be a good fit to that recruiter."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Nachbereitendes Mittag-/Abendessen mit den Gewinnern organisieren",
+      "actor": "a1",
+      "inputs": [
+        "Bekanntgabe der Gewinner"
+      ],
+      "outputs": [
+        "Termin fuer Nachbereitung"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I told the scholarship winners that within the next few weeks, we would like \nto meet with them for lunch or dinner  before the semester is over."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n5",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "karen.marshall@enron.com",
+      "date": "2001-03-06",
+      "subject": "Re: UT/Enron MBA Excellence Scholarships"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "greg.piper@enron.com",
+      "date": "2001-03-26",
+      "subject": "Commitments this Week"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "karen.marshall@enron.com",
+      "to": "sally.beck@enron.com; richard.causey@enron.com; gene.humphrey@enron.com; wanda.curry@enron.com; brent.price@enron.com; charlene.jackson@enron.com; christie.patrick@enron.com; loftus.fitzwater@enron.com; roger.ondreko@enron.com; andrea.reed@enron.com",
+      "date": "2001-03-28",
+      "subject": "UT/Enron MBA Excellence 2001 Scholarship Winners Announced!"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "billy.lemmons@enron.com; ben.glisan@enron.com",
+      "date": "2001-03-29",
+      "subject": "UT/Enron MBA Excellence 2001 Scholarship Winners Announced!"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "karen.marshall@enron.com",
+      "to": "sally.beck@enron.com; richard.causey@enron.com",
+      "date": "2001-03-29",
+      "subject": "Re: UT/Enron MBA Excellence 2001 Scholarship Winners Announced!"
+    }
+  ]
+}

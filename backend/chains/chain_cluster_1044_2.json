@@ -1,0 +1,137 @@
+{
+  "id": "cluster_1044_2",
+  "title": "Center for Houston's Future - Einladungsprozess",
+  "summary": "Marilou Schopper organisiert eine Veranstaltung mit Chuck Watson, fordert RSVP und Zahlung an, die Reservierung wird bestaetigt und im Anschluss eine Teilnehmerliste verschickt.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Es ist ein klarer, mehrstufiger Ablauf von Einladung, Rueckmeldung, Zahlung und Bestaetigung erkennbar, jedoch mit wenigen beteiligten Akteuren.",
+  "tags": [
+    "Veranstaltungsorganisation",
+    "Einladung",
+    "Houston",
+    "Networking"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Marilou Schopper",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Christina Valdez",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Marilou sendet Einladung und bittet um Rueckmeldung per E-Mail bis zum 9. Januar",
+      "actor": "a1",
+      "inputs": [
+        "Veranstaltungsdetails"
+      ],
+      "outputs": [
+        "RSVP-Aufforderung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please e-mail a reply to this invitation to Marilou Schopper, mschopper@houston.org by Wednesday, Jan. 9."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Marilou fordert Zahlung der Teilnahmegebuehr per Scheck an Jill Murray an",
+      "actor": "a1",
+      "inputs": [
+        "Zusage zur Teilnahme"
+      ],
+      "outputs": [
+        "Zahlungseingang"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Luncheon fee should be paid by a check made payable to Center for Houston's Future."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Christina Valdez bestaetigt die bezahlte Reservierung fuer die Veranstaltung",
+      "actor": "a2",
+      "inputs": [
+        "Zahlung"
+      ],
+      "outputs": [
+        "Bestaetigte Reservierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "reservation pd."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Marilou verschickt die Teilnehmerliste des Winter 2002 Business-Civic Leadership Forum",
+      "actor": "a1",
+      "inputs": [
+        "Teilnehmerdaten"
+      ],
+      "outputs": [
+        "Klassen-Roster"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Here is the roster."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Zusage zur Teilnahme erfolgt"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Zahlung wurde geleistet"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "mschopper@houston.org",
+      "to": "diverse Enron-Mitarbeiter",
+      "date": "2002-01-04",
+      "subject": "The Center -- An Invitation"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "christina.valdez@enron.com",
+      "to": "",
+      "date": "2002-01-10",
+      "subject": "The Houston Club; Travis Room - 10th flr - 811 Rusk (Ctr for Houston's Future - Chuck Watson to speak about \"Energy, Diversity and the Future of Houston\") - 11:30 Prompt-Reception/Noon Luncheon (11:45 check-in) - reservation pd."
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "mschopper@houston.org",
+      "to": "diverse Enron-Mitarbeiter",
+      "date": "2002-01-17",
+      "subject": "The Center -- Winter 2002 Business-Civic Leadership Forum -- Class Roster"
+    }
+  ]
+}

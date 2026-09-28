@@ -1,0 +1,261 @@
+{
+  "id": "cluster_1315_1",
+  "title": "AEP-HPL Transition Koordination",
+  "summary": "Mehrere Enron-Mitarbeiter erstellen, aktualisieren und stimmen iterativ Uebergabelisten und Protokolle fuer die AEP-HPL-Transition ab, wobei Zustaendigkeiten und Anforderungen zwischen den Beteiligten geklaert werden.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Der Cluster zeigt einen klar erkennbaren, mehrstufigen Ablauf mit wechselnden Verantwortlichkeiten (Entwurf, Kommentierung, Ueberarbeitung, Protokollerstellung) zwischen mehreren Akteuren.",
+  "tags": [
+    "AEP",
+    "HPL",
+    "Transition",
+    "Protokoll",
+    "Uebergabe"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Bob Hall",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Greg Piper",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Brian Redmond",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "Kathryn Bussell",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Bob Hall sendet ersten Entwurf des Memos zu AEP-Transitionsthemen an das Team und bittet um Ergaenzungen",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [],
+      "outputs": [
+        "Entwurfsmemo"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please add any items and forward back to me.  I will update"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Bob Hall aktualisiert das Memo und verteilt es erneut an eine erweiterte Empfaengerliste",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Entwurfsmemo",
+        "Kommentare des Teams"
+      ],
+      "outputs": [
+        "Aktualisiertes Memo"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Attached is a updated memo about transition issues."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Sally Beck leitet die aktuellste Version der Transitionsliste an Greg Piper weiter",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Aktualisiertes Memo"
+      ],
+      "outputs": [
+        "Weitergeleitete Liste"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "See attachment for latest attempt at satisfying the \"ill-defined\"."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Sally Beck entwickelt ein neues Format fuer die Aufgabenliste und schlaegt ein Protokoll fuer Kommunikation mit AEP vor",
+      "actor": "a2",
+      "recipient": "a4",
+      "inputs": [
+        "Weitergeleitete Liste"
+      ],
+      "outputs": [
+        "Energy Operations Task List",
+        "Protokollvorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "We devised this week a new format for incorporating the AEP-HPL transition issues on which my team has been focused"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Brian Redmond definiert konkrete Anforderungen an das Business-Ops-Protokoll zwischen Enron und AEP",
+      "actor": "a4",
+      "recipient": "a2",
+      "inputs": [
+        "Energy Operations Task List"
+      ],
+      "outputs": [
+        "Anforderungsliste fuer Protokoll"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "AEP and Enron need to agree in writing for each Business Ops \"process\" or function"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Brian Redmond sendet das PP&E- und CWIP-Protokoll fuer die Accounting-Aktivitaeten an Sally Beck",
+      "actor": "a4",
+      "recipient": "a2",
+      "inputs": [
+        "Anforderungsliste fuer Protokoll"
+      ],
+      "outputs": [
+        "PP&E/CWIP Protokoll"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "here is what Jim is using for the Accounting activities."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Kathryn Bussell sendet eine aktualisierte Version der Transitionsliste an Sally Beck",
+      "actor": "a5",
+      "recipient": "a2",
+      "inputs": [
+        "Aktualisiertes Memo"
+      ],
+      "outputs": [
+        "Aktualisierte Transitionsliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "please see the attached list as opposed to the one attached in Bob's earlier memo."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "nach Sammlung der Kommentare"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n2",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "bob.hall@enron.com",
+      "to": "brian.redmond@enron.com, tommy.yanowski@enron.com, troy.denetsosie@enron.com, bill.hare@enron.com, leslie.reeves@enron.com, michael.eiben@enron.com, edward.terry@enron.com, daren.farmer@enron.com, edward.gottlob@enron.com",
+      "date": "2001-03-23",
+      "subject": "AEP Transition Items"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "bob.hall@enron.com",
+      "to": "brian.redmond@enron.com, tommy.yanowski@enron.com, james.coffey@enron.com, anne.koehler@enron.com, barbara.gray@enron.com, michael.eiben@enron.com, edward.terry@enron.com, edward.gottlob@enron.com, thomas.martin@enron.com, daren.farmer@enron.com, sally.beck@enron.com, leslie.reeves@enron.com, jeffrey.gossett@enron.com, david.baumbach@enron.com, rita.wynne@enron.com",
+      "date": "2001-03-28",
+      "subject": "AEP-HPL transition issues"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "greg.piper@enron.com",
+      "date": "2001-03-29",
+      "subject": "AEP-HPL Transition Issues"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "louise.kitchen@enron.com, brian.redmond@enron.com",
+      "date": "2001-03-30",
+      "subject": "HPL Sale - Energy Operations Task List"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "brian.redmond@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2001-04-02",
+      "subject": "Re: HPL Sale - Energy Operations Task List"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "brian.redmond@enron.com",
+      "to": "sally.beck@enron.com, robert.hall@enron.com",
+      "date": "2001-04-02",
+      "subject": "PP&E and CWIP Protocol for HPL Transition"
+    },
+    {
+      "id": "src_7",
+      "type": "email",
+      "from": "kathryn.bussell@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2001-04-04",
+      "subject": "AEP-HPL transitions list - UPDATED"
+    }
+  ]
+}

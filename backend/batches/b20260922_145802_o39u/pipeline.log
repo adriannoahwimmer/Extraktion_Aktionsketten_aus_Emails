@@ -1,0 +1,35 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_145802_o39u
+Lese attachments__1_.zip ...
+Fertig. 5 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_145802_o39u\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_145802_o39u
+HDBSCAN-Quelle: sklearn
+Mails vorher: 5  |  nach Deduplizierung: 5
+Embedde 5 neue Mails (Batch-Groesse 32) ...
+Traceback (most recent call last):
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py", line 277, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py", line 259, in main
+    cache = embedde_fehlende(client, mails_dedup, cache)
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py", line 111, in embedde_fehlende
+    antwort = client.embeddings.create(model=EMBED_MODEL, input=texte)
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\openai\resources\embeddings.py", line 136, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/embeddings",
+        ^^^^^^^^^^^^^^
+    ...<9 lines>...
+        cast_to=CreateEmbeddingResponse,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\openai\_base_client.py", line 1332, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\openai\_base_client.py", line 1105, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'detail': 'Your session has expired or the token is invalid. Please sign in again.'}
+
+FEHLER: cluster_mails.py endete mit Code 1 (siehe pipeline.log)

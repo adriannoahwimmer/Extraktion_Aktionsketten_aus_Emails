@@ -1,0 +1,208 @@
+{
+  "id": "cluster_1069_1",
+  "title": "Jahresspendenaufruf der Periwinkle Foundation",
+  "summary": "Kelley Harrell koordiniert den jaehrlichen Spendenaufruf: Sammeln aktualisierter Adresslisten, Organisation eines Treffens zum Unterschreiben der Spendenbriefe und abschliessende Pruefung der Namensschreibweise fuer neues Briefpapier.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Die Mailkette beschreibt einen mehrstufigen, wiederkehrenden Fundraising-Ablauf mit klaren Zustaendigkeiten (Koordinatorin, Board-Mitglieder, Executive Director) und konkreten aufeinander folgenden Handlungsschritten.",
+  "tags": [
+    "Spendenaufruf",
+    "Non-Profit",
+    "Fundraising",
+    "Board-Meeting",
+    "Periwinkle Foundation"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Kelley Harrell",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Enron Board-Mitglieder",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Susan Bailey",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Pat (Executive Director)",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "fordert aktualisierte Namens- und Adresslisten fuer den Jahresspendenaufruf an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "aktualisierte Adresslisten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "we need new and/or updated names and addresses by Monday"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "informiert ueber Verlegung des Board-Meetings und Moeglichkeit, Spendenbriefe vor Ort zu unterschreiben",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "neuer Treffpunkt fuer Briefe"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "We have moved the Board Meeting on Wednesday night at 6pm to Chris and Judy Simon's house"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "erinnert an Verfuegbarkeit der Spendenbriefe zum Handschreiben persoenlicher Notizen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "unterschriebene/personalisierte Spendenbriefe"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "The annual fund letters will be available for you to make notes on tommorrow at 3:00"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "teilt mit, dass sie aufgrund ihrer Rolle nicht beim Fundraising helfen darf und nur am Meeting teilnimmt",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Ruecklauf zur Teilnahme"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I am not permitted to assist with any fund raising activities."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "erinnert erneut an Ort und Zeitraum fuer das Ausfuellen der Spendenbriefe",
+      "actor": "a4",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "fertiggestellte Spendenbriefe"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "the letters will be available for you to make notes on tomorrow, January 17 and Friday, January 18 beginning at 8 a.m. until 6 p.m."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "bittet um Pruefung der Namensschreibweise fuer das neue Briefpapier",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "korrigierte Namensliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "Please check this list to see if this is how you want your name to appear on The Periwinkle Foundation's printed materials."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n3",
+      "to": "n5"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "kharrell@periwinklefoundation.org",
+      "to": "wheless.laura@enron.com; et al.",
+      "date": "2002-01-09",
+      "subject": "The Periwinkle Foundation"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "kharrell@periwinklefoundation.org",
+      "to": "parsley.louise@enron.com; et al.",
+      "date": "2002-01-11",
+      "subject": "The Periwinkle Foundation"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "kharrell@periwinklefoundation.org",
+      "to": "dahlberg.carl@enron.com; et al.",
+      "date": "2002-01-15",
+      "subject": "The Periwinkle Foundation Annual Fund Drive"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "susan.bailey@enron.com",
+      "to": "kharrell@periwinklefoundation.org",
+      "date": "2002-01-16",
+      "subject": "RE: The Periwinkle Foundation Annual Fund Drive"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "executive_director@periwinklefoundation.org",
+      "to": "pool.smiley@enron.com; et al.",
+      "date": "2002-01-16",
+      "subject": "Board Meeting Tonight/Annual Fund Letters/ and Camp Meeting Coming up"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "kharrell@periwinklefoundation.org",
+      "to": "dahlberg.carl@enron.com; et al.",
+      "date": "2002-01-29",
+      "subject": "The Periwinkle Foundation"
+    }
+  ]
+}

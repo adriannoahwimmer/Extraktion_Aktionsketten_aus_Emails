@@ -1,0 +1,159 @@
+{
+  "id": "cluster_1270_1",
+  "title": "HPL Balancing Projekt - Naechste Schritte",
+  "summary": "Brenda Herod fasst die vereinbarten naechsten Schritte eines Kernteams zusammen, das die Transportgeschaefte von HPLC mit dem Off-System-Interconnect-Geschaeft abgleicht und bei Bedarf weitere Teams einbindet.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Die Mail beschreibt einen mehrstufigen Ablauf mit klaren Zustaendigkeiten (Kernteam), Datenabgleich und einem Entscheidungspunkt zur Einbindung weiterer Teams.",
+  "tags": [
+    "HPL",
+    "Balancing",
+    "Gas Accounting",
+    "Projektmanagement"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Brenda Herod",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Kernteam (Gottlob, Graves, Wynne, Cernosek)",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Brian Redmond",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Fasst naechste Schritte des HPL-Balancing-Projekts zusammen und teilt sie mit",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "Zusammenfassung der Schritte"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I wanted to recap my understanding of the next steps."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sammelt Daten zum Gesamt-Transportgeschaeft von HPLC",
+      "actor": "a2",
+      "recipient": "",
+      "inputs": [],
+      "outputs": [
+        "Transportdaten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "pull data to view HPLC's total transport business"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Gleicht Daten mit dem Off-System-Interconnect-Geschaeft ab",
+      "actor": "a2",
+      "recipient": "",
+      "inputs": [
+        "Transportdaten"
+      ],
+      "outputs": [
+        "Abgleichsergebnis"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "balance it to the off-system interconnect business used in the Texas Trading Operation"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Ist zusaetzliche Unterstuetzung noetig?"
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Bindet weitere Teams ein (Gas Accounting, Settlements)",
+      "actor": "a2",
+      "recipient": "",
+      "inputs": [],
+      "outputs": [
+        "Erweiterte Projektgruppe"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "will enlist others as needed which might include Gas Accounting, Settlements (Lisa Csikos) or others"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Legt Vorgehen fest und plant Folgetermin",
+      "actor": "a2",
+      "recipient": "",
+      "inputs": [],
+      "outputs": [
+        "Folgetermin"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "They will need to determine their course of action, and schedule a follow-up meeting with the group when they have some data to share."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "condition": "falls zusaetzliche Unterstuetzung noetig"
+    },
+    {
+      "from": "n4",
+      "to": "n6",
+      "condition": "falls keine zusaetzliche Unterstuetzung noetig"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "brenda.herod@enron.com",
+      "to": "brian.redmond@enron.com",
+      "date": "Wed, 12 Jul 2000 06:50:00 -0700",
+      "subject": "Balancing of HPL"
+    }
+  ]
+}

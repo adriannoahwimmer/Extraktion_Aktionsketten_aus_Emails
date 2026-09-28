@@ -1,0 +1,100 @@
+{
+  "id": "b20260924_112100_6q0k_cluster_1_1",
+  "title": "Wenzel Anlagenbau Handover-Notizen",
+  "summary": "Timo Kessler informiert Nils Kaufmann nach Vertragsunterschrift ueber die wichtigsten Handover-Punkte des Kunden Wenzel Anlagenbau, damit dieser den Kunden korrekt uebernehmen kann.",
+  "prozess_wahrscheinlichkeit": 0.45,
+  "prozess_begruendung": "Enthaelt konkrete Uebergabepunkte (Dokument im CRM, Ansprechpartner, Kickoff-Frist), ist aber eher eine Faktenliste als ein klar sequenzieller Ablauf.",
+  "tags": [
+    "handover",
+    "vertrieb",
+    "kundenuebergabe",
+    "kickoff"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Timo Kessler",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Nils Kaufmann",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Handover-Dokument im CRM am Deal hinterlegen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Unterschriebener Vertrag"
+      ],
+      "outputs": [
+        "Handover-Dokument im CRM"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Handover-Dokument liegt im CRM am Deal."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Fachlichen Ansprechpartner (Instandhaltung statt Einkauf) benennen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Kontaktinformation Ansprechpartner"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Ansprechpartner ist Herr Vollrath aus der Instandhaltung, nicht der Einkauf."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Kickoff-Termin spaetestens bis zum 18. ansetzen",
+      "actor": "a2",
+      "recipient": null,
+      "inputs": [],
+      "outputs": [
+        "Kickoff-Termin"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Kickoff müsste nach unserer Regel spätestens am 18. stehen."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "Timo Kessler",
+      "to": "Nils Kaufmann",
+      "date": "2026-03-05",
+      "subject": "Übergabe Wenzel Anlagenbau — unterschrieben 04.03."
+    }
+  ]
+}

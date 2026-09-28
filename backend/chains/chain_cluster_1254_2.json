@@ -1,0 +1,83 @@
+{
+  "id": "cluster_1254_2",
+  "title": "Anforderung und Zustellung der Sommer-Analystenliste",
+  "summary": "Sally Beck fordert bei Shelly Jones eine Liste aller Sommer-Analysten an, die daraufhin von Sheila Pardo zusammengestellt und an Sally geschickt wird.",
+  "prozess_wahrscheinlichkeit": 0.5,
+  "prozess_begruendung": "Die Mail beschreibt explizit einen Handoff-Prozess (Anfrage an Shelly Jones, Bearbeitung durch Sheila Pardo, Lieferung an Sally), auch wenn die Anfrage selbst nicht als eigene Mail vorliegt.",
+  "tags": [
+    "analysten",
+    "anforderung",
+    "reporting"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Shelly Jones",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Sheila Pardo",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Fordert Liste aller Sommer-Analysten bei Shelly Jones an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage nach Analystenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Per your request to Shelly Jones, this is a list of all summer analysts and their information."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sendet angeforderte Analystenliste an Sally",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage nach Analystenliste"
+      ],
+      "outputs": [
+        "Liste der Sommer-Analysten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "this is a list of all summer analysts and their information."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sheila.pardo@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-05-18",
+      "subject": "Summer, 2000 Analysts"
+    }
+  ]
+}

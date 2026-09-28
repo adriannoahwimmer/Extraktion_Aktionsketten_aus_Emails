@@ -1,0 +1,18 @@
+{
+  "batch_id": "b20260911_171849_m7cl",
+  "phase": "cluster",
+  "phasen_text": "Mails einbetten und clustern",
+  "fortschritt": {
+    "aktuell": 0,
+    "gesamt": 5
+  },
+  "zahlen": {
+    "mails": 5,
+    "cluster": 0,
+    "rauschen": 0,
+    "ketten": 0
+  },
+  "fehler": null,
+  "gestartet": "2026-09-11T15:18:51Z",
+  "aktualisiert": "2026-09-11T15:18:52Z"
+}

@@ -1,0 +1,132 @@
+{
+  "id": "b20260924_112100_6q0k_cluster_e00002_1",
+  "title": "Abstimmung SAP-Demo Nordform mit Anforderungsblatt",
+  "summary": "Jasmin kuendigt einen Demo-Termin beim Kunden Nordform an, Bene fordert ein ausgefuelltes Anforderungsblatt und eine Vorlaufzeit von zehn Arbeitstagen, woraufhin Jasmin die fehlenden Infos organisiert und eine Terminverschiebung erwaegt.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Es sind mehrere konkrete Handlungsschritte und eine klare Regel (10 Arbeitstage ab Eingang des Blattes) erkennbar, aber die Kette ist kurz und nicht bis zum Abschluss verfolgt.",
+  "tags": [
+    "Demo-Planung",
+    "SAP-Anbindung",
+    "Anforderungsblatt",
+    "Terminverschiebung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Jasmin Oezdemir",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Bene Fuchs",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Jasmin informiert Bene ueber den zugesagten Demo-Termin am 19. und verweist auf das Discovery-Protokoll im CRM",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Discovery-Protokoll im CRM"
+      ],
+      "outputs": [
+        "Terminankuendigung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I hab dem Kunden den 19. genannt. Discovery-Protokoll ist im CRM. Passt das bei dir?"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Bene lehnt den Start ohne ausgefuelltes Anforderungsblatt ab und legt eine Frist von zehn Arbeitstagen ab Eingang des Blattes fest",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Discovery-Protokoll (unvollstaendig)"
+      ],
+      "outputs": [
+        "Anforderung: ausgefuelltes Anforderungsblatt",
+        "Regel: 10 Arbeitstage ab Eingang"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Ich fange ohne ausgefülltes Anforderungsblatt nicht an, das hatten wir letztes Jahr bei Kronberg und ich hab die Demo dreimal umgebaut."
+        },
+        {
+          "source": "src_1",
+          "span": "Zehn Arbeitstage ab Eingang des Blattes, nicht ab heute."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Jasmin organisiert die fehlende Schnittstellenliste von Frau Pekarek und sagt zu, das Anforderungsblatt auszufuellen und Bene am Donnerstag zu liefern",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Zusage von Frau Pekarek"
+      ],
+      "outputs": [
+        "Ausgefuelltes Anforderungsblatt (geplant)"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Frau Pekarek hat mir zugesagt, dass sie die Schnittstellenliste bis Mittwoch schickt, dann fülle ich das Blatt aus und du hast es Donnerstag."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Jasmin erwaegt, den Kundentermin vorsorglich zu verschieben, um eine doppelte Umterminierung zu vermeiden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Frist von 10 Arbeitstagen ab Blatteingang"
+      ],
+      "outputs": [
+        "Entscheidung ueber Terminverschiebung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Dann verschiebe ich lieber jetzt als den Kunden zweimal umzuterminieren."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "Adrian Noah Wimmer <adrian.noah.wimmer@gmail.com>",
+      "to": "Kilian.laichinger@outlook.com",
+      "date": "2026-09-24",
+      "subject": "AW: AW: Nordform — Demo am 19."
+    }
+  ]
+}

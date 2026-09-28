@@ -1,0 +1,143 @@
+{
+  "id": "b20260924_105811_637q_cluster_1_2",
+  "title": "Konkrete Kundenuebergabe Wenzel Anlagenbau",
+  "summary": "Timo Kessler uebergibt den unterschriebenen Kunden Wenzel Anlagenbau an Nils Kaufmann und teilt dabei alle relevanten Vertragspunkte, Ansprechpartner und Fristen mit.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Die Mail listet konkrete, aufeinanderfolgende Uebergabeschritte mit klaren Zustaendigkeiten, ist aber ein Einzelfallbeispiel ohne Entscheidungspunkte.",
+  "tags": [
+    "handover",
+    "vertrieb",
+    "kundenuebergabe"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Timo Kessler",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Nils Kaufmann",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Timo informiert Nils ueber Vertragsunterschrift und Ablage des Handover-Dokuments im CRM",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Unterschriebener Vertrag"
+      ],
+      "outputs": [
+        "Handover-Dokument im CRM"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Wenzel hat gestern unterschrieben, Handover-Dokument liegt im CRM am Deal."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Timo weist auf Datenqualitaet und mitverkauftes Migrationspaket hin",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Hinweis auf Migrationsbedarf"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Migrationspaket ist mitverkauft, Techniker brauchst du auf jeden Fall."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Timo bestaetigt vertraglich zugesagte Sonderleistungen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Vertrag"
+      ],
+      "outputs": [
+        "Liste zugesagter Leistungen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Zugesagt habe ich zwei Dinge, beide stehen im Vertrag: Schulung vor Ort statt remote und ein zweites Testsystem für die Niederlassung in Eisenach."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Timo nennt den fachlichen Ansprechpartner beim Kunden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Kontaktinformation"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Ansprechpartner ist Herr Vollrath aus der Instandhaltung, nicht der Einkauf."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Timo weist auf die Kickoff-Frist hin",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Kickoff-Frist"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Kickoff müsste nach unserer Regel spätestens am 18. stehen."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "Timo Kessler",
+      "to": "Nils Kaufmann",
+      "date": "2026-03-05",
+      "subject": "Übergabe Wenzel Anlagenbau — unterschrieben 04.03."
+    }
+  ]
+}

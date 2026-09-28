@@ -1,0 +1,145 @@
+{
+  "id": "b20260924_112100_6q0k_cluster_e00003_1",
+  "title": "Terminumfrage fuer Sommerfest",
+  "summary": "Carina Voss startet eine Terminabstimmung fuer das Sommerfest, sammelt Rueckmeldungen und verkuendet anschliessend das Ergebnis samt Aufruf zur Aufbauhilfe.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Es ist ein klarer, mehrstufiger Ablauf (Umfrage erstellen, Abstimmen, Ergebnis verkuenden, Helfer suchen) erkennbar, jedoch mit wenigen Beteiligten und einfachem Umfang.",
+  "tags": [
+    "terminumfrage",
+    "sommerfest",
+    "organisation",
+    "abstimmung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Carina Voss",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Jonas Ritter",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Carina erstellt Terminumfrage mit drei Terminvorschlaegen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Umfrage-Link im Intranet"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Drei Termine stehen zur Auswahl, bitte bis Freitag abstimmen."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Jonas gibt seine Terminpraeferenz ab",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Umfrage-Link im Intranet"
+      ],
+      "outputs": [
+        "Stimme fuer Termin"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "von mir aus, Hauptsache nicht der 11., da ist Zeugnisvergabe\nbei meiner Tochter."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Carina verkuendet das Abstimmungsergebnis und die Location",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Stimme fuer Termin"
+      ],
+      "outputs": [
+        "Ergebnis: 27. Juni gewaehlt",
+        "Location: Hof bei Kammerer"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "die Abstimmung ist durch, der 27. Juni hat gewonnen mit 14 Stimmen."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Carina ruft zur Anmeldung fuer die Aufbauhilfe auf",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Ergebnis: 27. Juni gewaehlt"
+      ],
+      "outputs": [
+        "Anmeldungen fuer Aufbauhilfe"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Wer beim Aufbau helfen kann, meldet sich bei mir."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Umfrage veroeffentlicht"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Abstimmungsfrist abgelaufen"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "Termin und Location feststehen"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "Carina Voss",
+      "to": "Team",
+      "date": "2026-03-04T10:40:00Z",
+      "subject": "Sommerfest — Terminumfrage"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "Jonas Ritter",
+      "to": "Carina Voss",
+      "date": "2026-03-04T15:11:00Z",
+      "subject": "AW: Sommerfest — Terminumfrage"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "Adrian Noah Wimmer",
+      "to": "Kilian.laichinger@outlook.com",
+      "date": "2026-09-24T07:11:31Z",
+      "subject": "Sommerfest — Terminumfrage"
+    }
+  ]
+}

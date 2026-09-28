@@ -1,0 +1,129 @@
+{
+  "id": "cluster_1144_1",
+  "title": "Interview-Terminierung und Feedback-Einholung bei Enron",
+  "summary": "Lydia Delgado verschickt fertige Interviewplaene fuer Kandidaten an die zustaendigen Fachbereichsmitarbeiter, woraufhin Johnny Palmer im Anschluss an das Interview bei denselben Empfaengern nach Interesse bzw. Feedback zum Kandidaten fragt.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Es ist ein wiederkehrender zweistufiger Ablauf (Terminversand, dann Feedback-Nachfrage) mit klaren Zustaendigkeiten erkennbar, aber die tatsaechlichen Rueckmeldungen der Interviewer fehlen im Cluster.",
+  "tags": [
+    "recruiting",
+    "interview",
+    "feedback",
+    "enron",
+    "terminplanung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lydia Delgado",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Johnny Palmer",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Don Baughman",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Juan Hernandez",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Lydia sendet den finalen Interviewplan mit Termin und Unterlagen an die Interviewer",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Kandidatenunterlagen",
+        "Terminvereinbarung"
+      ],
+      "outputs": [
+        "Final Schedule Mail an Interviewer"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "When: Friday, August 10, 2001 12:30 PM-1:00 PM (GMT-06:00) Central Time (US & Canada)."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Johnny fragt nach dem Interview bei den Interviewern nach Interesse bzw. Feedback zum Kandidaten",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Durchgefuehrtes Interview"
+      ],
+      "outputs": [
+        "Feedback-Anfrage an Interviewer"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Any interest in Mark Potts?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Johnny bittet erneut um Feedback zu einem weiteren Kandidaten nach revidiertem Zeitplan",
+      "actor": "a2",
+      "recipient": "a4",
+      "inputs": [
+        "Revidierter Interviewplan"
+      ],
+      "outputs": [
+        "Feedback-Anfrage zu Bang I. Tran"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Please provide feedback with regards to Bang."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "nach Durchfuehrung des Interviews"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "lydia.delgado@enron.com",
+      "to": "don.baughman@enron.com, juan.hernandez@enron.com",
+      "date": "2001-07-24",
+      "subject": "Interview - Mark J. Potts"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "johnny.palmer@enron.com",
+      "to": "don.baughman@enron.com, juan.hernandez@enron.com",
+      "date": "2001-08-21",
+      "subject": "RE: Final Schedule - Friday, August 10, 2001 - Mark J. Potts"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "johnny.palmer@enron.com",
+      "to": "don.baughman@enron.com, juan.hernandez@enron.com, l..garcia@enron.com, dean.laurent@enron.com",
+      "date": "2001-10-17",
+      "subject": "RE: REVISED - Final Schedule - Thursday, October 11, 2001 - Bang I. Tran"
+    }
+  ]
+}

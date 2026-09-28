@@ -1,0 +1,385 @@
+{
+  "id": "cluster_1203_1",
+  "title": "Ermittlung und Verteilung des Wellhead-Rueckstellungswerts (Accrual Value)",
+  "summary": "Eric Bass ermittelt den monatlichen Rueckstellungswert des Wellhead-Portfolios, klaert die Aufteilung zwischen Greg Sharp und Tom Martin mit dem Management ab und verteilt die berechneten Werte anschliessend an mehrere Stakeholder, inklusive Klaerung von Detailfragen wie Facility Fees.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Die Mails beschreiben einen mehrstufigen, wiederkehrenden Ablauf mit klaren Zustaendigkeiten (Berechnung, Entscheidung, Reporting, Verteilung) ueber mehrere Monate hinweg.",
+  "tags": [
+    "accrual value",
+    "wellhead portfolio",
+    "reporting",
+    "finance",
+    "enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Eric Bass",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Melissa Graves",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Brenda Herod",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "George Weissman",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "David Baumbach",
+      "type": "person"
+    },
+    {
+      "id": "a6",
+      "name": "Bryan Hull",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Melissa fragt nach dem Stand der Rueckstellungswert-Schaetzung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Anfrage zum Status"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please let me know how the Accrual Value estimate is coming."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Eric klaert die Berechnungsmethode mit Transport- und Marketing-Gruppen ab",
+      "actor": "a1",
+      "inputs": [
+        "Anfrage von Melissa"
+      ],
+      "outputs": [
+        "Abstimmung mit Fachgruppen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I want to get some confirmation from the transport and marketing groups on how we want to account for it."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Eric informiert das Transport-Team ueber Toms finale Entscheidung zur 60/40-Aufteilung des Rueckstellungswerts",
+      "actor": "a1",
+      "recipient": "a6",
+      "inputs": [
+        "Abstimmung mit Fachgruppen"
+      ],
+      "outputs": [
+        "Aufteilungsregel 60% Greg / 40% Tom"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "60% of this value should be credited to Greg's Transport expense on a monthly basis."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Melissa bittet um eine detaillierte Aufschluesselung der monatlichen Berechnung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Anfrage nach Detailaufschluesselung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Could you please provide the detail behind this calculation"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Eric liefert vorlaeufige Quartalszahlen fuer Q1",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Anfrage nach Detailaufschluesselung"
+      ],
+      "outputs": [
+        "Q1-Rueckstellungswerte"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Here are the accrual values for Q1."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Eric erklaert, dass Sharps Anteil bereits in den Gesamtzahlen enthalten ist",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Q1-Rueckstellungswerte"
+      ],
+      "outputs": [
+        "Klarstellung zur Enthaltenheit von Sharps Anteil"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Those numbers are all inclusive for the wellhead portfolio.  Sharp's number is embedded within those."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Eric liefert die vollstaendige monatliche Aufschluesselung mit Greg- und Tom-Anteilen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Klarstellung zur Enthaltenheit von Sharps Anteil"
+      ],
+      "outputs": [
+        "Monatliche Detailaufschluesselung Q1"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "The following is a breakdown of 1st quarter accrual value."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Eric leitet die Rueckstellungsdaten an Brenda Herod weiter",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Monatliche Detailaufschluesselung Q1"
+      ],
+      "outputs": [
+        "Weitergeleitete Rueckstellungsdaten"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "Hear is the info.  Let me know if you have any further questions."
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "task",
+      "action": "Eric leitet die Wellhead-Daten an George Weissman weiter",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Monatliche Detailaufschluesselung Q1"
+      ],
+      "outputs": [
+        "WH-Datendatei"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "Here is the wh data.  I have included the file for February only."
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "task",
+      "action": "Eric leitet die Zahlen an Bryan Hull und O'Neal Winfree weiter",
+      "actor": "a1",
+      "recipient": "a6",
+      "inputs": [
+        "Monatliche Detailaufschluesselung Q1"
+      ],
+      "outputs": [
+        "Weitergeleitete Zahlen"
+      ],
+      "evidence": [
+        {
+          "source": "src_8",
+          "span": "Here are the numbers"
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "type": "task",
+      "action": "David fragt nach, ob Facility Fees Teil des fuer Greg Sharp einbehaltenen Rueckstellungswerts sind",
+      "actor": "a5",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Frage zu Facility Fees"
+      ],
+      "evidence": [
+        {
+          "source": "src_9",
+          "span": "Are the facility fees part of the accrual piece we are holding out for Greg Sharp?"
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "type": "task",
+      "action": "Eric erklaert die Behandlung der Facility Fees und beauftragt David, den Coastal Deal zu pruefen",
+      "actor": "a1",
+      "recipient": "a5",
+      "inputs": [
+        "Frage zu Facility Fees"
+      ],
+      "outputs": [
+        "Pruefauftrag Coastal Deal"
+      ],
+      "evidence": [
+        {
+          "source": "src_9",
+          "span": "Could you check into this and get back to him?"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n11"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    },
+    {
+      "from": "n7",
+      "to": "n8"
+    },
+    {
+      "from": "n7",
+      "to": "n9"
+    },
+    {
+      "from": "n7",
+      "to": "n10"
+    },
+    {
+      "from": "n11",
+      "to": "n12"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "melissa.graves@enron.com",
+      "date": "1999-12-27",
+      "subject": "Re: Wellhead Portfolio"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "bryan.hull@enron.com, david.baumbach@enron.com, michael.walters@enron.com",
+      "date": "2000-04-03",
+      "subject": "FINAL DECISION ON ACCRUAL VALUE"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "melissa.graves@enron.com",
+      "date": "2000-04-07",
+      "subject": "Re: Wellhead Accrual Income"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "melissa.graves@enron.com",
+      "date": "2000-04-07",
+      "subject": "Re: Wellhead Accrual Income"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "melissa.graves@enron.com",
+      "date": "2000-04-14",
+      "subject": "Re: Wellhead Accrual Income"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "brenda.herod@enron.com",
+      "date": "2000-04-17",
+      "subject": "Re: Wellhead Accrual Income"
+    },
+    {
+      "id": "src_7",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "george.weissman@enron.com",
+      "date": "2000-04-26",
+      "subject": "WH DATA"
+    },
+    {
+      "id": "src_8",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "bryan.hull@enron.com, o'neal.winfree@enron.com",
+      "date": "2000-05-01",
+      "subject": "Re: Wellhead Accrual Income"
+    },
+    {
+      "id": "src_9",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "david.baumbach@enron.com",
+      "date": "2000-05-16",
+      "subject": "Re: Facility Fees"
+    }
+  ]
+}

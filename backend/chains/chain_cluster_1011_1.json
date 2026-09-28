@@ -1,0 +1,122 @@
+{
+  "id": "cluster_1011_1",
+  "title": "FTD.COM Bestellung: Lieferverzug, Stornierung und Rueckerstattung",
+  "summary": "Eric Bass reklamiert eine nicht gelieferte FTD.COM-Bestellung, woraufhin die Bestellung storniert und der Betrag auf seine Kreditkarte zurueckerstattet wird.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Der Ablauf zeigt klare aufeinanderfolgende Schritte (Reklamation, Stornierungswunsch, Bestaetigung der Rueckerstattung) zwischen Kunde und Kundenservice.",
+  "tags": [
+    "Kundenservice",
+    "Stornierung",
+    "Rueckerstattung",
+    "Bestellung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Eric Bass",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "FTD.COM Customer Service",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Kunde meldet ausbleibende Lieferung und fragt nach Lieferstatus",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Bestellbestaetigung FNF957149"
+      ],
+      "outputs": [
+        "Anfrage zum Lieferstatus"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "My flowers have not been delivered.  Could you please tell me when they will be delivered?"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Kunde bittet um Bestaetigung der Stornierung und Rueckbuchung",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Ausbleibende Lieferung"
+      ],
+      "outputs": [
+        "Bestaetigungsanfrage zur Stornierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I just want to confirm that this order was cancelled and the charges reversed on my card."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Kundenservice bestaetigt Stornierung und Rueckerstattung des Betrags",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Stornierungsanfrage"
+      ],
+      "outputs": [
+        "Bestaetigte Rueckerstattung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "your FTD.COM order has been canceled and a refund in the amount of $167.98 has been posted to your credit card"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Lieferung bleibt aus"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Stornierung wird bearbeitet"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "direct@hpftd1.ftdi.com",
+      "date": "2001-02-14",
+      "subject": "Re: FTD.COM Order Confirmation"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "direct@hpftd1.ftdi.com",
+      "date": "2001-02-20",
+      "subject": "Re: FTD.COM Order Confirmation"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "eric.bass@enron.com",
+      "to": "shanna.husser@enron.com",
+      "date": "2001-02-20",
+      "subject": "Re: CUSTOMER REQUESTED CANCEL"
+    }
+  ]
+}

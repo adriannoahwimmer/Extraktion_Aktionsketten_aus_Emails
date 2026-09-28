@@ -1,0 +1,147 @@
+{
+  "id": "cluster_1270_2",
+  "title": "AEP-HPL Uebergangsthemen-Tracking",
+  "summary": "Bob Hall berichtet nach einem Meeting mit AEP ueber geloeste und neue offene Punkte im Uebergangsprozess und kuendigt eine ueberarbeitete Themenliste an.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Die Mail beschreibt einen wiederkehrenden Ablauf aus Meeting, Dokumentation geloester und neuer Punkte sowie Ankuendigung einer aktualisierten Liste, jedoch mit nur einer Quelle und ohne Antwort.",
+  "tags": [
+    "AEP",
+    "HPL",
+    "Transition",
+    "Issue Tracking"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Bob Hall",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "AEP",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Berichtet ueber Meeting mit AEP zu Uebergangsthemen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Statusbericht"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "After meeting with AEP this morning, some issues are revolved and new one added."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Dokumentiert geloeste Punkte (Confirmations, Facilities, DUNS-Nummer, manuelle Eingabe)",
+      "actor": "a1",
+      "recipient": "",
+      "inputs": [],
+      "outputs": [
+        "Liste geloester Punkte"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Confirmations will be done out of AEP's systems for long term deals, intramonth transactions will be confirmed using DECAF 2."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Erfasst neue offene Punkte (Training, Risk Portfolios, manuelle Buchungen)",
+      "actor": "a1",
+      "recipient": "",
+      "inputs": [],
+      "outputs": [
+        "Liste neuer Punkte"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "New Risk Portfolios need to created in Sitara."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Benennt Ansprechpartner auf AEP-Seite",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Ansprechpartner AEP"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "AEP to fill in point person for there side."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Kuendigt ueberarbeitete Themenliste an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Ansprechpartner AEP"
+      ],
+      "outputs": [
+        "Ueberarbeitete Themenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I will issue a revised transitions issues list tomorrow afternoon, after my energy ops meeting."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n1",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "bob.hall@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "Tue, 03 Apr 2001 06:45:00 -0700",
+      "subject": "AEP-HPL update"
+    }
+  ]
+}

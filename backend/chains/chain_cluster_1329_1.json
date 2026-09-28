@@ -1,0 +1,224 @@
+{
+  "id": "cluster_1329_1",
+  "title": "Woechentliches Rentroll-Management und Mieterverwaltung",
+  "summary": "Phillip Allen und die Hausverwalterin Lucy wickeln wiederkehrend die woechentliche Rentroll-Pruefung, Mietanpassungen, Aktualisierung von Lease-Daten und Klaerung offener Mietzahlungen ab.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Die Mails beschreiben einen klar wiederkehrenden Ablauf mit festen Zustaendigkeiten (Rentroll-Erstellung, Pruefung, Korrektur, Eskalation) ueber mehrere Wochen hinweg.",
+  "tags": [
+    "Immobilienverwaltung",
+    "Rentroll",
+    "Mietinkasso",
+    "Property Management"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Lucy (stagecoachmama)",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip prueft die woechentliche Rentroll und bewertet Lucys vorherigen Bericht",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Rentroll der Vorwoche"
+      ],
+      "outputs": [
+        "Feedback zur Rentroll"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Here is a rentroll for this week.  The one you sent for 11/24 looked good."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip erteilt Lucy Vollmacht, Mietpreise fuer vakante Einheiten nach eigenem Ermessen zu senken",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Liste vakanter Einheiten"
+      ],
+      "outputs": [
+        "Angepasste Mietpreise"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "If you need to lower the rent by $10 or $20 to get things full, go ahead."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip fordert Lucy auf, alle Lease-Informationen zu aktualisieren und die neue Rentroll zu senden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Liste neuer Mieter seit 15. Dezember"
+      ],
+      "outputs": [
+        "Aktualisierte Rentroll vom 1/12"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Please update all lease information on the 1/12 rentroll and email it to me this afternoon."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Phillip stellt Rueckfragen zu offenen Zahlungen einzelner Mieter",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Aktualisierte Rentroll"
+      ],
+      "outputs": [
+        "Liste offener Fragen zu #15, #25, #27"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "#15  Only paid 95 of their 190 on 1/19 then paid nothing on 1/26.  What is going on?"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Phillip weist an, einen Buchungsfehler in der Rentroll zu korrigieren",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Rentroll #41"
+      ],
+      "outputs": [
+        "Korrigierter Saldo #41"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Please fix #2  Has she actually paid the $150 deposit"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Phillip fordert sofortige Klaerung fehlender Mietzahlungen ueber $1200",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Rentroll-Historie der letzten drei Wochen"
+      ],
+      "outputs": [
+        "Aufklaerung der fehlenden Zahlungen"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I need you to figure these out immediately."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Phillip weist Lucy an, bei seiner Abwesenheit mit Gary an dringenden Themen zu arbeiten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kontaktinformationen Gary"
+      ],
+      "outputs": [
+        "Vertretungsregelung"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Otherwise try and work with Gary on pressing issues."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2000-11-29",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-01-11",
+      "subject": "updated lease information"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-02-02",
+      "subject": ""
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-02-24",
+      "subject": ""
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "2001-03-09",
+      "subject": ""
+    }
+  ]
+}

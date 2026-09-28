@@ -1,0 +1,134 @@
+{
+  "id": "cluster_1292_1",
+  "title": "Interne Personalanfrage fuer Buchhalter (Barry Pearce)",
+  "summary": "Barry Pearce sucht ueber informelle Hinweise und eine formelle Anfrage an Sally Beck und Kollegen Buchhalter-Unterstuetzung fuer sein Team, wobei Sally anbietet, den Bedarf in ihrem Staff-Meeting anzusprechen.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Der Ablauf zeigt mehrere aufeinander aufbauende Schritte einer internen Ressourcenanfrage (Hinweis, Bestaetigung des Bedarfs, Eskalation, formelle Anfrage), ist aber stark informell gehalten.",
+  "tags": [
+    "staffing",
+    "personalanfrage",
+    "buchhaltung",
+    "enron",
+    "interne kommunikation"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Barry Pearce",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Sally informiert Barry per Sprachnachricht ueber einen moeglichen Kandidaten (Scott Mills)",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Hinweis auf Kandidat Scott Mills"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I left you a return voice mail regarding Scott."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Barry bestaetigt seinen Bedarf an qualifizierten Buchhaltern fuer die Op Analyst Gruppe",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Hinweis auf Kandidat Scott Mills"
+      ],
+      "outputs": [
+        "Bestaetigter Personalbedarf"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "You're right - I'm looking for a couple of quality accountants - to staff Op Analyst group."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Sally bietet an, den Ressourcenbedarf in ihrem woechentlichen Staff-Meeting anzusprechen",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Bestaetigter Personalbedarf"
+      ],
+      "outputs": [
+        "Eskalation des Bedarfs in Staff-Meeting"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would like to be able to bring up resource needs that you have in my weekly staff meeting"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Barry stellt eine formelle Anfrage an Sally und weitere Kollegen, kurzfristig einen Buchhalter auszuleihen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Eskalation des Bedarfs in Staff-Meeting"
+      ],
+      "outputs": [
+        "Formelle Personalanfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Do you have anyone I could borrow for a couple of months?"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "barry.pearce@enron.com",
+      "date": "1979-12-31",
+      "subject": "Re: Class Confirmation - Kristin Albrecht"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "barry.pearce@enron.com",
+      "to": "sally.beck@enron.com, georgeanne.hodges@enron.com, wes.colwell@enron.com",
+      "date": "2000-08-31",
+      "subject": "Last Call for Accountants....."
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "cluster_1145_2",
+  "title": "OU-Stipendienprozess mit Enron-Beteiligung",
+  "summary": "Lexi Elliott beschreibt den geplanten Ablauf zur Vergabe eines von Enron gesponserten Stipendiums an der OU, von der Mittelzusage ueber Interviews bis zur Praesentation der Preise beim Awards Banquet.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Eine einzelne Mail beschreibt einen mehrstufigen, zeitlich geplanten Ablauf mit klaren Schritten, bleibt aber ohne bestaetigte Rueckmeldungen der anderen Beteiligten.",
+  "tags": [
+    "stipendium",
+    "universitaet",
+    "ou",
+    "veranstaltung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lexi Elliott",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Mike McConnell",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Stipendienmittel zusagen, um Interviewtermin zu ermoeglichen",
+      "actor": "a1",
+      "inputs": [],
+      "outputs": [
+        "Zugesagte Stipendienmittel"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I have been in contact with Ted Jacobs and have volunteered $1500 in \nscholarship funds to be awarded by Enron this spring."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "An Stipendieninterviews auf dem Campus teilnehmen, um Kandidaten zu identifizieren",
+      "actor": "a1",
+      "inputs": [
+        "Zugesagte Stipendienmittel"
+      ],
+      "outputs": [
+        "Identifizierte Kandidaten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "By volunteering this \nmoney, we are now able to attend scholarship interviews on Tuesday, March 6 \non campus."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Stipendien beim Scholarship Awards Banquet praesentieren",
+      "actor": "a1",
+      "inputs": [
+        "Identifizierte Kandidaten"
+      ],
+      "outputs": [
+        "Verliehene Stipendien"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "we are invited to \npresent our awards at the Scholarship Awards Banquet on Friday, April 20."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Mike McConnell zur Teilnahme an der Veranstaltung einladen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Einladung zur Teilnahme"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Ted will (if he has not already) approach you, Mike, to see if you are \ninterested in playing a role at this event."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n1",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "lexi.elliott@enron.com",
+      "to": "mike.mcconnell@enron.com; sally.beck@enron.com",
+      "date": "2001-01-29",
+      "subject": "OU Scholarships"
+    }
+  ]
+}

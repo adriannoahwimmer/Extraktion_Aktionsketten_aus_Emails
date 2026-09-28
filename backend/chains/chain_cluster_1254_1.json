@@ -1,0 +1,89 @@
+{
+  "id": "cluster_1254_1",
+  "title": "Weiterleitung von Analysten-Daten an Sally Beck",
+  "summary": "Lisa Cousino erhaelt gestaffelte Daten vom Analyst Program (ueber Shelly) und leitet zunaechst eine Teilliste (MSAP) und anschliessend die vollstaendige Analystenliste an Sally Beck weiter.",
+  "prozess_wahrscheinlichkeit": 0.45,
+  "prozess_begruendung": "Zwei aufeinander aufbauende Weiterleitungsschritte mit klarer Zustaendigkeit, aber ohne Entscheidungspunkte oder weitere Verzweigungen.",
+  "tags": [
+    "analysten",
+    "datenweiterleitung",
+    "reporting"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lisa Cousino",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Leitet MSAP-Analystendaten an Sally weiter",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Nachricht vom Analyst Program"
+      ],
+      "outputs": [
+        "MSAP-Analystenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I am forwarding you the information I received from the Analyst Program which details the Analysts currently tagged as MSAP."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Leitet vollstaendige Analystenliste an Sally weiter",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "2. Nachricht von Shelly"
+      ],
+      "outputs": [
+        "Vollstaendige Analystenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I received a 2nd message from Shelly which provided the detail of all analysts in the Program."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Nachtrag der vollstaendigen Liste nach Teillieferung"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "lisa.cousino@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-04-16",
+      "subject": "Detail of Commercial Support Analysts"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "lisa.cousino@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-04-16",
+      "subject": "Detail of all Analysts"
+    }
+  ]
+}

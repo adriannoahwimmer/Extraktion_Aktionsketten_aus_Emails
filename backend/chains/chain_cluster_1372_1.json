@@ -1,0 +1,264 @@
+{
+  "id": "cluster_1372_1",
+  "title": "Kostenpruefung und Bauherrenwahl fuer San-Marcos-Immobilienprojekt",
+  "summary": "Phillip Allen prueft Kostenschaetzungen fuer ein Studentenwohnungsprojekt in San Marcos, lehnt die zu hohe Kalkulation des urspruenglichen Builders ab, uebernimmt das Grundstueck und holt Alternativangebote von weiteren Baufirmen und Beratern ein.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Der Ablauf zeigt klar wiederkehrende Schritte einer Bauprojektsteuerung: Kostenpruefung, Entscheidung, Ablehnung eines Anbieters, Einholen alternativer Angebote und Weitergabe von Unterlagen an mehrere Beteiligte.",
+  "tags": [
+    "immobilien",
+    "kostenschaetzung",
+    "bauprojekt",
+    "verhandlung",
+    "san marcos"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "George",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Daryl/Darrell Jack",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Reagan Lehmann",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "Greg Thorse",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip antwortet George auf dessen Vorschlaege zu Zeit und Kosten des Projekts",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Vorschlaege von George zu Fixpreisvertrag"
+      ],
+      "outputs": [
+        "Antwortmail mit Einschaetzung zu Kosten und Zeit"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "In response to your ideas"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip erstellt detaillierte Kostenschaetzung von 10,5 Mio USD und fordert Telefonkonferenz zu Alternativen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kostenkomponenten (Grundstueck, Finanzierung, Bauleistungen)",
+        "Marktanalyse Reagan/Sagewood"
+      ],
+      "outputs": [
+        "Kostenschaetzung 10,5 Mio USD",
+        "Terminvorschlag Telefonkonferenz"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I believe the project should cost around $10.5 million"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip sendet Proforma-Datei mit Kosten und Vergleichswerten an Daryl Jack zur Pruefung",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Proforma des Builders/Developers"
+      ],
+      "outputs": [
+        "Uebermittelte Proformadatei"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Here is the file that includes the proforma, unit costs, and comps."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Phillip sendet Kostenschaetzung und Proforma an alternativen Bauunternehmer Reagan Lehmann",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Kostenschaetzung von George und Larry"
+      ],
+      "outputs": [
+        "Site-Plan, Elevation, Floor Plans per Fax"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Here is the cost estimate and proforma prepared by George and Larry."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Phillip lehnt die ueberhoehte Kostenschaetzung des urspruenglichen Builders ab und uebernimmt das Grundstueck selbst",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Ablehnung der Kostenschaetzung"
+      ],
+      "outputs": [
+        "Uebernahme des Grundstuecks",
+        "Plan zum Vergleich von Bank One und FHA-Finanzierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "Today I let the builder/developer know that I would not proceed with his excessively high cost estimates."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Phillip stellt Greg Thorse detaillierte Fragen zu neuen Kostenschaetzungen und Gebuehren",
+      "actor": "a1",
+      "recipient": "a5",
+      "inputs": [
+        "Neue Kostenschaetzung von Greg"
+      ],
+      "outputs": [
+        "Fragenkatalog zu Baukosten und Gebuehren"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "Here are my comments and questions on the cost estimates:"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Phillip vergleicht Gebuehren mehrerer Anbieter und gibt Reagan Feedback zur Zielkostensenkung",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Marktangebote",
+        "Vergleich mit George/Larry und Greg"
+      ],
+      "outputs": [
+        "Zielkosten 10,5 Mio USD fuer bessere Rendite"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "Although your fees are lower than George and Larry I am still getting market quotes lower yet."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n2",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "c@enron.com",
+      "date": "1979-12-31",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "cbpres@austin.rr.com",
+      "date": "2001-03-05",
+      "subject": ""
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "djack@stic.net",
+      "date": "2001-03-06",
+      "subject": ""
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "rlehmann@yahoo.com",
+      "date": "2001-03-07",
+      "subject": ""
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "djack@keyad.com",
+      "date": "2001-03-07",
+      "subject": "Re: San Marcos"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "gthorse@keyad.com",
+      "date": "2001-03-27",
+      "subject": ""
+    },
+    {
+      "id": "src_7",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "rlehmann@yahoo.com",
+      "date": "2001-03-29",
+      "subject": ""
+    }
+  ]
+}

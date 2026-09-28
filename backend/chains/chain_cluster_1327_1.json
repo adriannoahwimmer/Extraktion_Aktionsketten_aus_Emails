@@ -1,0 +1,210 @@
+{
+  "id": "cluster_1327_1",
+  "title": "Eskalation und Loesung bei verzoegerten Sommerpraktikanten-Interviews",
+  "summary": "Sally Beck meldet Bedenken ueber verspaetete Herbst-Interviews fuer Sommerpraktikanten, laesst Wettbewerbsdaten sammeln, woraufhin Charlene Jackson die Strategie erklaert und Mike McConnell eine praktische Loesung ueber eine geplante Recruiting-Reise herbeifuehrt.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Der Ablauf zeigt klare Zustaendigkeiten, mehrere aufeinander aufbauende Handlungsschritte und einen dokumentierten Loesungsweg im Recruiting-Programm.",
+  "tags": [
+    "recruiting",
+    "praktikanten",
+    "eskalation",
+    "hochschulmarketing",
+    "enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Charlene Jackson",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Mike McConnell",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Lexi Elliott",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "James Scribner",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Sally Beck meldet Bedenken ueber die verzoegerten Herbst-Interviews fuer Sommerpraktikanten an das Recruiting-Programm",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Beschwerde/Bedenken"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I have communicated my concerns to Lexi Elliott and her manager, Shelley Jones"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally Beck beauftragt James Scribner, Wettbewerbsdaten zu Interviewterminen anderer Firmen zu sammeln",
+      "actor": "a1",
+      "recipient": "a5",
+      "inputs": [],
+      "outputs": [
+        "Wettbewerbsdaten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I volunteered to have James Scribner, a  Senior Director on my team, obtain this market information."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Mike McConnell empfiehlt Sally, im Rahmen ihrer geplanten Recruiting-Reise Interviews fuer Sommerpraktikanten durchzufuehren",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Bedenken aus n1"
+      ],
+      "outputs": [
+        "Handlungsempfehlung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I believe that you should interview for summer interns as an extension to your upcoming planned recruiting trip."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Charlene Jackson beauftragt Lexi Elliott, bei UT und OU Career Services nach aktuellen Rekrutierungspraktiken zu fragen",
+      "actor": "a2",
+      "recipient": "a4",
+      "inputs": [
+        "Bedenken aus n1"
+      ],
+      "outputs": [
+        "Rueckmeldung der Universitaeten"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "therefore I had Lexi Elliott contact both UT and OU"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Charlene Jackson erlaeutert die bestehende Recruiting-Strategie und bietet Unterstuetzung fuer zusaetzliche OU-Interviews an",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Rueckmeldung der Universitaeten aus n4"
+      ],
+      "outputs": [
+        "Angebot zur Unterstuetzung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "If you believe that it is critical to recruit summer interns at OU in the fall we are supportive"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Mike McConnell bestaetigt, dass Sally zusaetzliche OU-Interviews im Rahmen der Reise eingeplant hat",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [
+        "Empfehlung aus n3",
+        "Angebot aus n5"
+      ],
+      "outputs": [
+        "Geplante Interviewtermine"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I have asked Sally to tag on some interviews for summer interns while on that trip.  I believe that she has been able to schedule this"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n3"
+    },
+    {
+      "from": "n1",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n3",
+      "to": "n6"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "charlene.jackson@enron.com, celeste.roberts@enron.com",
+      "date": "2000-10-02",
+      "subject": "Hiring Practices for Summer Interns"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "mike.mcconnell@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-10-03",
+      "subject": "Re: Hiring Practices for Summer Interns"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "charlene.jackson@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-10-04",
+      "subject": "Re: Hiring Practices for Summer Interns"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "mike.mcconnell@enron.com",
+      "to": "charlene.jackson@enron.com",
+      "date": "2000-10-05",
+      "subject": "Re: Hiring Practices for Summer Interns"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "id": "cluster_1322_1",
+  "title": "Wiederkehrende Mietaufstellungs-Pruefung und Klaerung von Zahlungsdifferenzen",
+  "summary": "Phillip Allen erstellt/versendet periodisch die Mietaufstellung (Rentroll) an Lucy, prueft Zahlungseingaenge der Mieter, identifiziert Diskrepanzen und fordert von Lucy Klaerung sowie Nachverfolgung bei einzelnen Mietern an.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Ueber mehrere Mails hinweg zeigt sich ein wiederkehrender, mehrstufiger Ablauf mit klaren Zustaendigkeiten (Erstellung/Versand der Aufstellung, Pruefung, Nachfrage, Nachverfolgungsauftrag).",
+  "tags": [
+    "Immobilienverwaltung",
+    "Mietaufstellung",
+    "Zahlungsklaerung",
+    "Rentroll"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Lucy",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip sendet die aktuelle Mietaufstellung (Rentroll) an Lucy",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Rentroll-Datei"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Here is a final 12/01 rentroll for you to save."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip prueft die Zahlungseingaenge und identifiziert Diskrepanzen bei einzelnen Mietern",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Rentroll-Datei"
+      ],
+      "outputs": [
+        "Liste offener Fragen zu Mietern"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Neil Moreno in #21-he paid $120 on 11/24, but did not pay anything on 12/01."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip stellt konkrete Rueckfragen zu verspaeteten oder fehlenden Zahlungen und fordert Antworten an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Liste offener Fragen zu Mietern"
+      ],
+      "outputs": [
+        "Anfrage an Lucy"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Please email the answers."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Phillip beauftragt Lucy, bei einem bestimmten Mieter wegen ausstehender Zahlung nachzufassen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Anfrage an Lucy"
+      ],
+      "outputs": [
+        "Nachfassauftrag"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "Try and follow up with Tomas about the $95."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "Thu, 07 Dec 2000 06:23:00 -0800",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "Thu, 14 Dec 2000 06:15:00 -0800",
+      "subject": ""
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "Wed, 17 Jan 2001 07:35:00 -0800",
+      "subject": ""
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "Thu, 15 Feb 2001 07:13:00 -0800",
+      "subject": ""
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "stagecoachmama@hotmail.com",
+      "date": "Thu, 15 Feb 2001 07:13:00 -0800",
+      "subject": ""
+    }
+  ]
+}

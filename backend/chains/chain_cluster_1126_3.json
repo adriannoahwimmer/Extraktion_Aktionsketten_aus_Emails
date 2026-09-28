@@ -1,0 +1,187 @@
+{
+  "id": "cluster_1126_3",
+  "title": "Anmeldung zum Director-Level Impact and Influence Kurs",
+  "summary": "Hector McLoughlin bietet Sally Beck einen Pilotkurs fuer Direktoren an, liefert auf Nachfrage Termine und Direktorenliste, woraufhin Sally ihr Team informiert und Teilnehmer fuer die Anmeldung benennt.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Klarer mehrstufiger Ablauf mit Angebot, Rueckfrage, Informationslieferung, Auswahl und konkreter Anmeldeanweisung.",
+  "tags": [
+    "training",
+    "enrollment",
+    "director development",
+    "hr"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Hector McLoughlin",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Team (Beth Apollo, Leslie Reeves, Brenda Herod)",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Hector bietet Sally den Director-Level Kurs als Pilotprogramm an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Kursangebot"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "We can offer the Director Level &Impact and Influence8  course to all of your Directors as part of a pilot program."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally fragt nach weiteren Terminen und einer Liste der Direktoren",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Kursangebot"
+      ],
+      "outputs": [
+        "Informationsanfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Can you also get me a list of the director and senior directors that I have in EIM, EGM and EA?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Hector liefert zusaetzliche Termine und die Direktorenliste",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Informationsanfrage"
+      ],
+      "outputs": [
+        "Terminliste",
+        "Direktorenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Three additional dates will be determined next week.   It is anticipated the future dates will be September, November, and February ,02."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Sally informiert ihr Team ueber die Anmeldefrist und schlaegt Teilnehmer fuer die Maisitzung vor",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Terminliste",
+        "Direktorenliste"
+      ],
+      "outputs": [
+        "Teilnehmervorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "today is the deadline for registering participants for the first session, May 16 and 17."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Sally beauftragt Hector, die vorgeschlagenen Teilnehmer fuer die Maisitzung anzumelden",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Teilnehmervorschlag"
+      ],
+      "outputs": [
+        "Bestaetigte Anmeldung"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "please enroll Brenda Herod, James Scribner, Thresa Allen and Shona Wilson for the May session."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "hector.mcloughlin@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2001-03-30",
+      "subject": "FW: Director-level Impact and Influence"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "hector.mcloughlin@enron.com",
+      "date": "2001-03-30",
+      "subject": "Re: FW: Director-level Impact and Influence"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "hector.mcloughlin@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2001-03-30",
+      "subject": "RE: FW: Director-level Impact and Influence"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "beth.apollo@enron.com, leslie.reeves@enron.com, brenda.herod@enron.com",
+      "date": "2001-04-04",
+      "subject": "FW: Impact and Influence"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "hector.mcloughlin@enron.com",
+      "date": "2001-04-04",
+      "subject": "FW: Impact and Influence"
+    }
+  ]
+}

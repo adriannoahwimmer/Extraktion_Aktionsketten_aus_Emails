@@ -1,0 +1,219 @@
+{
+  "id": "cluster_1168_1",
+  "title": "Uebergangsentsendung Brent Price und Sally Beck nach London",
+  "summary": "Jane Allen koordiniert die temporaere UK-Entsendung von Brent Price und Sally Beck, inklusive Arbeitserlaubnis, Unterkunft, Steuerfragen und Tagessatz, in Zusammenarbeit mit Tara Rozen aus dem Londoner Buero.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Die Mails beschreiben einen klaren, mehrstufigen HR-Ablauf mit definierten Zustaendigkeiten (Jane, Brent, Tara) fuer Arbeitserlaubnis, Unterkunft und Per Diem.",
+  "tags": [
+    "Auslandsentsendung",
+    "Arbeitserlaubnis",
+    "HR",
+    "Grossbritannien",
+    "Relocation"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Jane Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Brent Price",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Tara Rozen",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Bittet Brent, das Arbeitserlaubnisformular schnellstmoeglich auszufuellen und an Tara Rozen zu senden",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Work permit form"
+      ],
+      "outputs": [
+        "Ausgefuelltes Formular an Tara Rozen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please complete this form as quickly as possible (Brent, for you today would be great!) and email to Tara Rozen."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Dokumentiert die Uebergangsregelung und bittet Tara Rozen, Unterkunft, Steuer und Per Diem zu klaeren",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Reisedaten",
+        "Familiendetails"
+      ],
+      "outputs": [
+        "Liste offener Fragen an Tara"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "so can you have someone arrange for corporate housing that will accommodate them?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Bittet Brent, den Antrag an ihre Assistentin Lisa Mcrae weiterzuleiten, damit die Bearbeitung beginnt",
+      "actor": "a4",
+      "recipient": "a2",
+      "inputs": [
+        "Work permit application"
+      ],
+      "outputs": [
+        "Antrag bei Lisa Mcrae"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "please can you forward work permit application to Lisa Mcrae, my assistant, who will get the work permit rolling."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Beantwortet die offenen Punkte zu Unterkunft, Einwanderungsprozess, Steuer und Sozialleistungen",
+      "actor": "a4",
+      "recipient": "a1",
+      "inputs": [
+        "Offene Fragen aus Mail 2"
+      ],
+      "outputs": [
+        "Klaerung Unterkunft",
+        "Klaerung Steuer",
+        "Klaerung Einwanderung"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Brent's work permit will be submitted today and we may receive if before April 1st, but it is unlikely."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Legt den Tagessatz fest und weist Brent an, ihn ueber die Spesenabrechnung geltend zu machen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Cost of living Tabellen"
+      ],
+      "outputs": [
+        "Festgelegter Per-Diem-Betrag"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "the appropriate amount of daily per diem while in London accompanied by family is $55.00/day."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Legt den Tagessatz fest und weist Sally an, ihn ueber die Spesenabrechnung geltend zu machen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Cost of living Tabellen"
+      ],
+      "outputs": [
+        "Festgelegter Per-Diem-Betrag"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "the appropriate amount of daily per diem while in London accompanied by family is $55.00/day."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n3",
+      "condition": "Formular wurde an Tara gesendet"
+    },
+    {
+      "from": "n2",
+      "to": "n4",
+      "condition": "Fragen wurden gestellt"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "condition": "Per-Diem-Frage wurde aufgeworfen"
+    },
+    {
+      "from": "n4",
+      "to": "n6",
+      "condition": "Per-Diem-Frage wurde aufgeworfen"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "jane.allen@enron.com",
+      "to": "brent.price@enron.com, sally.beck@enron.com",
+      "date": "2000-03-08",
+      "subject": "UK Work Permits"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "jane.allen@enron.com",
+      "to": "tara.rozen@enron.com",
+      "date": "2000-03-08",
+      "subject": "Transitional Assignments"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "tara.rozen@enron.com",
+      "to": "jane.allen@enron.com",
+      "date": "2000-03-08",
+      "subject": "Re: Transitional Assignments"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "tara.rozen@enron.com",
+      "to": "jane.allen@enron.com",
+      "date": "2000-03-10",
+      "subject": "Re: Transitional Assignments"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "jane.allen@enron.com",
+      "to": "sally.beck@enron.com, brent.price@enron.com",
+      "date": "2000-03-17",
+      "subject": "Per Diem Amount"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "id": "cluster_1328_2",
+  "title": "Terminplanung fuer Diversity-Meeting mit Enterprise Services Company",
+  "summary": "Andrea Yowman verfolgt eine Diversity-Initiative, prueft potenzielle Dienstleistungsfirmen und organisiert im Anschluss ein Meeting zwischen Sally Beck und Robert Carter, wofuer Carter Agenda und Terminoptionen liefert.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Der Ablauf beschreibt mehrere konkrete Schritte (Treffen, Due Diligence, Bitte um Terminplanung, Rueckmeldung mit Agenda) mit klaren Zustaendigkeiten.",
+  "tags": [
+    "diversity",
+    "terminplanung",
+    "meeting",
+    "due-diligence"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Andrea Yowman",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Robert Carter",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Andrea Yowman trifft sich mit Vertretern der Minderheiten-Dienstleistungsfirmen als Follow-up eines fruehen Treffens von Ken Lay",
+      "actor": "a1",
+      "recipient": null,
+      "inputs": [
+        "Diversity-Initiative von Ken Lay"
+      ],
+      "outputs": [
+        "Kontakt zu Dienstleistungsfirmen"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "On October 16th Cindy, Kelly and I met with Gerald Smith of Smith Graham & Company, Robert Carter of The Enterprise Group and Willie Alexander of W.J. Alexander & Associates as a follow-up to a recent meeting Mr. Lay and Cindy attended."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Andrea plant eine Due-Diligence-Pruefung der Organisationen vor formaler Empfehlung an das Management Committee",
+      "actor": "a1",
+      "recipient": null,
+      "inputs": [
+        "Kontakt zu Dienstleistungsfirmen"
+      ],
+      "outputs": [
+        "Due-Diligence-Plan"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "My plan is to conduct due diligence on these organzations prior to making formal recommendations to the Management Committee."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Andrea bittet Sally Beck um Unterstuetzung bei der Terminplanung eines Meetings mit Robert Carter",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Due-Diligence-Plan"
+      ],
+      "outputs": [
+        "Anfrage zur Terminkoordination"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "The purpose of this note is to seek your assistance in scheduling some time with you and Robert Carter of The Enterprise Group to identify opportunities to provide support services."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Robert Carter liefert Ziel, Agenda, Dauer, Teilnehmer und Terminoptionen fuer das Meeting",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage zur Terminkoordination"
+      ],
+      "outputs": [
+        "Meeting-Agenda und Terminoptionen"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Meeting Objective: Identify opportunities for ESC to provide business process support services to Enron Wholesale"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "andrea.yowman@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2001-10-30",
+      "subject": "Follow-up from the Houston CEO Diversity Roundtable"
+    }
+  ]
+}

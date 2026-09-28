@@ -1,0 +1,139 @@
+{
+  "id": "cluster_1248_3",
+  "title": "Recruiting Expo - Teambeitritt und Einbindung neuer Mitarbeiterin",
+  "summary": "Lexi Elliott laedt zur Recruiting Expo ein, Sally Beck sagt ab, bestaetigt aber ihre Teammitgliedschaft und bittet Lexi, die neue Kollegin Beth Apollo zu kontaktieren und ihr die Schulen vorzustellen.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Der Ablauf beschreibt konkrete Schritte zur Einbindung eines neuen Teammitglieds (Kontaktaufnahme, Information, Entscheidung), auch wenn die Ausfuehrung nicht mehr belegt ist.",
+  "tags": [
+    "recruiting",
+    "expo",
+    "onboarding",
+    "teamzuweisung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Lexi Elliott",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Beth Apollo",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Lexi Elliott laedt zur Recruiting Expo ein und wirbt um Teambeitritt",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Einladung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "WE WANT YOU to join one of the many campus teams to help recruit new talent for Enron."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally Beck sagt die Teilnahme an der Expo ab, bestaetigt aber ihre Teammitgliedschaft",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Einladung"
+      ],
+      "outputs": [
+        "Absage mit Zusage zur Mitgliedschaft"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "You know that you can count me in already as a team member!"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Sally Beck bittet Lexi, die neue Kollegin Beth Apollo zu kontaktieren",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Auftrag zur Kontaktaufnahme"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "why don't you call her for an introduction and give her the rundown on the schools that you are responsible for so that she can make a choice"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Lexi Elliott soll Beth Apollo ueber die verfuegbaren Schulen informieren, damit sie eine Wahl treffen kann",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "Auftrag zur Kontaktaufnahme"
+      ],
+      "outputs": [
+        "Schulauswahl durch Beth Apollo"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "give her the rundown on the schools that you are responsible for so that she can make a choice"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Antwort auf Einladung"
+    },
+    {
+      "from": "n1",
+      "to": "n3",
+      "condition": "Ergaenzung zur Teamliste"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "Auftrag wird weitergegeben"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "lexi.elliott@enron.com",
+      "date": "2001-04-04",
+      "subject": "Re: Recruiting Expo"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "lexi.elliott@enron.com",
+      "date": "2001-04-04",
+      "subject": "Addition to Re: Recruiting Expo"
+    }
+  ]
+}

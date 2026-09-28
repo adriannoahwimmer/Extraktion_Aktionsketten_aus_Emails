@@ -1,0 +1,278 @@
+{
+  "id": "cluster_1261_1",
+  "title": "Verkauf der POPS-Lizenz an AEP",
+  "summary": "Tommy Yanowski verhandelt und dokumentiert den Verkauf einer Lizenz fuer die POPS-Software an AEP, erstellt Wirtschaftlichkeitsanalysen, stimmt sich mit Barbara Gray zum Lizenzvertrag ab und bereitet die interne Freigabe sowie Auslieferung vor.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Die Mails beschreiben einen klaren mehrstufigen Verhandlungs- und Freigabeprozess mit konkreten Zustaendigkeiten (Yanowski, Gray, Piper) und Entscheidungspunkten (Vertragsabschluss, interne Pruefung).",
+  "tags": [
+    "POPS",
+    "Lizenzvertrag",
+    "AEP",
+    "Enron",
+    "Vertragsverhandlung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Greg Piper",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Tommy Yanowski",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Barbara Gray",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Peter Del",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Greg Piper fordert die Proforma-Wirtschaftlichkeitsanalyse zum POPS-Deal an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage nach Wirtschaftlichkeitsdaten"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Can I see the proforma economics on this deal?"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Tommy Yanowski erstellt und uebersendet eine Tabelle mit den Wirtschaftlichkeitsdaten des POPS-Deals",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage nach Wirtschaftlichkeitsdaten"
+      ],
+      "outputs": [
+        "Wirtschaftlichkeits-Tabelle"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Attached is a spreadsheet that summarizes the economics on the POPS deal."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Tommy Yanowski prueft mit Barbara Gray die von AEP eingereichten Vertragskommentare",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Kommentare von AEP zum Lizenzvertrag"
+      ],
+      "outputs": [
+        "Bewertung der Vertragskommentare"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I just received comments to the license agreement from AEP.  I will review these with Barbara Gray"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Tommy Yanowski plant ein Meeting mit Anwendungs-, DBA-, DA- und Technical-Writing-Teams zur Auslieferung der Anwendung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "abgestimmter Lieferplan bis Ende November"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I will be setting up a meeting with the application, DBA, DA and technical writing teams to make sure we are all on the same page and ready to deliver the application by the end of November."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Tommy Yanowski sendet eine Mini-Dash-Zusammenfassung des geplanten Lizenzdeals zur Pruefung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Vertragsstand"
+      ],
+      "outputs": [
+        "Mini Dash Dokument"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "Attached is a mini dash that summarizes the proposed deal to grant a license for POPS to AEP."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Tommy Yanowski trifft sich mit Barbara Gray und dem AEP-Vertreter, um den Vertrag final abzustimmen",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "letzte Aenderungen von AEP zur Schiedsklausel"
+      ],
+      "outputs": [
+        "finalisierter Lizenzvertrag"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I will be meeting with Barbara Gray and my counterpart from AEP, Dave Banks, tomorrow to nail down this agreement."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Werden am Freitag die Unterschriften erreicht?"
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Enron leitet nach Unterschrift die erste Zahlung ein und startet den Auslieferungsprozess der Anwendung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "unterzeichneter Lizenzvertrag"
+      ],
+      "outputs": [
+        "erste Zahlung",
+        "Beginn Anwendungslieferung"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I'd like to get signatures on Friday so that we can move forward with getting our first payment and then start the process of delivering the application."
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "task",
+      "action": "Barbara Gray leitet den Mini Dash an Peter Del weiter und prueft die Vereinbarkeit mit dem Dynegy Kaufvertrag",
+      "actor": "a3",
+      "recipient": "a4",
+      "inputs": [
+        "Mini Dash Dokument"
+      ],
+      "outputs": [
+        "Pruefergebnis Dynegy-Vereinbarkeit"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "As we concluded, this transaction would not be prohibited by the Dynergy Purchase and Sale Agreement."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    },
+    {
+      "from": "n7",
+      "to": "n8",
+      "condition": "Unterschriften erfolgt"
+    },
+    {
+      "from": "n5",
+      "to": "n9"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "greg.piper@enron.com",
+      "to": "j..yanowski@enron.com",
+      "date": "2001-10-15",
+      "subject": "RE: Status of sale of POPS to AEP"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "j..yanowski@enron.com",
+      "to": "greg.piper@enron.com",
+      "date": "2001-10-16",
+      "subject": "RE: Status of sale of POPS to AEP"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "j..yanowski@enron.com",
+      "to": "greg.piper@enron.com, sally.beck@enron.com, kerry.roper@enron.com, mark.pickering@enron.com, beth.perlman@enron.com, steve.hotte@enron.com",
+      "date": "2001-10-24",
+      "subject": "Status to the Enron License to use POPS"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "j..yanowski@enron.com",
+      "to": "greg.piper@enron.com, sally.beck@enron.com, mark.pickering@enron.com, beth.perlman@enron.com, steve.hotte@enron.com, kerry.roper@enron.com, ramesh.rao@enron.com, john.warner@enron.com, matt.pena@enron.com, richard.burchfield@enron.com, jim.ogg@enron.com, romeo.d'souza@enron.com",
+      "date": "2001-10-25",
+      "subject": "Status of the sale of POPS to AEP"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "j..yanowski@enron.com",
+      "to": "greg.piper@enron.com, mark.pickering@enron.com, sally.beck@enron.com, n..gray@enron.com, kerry.roper@enron.com",
+      "date": "2001-11-14",
+      "subject": "POPS Mini Dash and License Agreement Status"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "n..gray@enron.com",
+      "to": "peter.del@enron.com",
+      "date": "2001-11-14",
+      "subject": "FW: POPS Mini Dash and License Agreement Status"
+    }
+  ]
+}

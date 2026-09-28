@@ -1,0 +1,154 @@
+{
+  "id": "cluster_1033_1",
+  "title": "Organisation des Sommerempfangs mit Sponsorensuche",
+  "summary": "Glenn Sprenger organisiert den GBN Sommerempfang in Houston und bittet die Alumni-Kontakte, Sponsoring-Zusagen ihrer Firmen einzuholen und ihm zu melden.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Die Mail beschreibt mehrere aufeinanderfolgende Schritte (Terminierung, Menueabsprache, Sponsorenakquise, Ruecklauf), auch wenn die Antworten der Empfaenger im Cluster fehlen.",
+  "tags": [
+    "Eventplanung",
+    "Sponsoring",
+    "Alumni-Netzwerk",
+    "Houston"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Glenn Sprenger",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Houston Alumni-Kontakte",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Termin und Ort fuer den Sommerempfang festlegen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Reservierung bei Jalapeno's fuer 26. Juli"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "The summer reception has been scheduled at Jalapeno's (same as last year), 2702 Kirby Drive"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Menueoptionen beim Veranstaltungsort einholen",
+      "actor": "a1",
+      "recipient": null,
+      "inputs": [],
+      "outputs": [
+        "Menueoptionen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I should be receiving the menu options this week."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Alumni-Kontakte nach Sponsoring-Zusagen ihrer Firmen fragen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage an Kontakte"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Have any of you received sponsorship pledges from your companies?"
+        }
+      ]
+    },
+    {
+      "id": "g1",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Wurde eine Sponsoring-Zusage erhalten?"
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Firma und Betrag der Sponsoring-Zusage an Glenn melden",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Sponsoring-Zusage"
+      ],
+      "outputs": [
+        "Gemeldete Zusage"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "please let me know the company and the amount"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Weitere Klassenkameraden in Houston nach Firmensponsoring fragen",
+      "actor": "a2",
+      "recipient": null,
+      "inputs": [],
+      "outputs": [
+        "Weitere potenzielle Sponsoren"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please also try asking your classmates who work in Houston about their companies sponsoring this event."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n1",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "g1"
+    },
+    {
+      "from": "g1",
+      "to": "n4",
+      "condition": "Zusage erhalten"
+    },
+    {
+      "from": "g1",
+      "to": "n5",
+      "condition": "keine Zusage erhalten"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sprenger@alumni.utexas.net",
+      "to": "katie.george@bus.utexas.edu, davis.paddock@bus.utexas.edu, jeremy.giles@bus.utexas.edu, jacob.walter@bus.utexas.edu, jon.ruggles@bus.utexas.edu",
+      "date": "2000-07-04",
+      "subject": "Summer Reception, II"
+    }
+  ]
+}

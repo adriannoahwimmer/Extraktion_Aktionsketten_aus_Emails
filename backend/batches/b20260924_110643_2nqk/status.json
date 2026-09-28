@@ -1,0 +1,18 @@
+{
+  "batch_id": "b20260924_110643_2nqk",
+  "phase": "error",
+  "phasen_text": "Fehler",
+  "fortschritt": {
+    "aktuell": 3,
+    "gesamt": 6
+  },
+  "zahlen": {
+    "mails": 10,
+    "cluster": 2,
+    "rauschen": 4,
+    "ketten": 0
+  },
+  "fehler": "extract_chains.py endete mit Code 1 (siehe pipeline.log)",
+  "gestartet": "2026-09-24T09:06:44Z",
+  "aktualisiert": "2026-09-24T09:11:25Z"
+}

@@ -1,0 +1,282 @@
+{
+  "id": "cluster_1130_1",
+  "title": "Organisation der VAR-Schulung fuer Sallys Team",
+  "summary": "Tim O'Rourke koordiniert mit externen Anbietern die Planung, Terminfindung und Buchung einer zweitaegigen VAR-Schulung fuer Sally Becks Gruppe, inklusive Raum- und Materialorganisation.",
+  "prozess_wahrscheinlichkeit": 0.85,
+  "prozess_begruendung": "Die Kette zeigt einen klaren mehrstufigen Ablauf mit Anfrage, Terminverhandlung, Feedback, Buchung, Bestaetigung und Koordination von Details.",
+  "tags": [
+    "schulung",
+    "var-training",
+    "terminplanung",
+    "koordination"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Tim O'Rourke",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Gracie",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Patti",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "James Scribner",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Kontaktiert Trainingsanbieter bezueglich Verfuegbarkeit und Kursformat",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Anfrage von Sally per Voicemail"
+      ],
+      "outputs": [
+        "Verfuegbare Termine im September"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I've taken the liberty of getting in touch with the suppliers to talk to them about the request and their availability."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Bittet um Feedback zu Terminen und Kursformat",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage an Sally"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "How does this fit with your group?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Gibt Rueckmeldung zu Terminproblemen und bittet um Kursuebersicht",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Anforderung eines Kursuebersicht"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Could I get an outline of their 2 day course to review in order to make this decision?"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Sagt Uebersicht zu und bucht Anbieter vorlaeufig",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Vorlaeufige Buchung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I'll provisionally book the suppliers in case you've got over your irritation by September - so we don't lose those dates."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Bucht die Schulung fuer 2.-3. August und plant Abstimmungstermin mit Sally",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Buchung fuer 2.-3. August"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I've booked the company to do the 2-3rd August."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Bittet Patti, einen 30-minuetigen Termin mit Sally zu koordinieren",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [],
+      "outputs": [
+        "Terminanfrage an Patti"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Patti - could you schedule me 30 minutes with Sally please early in w/c 7/17?"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Bestaetigt endgueltige Termine und Raum, beauftragt Gracie zur Koordination",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Bestaetigte Termine 14./15. und 21./22. September",
+        "Raumbuchung EB 560"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I've confirmed with the training company the two dates - 14/15th September, and 21/22 September."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Beauftragt Gracie, sich mit Patti bezueglich Material und Teilnehmerlisten abzustimmen",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [],
+      "outputs": [
+        "Koordination von Material und Teilnehmerlisten"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I'll ask Gracie to coordinate with Patti on the details regarding materials and lists of attendees"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "task",
+      "action": "Erstellt Bewertung der durchgefuehrten VAR-Schulung",
+      "actor": "a5",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Schulungsbewertung"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "Attached is my quick assessment of the VAR training."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n5",
+      "to": "n7"
+    },
+    {
+      "from": "n7",
+      "to": "n8"
+    },
+    {
+      "from": "n7",
+      "to": "n9"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "tim.o'rourke@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-06-19",
+      "subject": "VAR training"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "tim.o'rourke@enron.com",
+      "date": "2000-06-20",
+      "subject": "Re: VAR training"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "tim.o'rourke@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-06-20",
+      "subject": "Re: VAR training"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "tim.o'rourke@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-07-11",
+      "subject": "VaR training"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "tim.o'rourke@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-07-26",
+      "subject": "VAR training"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "james.scribner@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-09-19",
+      "subject": "VAR Training Assessment"
+    }
+  ]
+}

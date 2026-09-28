@@ -1,0 +1,6 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_171849_m7cl
+Lese attachments__1_.zip ...
+Fertig. 5 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_171849_m7cl\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260911_171849_m7cl

@@ -1,0 +1,85 @@
+{
+  "id": "cluster_0_1",
+  "title": "SAP Zahlungsvorschlag-Freigabeprozess",
+  "summary": "Das SAP AP System versendet taeglich automatisch Zahlungsvorschlagsdateien an die AP User, die diese pruefen und zur weiteren Genehmigung an ihre Approver bzw. den CAO weiterleiten sollen.",
+  "prozess_wahrscheinlichkeit": 0.4,
+  "prozess_begruendung": "Der Ablauf beschreibt klare Zustaendigkeiten (System, AP User, Approver/CAO) und zwei Handlungsschritte, ist aber wegen fehlender Rueckmeldungen und automatisierter Wiederholung nur lueckenhaft belegt.",
+  "tags": [
+    "SAP",
+    "Accounts Payable",
+    "Zahlungsvorschlag",
+    "Genehmigung",
+    "Automatisierung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "SAP AP Team System",
+      "type": "system"
+    },
+    {
+      "id": "a2",
+      "name": "AP User (Tammy Marcontell, Sally Beck, Kerry Roper, S. Galvan, Tahnee Stall)",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Approver/CAO",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "System versendet Zahlungsvorschlagsdatei an AP User",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Zahlungsvorschlagsdatei (XLS)"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Attached is/are the payment proposal(s) for your business unit."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "AP User prueft und leitet die Datei an Approver/CAO weiter",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Zahlungsvorschlagsdatei (XLS)"
+      ],
+      "outputs": [
+        "Weitergeleitete Zahlungsvorschlagsdatei"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please review and forward to your approver(s)/CAO."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "mbx_iscinfra@enron.com",
+      "to": "tammy.marcontell@enron.com, sally.beck@enron.com, kerry.roper@enron.com, s..galvan@enron.com, tahnee.stall@enron.com",
+      "date": "2002-01-02",
+      "subject": "\\\\spr1inf1\\sapfiles\\ifout\\04000\\20020102-DENWE.XLS"
+    }
+  ]
+}

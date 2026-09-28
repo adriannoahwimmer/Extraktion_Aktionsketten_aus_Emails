@@ -1,0 +1,207 @@
+{
+  "id": "cluster_1246_1",
+  "title": "Organisation des OU-Sommer-Cookouts",
+  "summary": "Sally Beck plant ein Cookout fuer OU-Praktikanten und -Absolventen und koordiniert mit Jody Crook die Erstellung von Gaestelisten, das Datum sowie die Einladung der Gruppe.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Der Ablauf zeigt klare Zustaendigkeiten (Jody: Listen/Logistik, Sally: Organisation/Einladung) und eine nachvollziehbare Schrittfolge von Angebot bis Einladung.",
+  "tags": [
+    "Event-Planung",
+    "Cookout",
+    "OU-Recruiting",
+    "Enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Jody Crook",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "OU Praktikanten und Absolventen Gruppe",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Jody bietet Sally Hilfe bei Logistik, Aufbau und Aufraeumen des Cookouts an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Hilfsangebot"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please let me help with any of the logistics, set-up, and clean up."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally bittet Jody um eine Liste kuerzlich eingestellter OU-Absolventen und schlaegt ein Datum vor",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Hilfsangebot"
+      ],
+      "outputs": [
+        "Anfrage nach Absolventenliste",
+        "Terminvorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Can you get a list of recent OU grads hired at Enron?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Jody bestaetigt das Datum und sagt zu, eine Liste der Absolventen zusammenzustellen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Terminvorschlag"
+      ],
+      "outputs": [
+        "Zusage Absolventenliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I will put a list together of recent graduates and send that to you."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Jody sagt zu, Shelly Jones zu kontaktieren, um eine Liste der im Juli startenden neuen Mitarbeiter zu erhalten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Zusage Kontaktaufnahme Shelly Jones"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "I will also contact Shelly Jones and get a list of those starting in July."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Sally kombiniert die Absolventenliste mit der Liste der Sommerpraktikanten zu einer vollstaendigen Gaesteliste",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Zusage Absolventenliste"
+      ],
+      "outputs": [
+        "Kombinierte Gaesteliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I will combine it with the list that I have of summer interns and we can make sure that it looks complete."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Sally verschickt eine Save-the-Date-Ankuendigung an die Gruppe der OU-Praktikanten und -Absolventen",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Kombinierte Gaesteliste"
+      ],
+      "outputs": [
+        "Save-the-Date E-Mail"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I will be hosting a cookout at my home for OU summer interns, recently hired OU grads and the OU recruiting team on Sunday, July 30th in the late afternoon."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n3",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "jody.crook@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-06-14",
+      "subject": "Summer Cookout"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "jody.crook@enron.com",
+      "date": "2000-06-19",
+      "subject": "Re: Summer Cookout"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "jody.crook@enron.com",
+      "date": "2000-06-20",
+      "subject": "Re: Summer Cookout"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "jody.crook@enron.com",
+      "date": "2000-06-20",
+      "subject": "Further Follow Up"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "emily.ferguson@enron.com, blake.lasuzzo@enron.com, scott.neuendorf@enron.com, robert.shamblin@enron.com, michelle.terry@enron.com, rafael.avila@enron.com, michael.benien@enron.com, justin.o'malley@enron.com, angie.zeman@enron.com, jody.crook@enron.com",
+      "date": "2000-07-07",
+      "subject": "Save the Date - Cookout for OU Summer Interns and OU Grads"
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "id": "cluster_1091_2",
+  "title": "Klaerung des Handels- und Vertriebsmodells fuer Agenturbueros",
+  "summary": "David Port schlaegt ein einfaches Vertriebs-/Handelsmodell vor, woraufhin Andrew Cornfield und Tim Poullain-Patterson das tatsaechlich implementierte Modell mit taeglichen Preisvorgaben, Handelsrahmen und Kontrollmechanismen erklaeren; abschliessend wird eine weitere Telefonkonferenz zur Klaerung offener Fragen vereinbart.",
+  "prozess_wahrscheinlichkeit": 0.8,
+  "prozess_begruendung": "Es werden konkrete, mehrstufige Ablaeufe (Preisvorgabe, Handelsrahmen, Kontrollmechanismus, Eskalation bei Grenzueberschreitung, Klaerungs-Call) mit klaren Zustaendigkeiten beschrieben.",
+  "tags": [
+    "trading model",
+    "sales process",
+    "risk controls",
+    "authorised traders"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "David Port",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Andrew Cornfield",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Tim Poullain-Patterson",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "David Port schlaegt ein vereinfachtes Geschaeftsmodell vor, bei dem der Verkaeufer mit dem Kunden verhandelt und der Trading Desk den Preis stellt.",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Kundenanfrage"
+      ],
+      "outputs": [
+        "Vorschlag Geschaeftsmodell"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "salesperson phones trading desk and gets price (trading desk is London or NY - NB: all lines are taped)"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Andrew Cornfield erlaeutert das tatsaechliche Modell im Finanzhandel: naechtliche E-Mail-Anweisungen an New York und Tokio schaffen einen Handelsrahmen (envelope).",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Positions- und Preisvorgaben"
+      ],
+      "outputs": [
+        "Handelsrahmen (envelope)"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "creating an envelope in which they can trade."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Innerhalb dieses Rahmens muessen Haendler bei Ueberschreiten der Preis- oder Positionsgrenzen weitere Anweisungen einholen.",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Handelsrahmen (envelope)"
+      ],
+      "outputs": [
+        "Ruecksprache bei Grenzueberschreitung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "They  must call for further instructions if the price shifts by more than $10 ($100 for Tin & Nickel)  or the position by more than 100 lots."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Tim Poullain-Patterson bestaetigt, dass zusaetzlich der Head Trader (Sam Hainsworth) taeglich den Verkaeufer vor Kundengespraechen anruft und Vorgaben macht.",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Vorschlag Geschaeftsmodell"
+      ],
+      "outputs": [
+        "Taegliche Vorgabe des Head Traders"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "the Head Trader in London (Sam Hainsworth) calls the sales person each day to tell him what to do before they speak to any customers."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Weicht der Verkaeufer von den taeglich vereinbarten Vorgaben ab, wird dies anhand der aufgezeichneten Gespraeche geahndet (red card).",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Taegliche Vorgabe des Head Traders"
+      ],
+      "outputs": [
+        "Sanktionierung bei Abweichung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "then they will be red carded."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "David Port hinterfragt die fehlende Autonomie lokaler Bueros und bittet um weitere Erklaerung.",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Erklaerung Handelsrahmen und Head-Trader-Vorgabe"
+      ],
+      "outputs": [
+        "Offene Frage zur Autonomie"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Why don't NY and London do the deals themselves and let the locals concentrate on generating business ?"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Tim Poullain-Patterson schlaegt eine weitere Telefonkonferenz mit Marcelo, Andy und David vor, um das Modell nochmals zu erklaeren.",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Offene Frage zur Autonomie"
+      ],
+      "outputs": [
+        "Geplante Telefonkonferenz"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I suggest we have another conference call at which Marcelo, Andy and I go through this one more time for any interested parties."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n1",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n3",
+      "to": "n6"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "david.port@enron.com",
+      "to": "andrew.cornfield@enron.com",
+      "date": "2000-11-08T23:52:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "andrew.cornfield@enron.com",
+      "to": "david.port@enron.com",
+      "date": "2000-11-09T11:11:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "tim.poullain-patterson@enron.com",
+      "to": "david.port@enron.com",
+      "date": "2000-11-09T07:27:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "david.port@enron.com",
+      "to": "andrew.cornfield@enron.com",
+      "date": "2000-11-09T06:46:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "tim.poullain-patterson@enron.com",
+      "to": "david.port@enron.com",
+      "date": "2000-11-10T00:54:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    }
+  ]
+}

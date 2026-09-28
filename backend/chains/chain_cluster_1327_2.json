@@ -1,0 +1,87 @@
+{
+  "id": "cluster_1327_2",
+  "title": "Anpassung der Praktikumsdauer und HR-Vermerk",
+  "summary": "Eine Praktikantin fragt bei der Recruiterin an, ob eine verkuerzte Praktikumsdauer moeglich ist, woraufhin diese den zulaessigen Mindestzeitraum bestaetigt und eine Anweisung zur Dokumentation im Angebotsschreiben fuer HR gibt.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Es handelt sich um einen kleinen, aber klar definierten Ablauf mit Anfrage, Entscheidung und konkreter Handlungsanweisung an HR.",
+  "tags": [
+    "praktikum",
+    "hr",
+    "recruiting",
+    "ausnahmeregelung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Whittney Skinner",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Lexi Elliott",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Whittney Skinner fragt bei Lexi Elliott an, ob eine verkuerzte Praktikumsdauer wegen persoenlicher Verpflichtungen moeglich ist",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage zur Terminanpassung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I don't know if this presents a problem, but I wanted to check with you."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Lexi Elliott bestaetigt die verkuerzte Dauer und weist an, die Terminwuensche im Angebotsschreiben zu vermerken, damit HR informiert ist",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage aus n1"
+      ],
+      "outputs": [
+        "Vermerk im Angebotsschreiben"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Please just indicate your date considerations on your offer letter so that HR knows you will not be here a full 12 weeks."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "whittneyskinner@hotmail.com",
+      "to": "lexi.elliot@enron.com",
+      "date": "2000-12-11",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "lexi.elliott@enron.com",
+      "to": "whittneyskinner@hotmail.com",
+      "date": "2000-12-12",
+      "subject": "Re:"
+    }
+  ]
+}

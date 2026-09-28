@@ -1,0 +1,291 @@
+{
+  "id": "b20260924_110315_ubwx_cluster_e00004_1",
+  "title": "Ablauf fuer Pull Requests bis zum Produktions-Deployment",
+  "summary": "Kai erklaert Adrian den vollstaendigen Prozess von der Erstellung eines Pull Requests ueber Review, Freigabe und Merge bis zum Deployment auf Produktion.",
+  "prozess_wahrscheinlichkeit": 0.9,
+  "prozess_begruendung": "Die Mail beschreibt einen klaren, mehrstufigen Ablauf mit konkreten Zustaendigkeiten und mehreren Entscheidungspunkten.",
+  "tags": [
+    "Pull Request",
+    "Code Review",
+    "Deployment",
+    "Softwareentwicklung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Adrian (Entwickler)",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Reviewer (Team)",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Nadine (Security-Team)",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Kai",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Pull Request auf develop erstellen",
+      "actor": "a1",
+      "inputs": [
+        "Fertiger Code"
+      ],
+      "outputs": [
+        "Pull Request"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Du machst einen Pull Request auf develop."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Screenshot fuer sichtbare Oberflaechenaenderungen anhaengen",
+      "actor": "a1",
+      "inputs": [
+        "Pull Request"
+      ],
+      "outputs": [
+        "PR mit Screenshot"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "bei allem was an der Oberfläche sichtbar ist bitte einen Screenshot dazu"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Ist die Pipeline gruen?"
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Warten bis Pipeline durchgelaufen ist, bevor Reviewer angefragt wird",
+      "actor": "a1",
+      "inputs": [
+        "Pipeline-Status"
+      ],
+      "outputs": [
+        "Freigegebene PR fuer Review"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Bevor du jemanden als Reviewer anfragst, warte bis die Pipeline durch ist."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Betrifft PR Zahlungsdienst oder Authentifizierung?"
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Freigabe von einem Teammitglied einholen",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "PR"
+      ],
+      "outputs": [
+        "Teamfreigabe"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Normalerweise reicht eine Freigabe aus dem Team."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Zusaetzlich Freigabe von Nadine aus dem Security-Team einholen",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "PR mit Sicherheits- oder Zahlungsbezug"
+      ],
+      "outputs": [
+        "Security-Freigabe"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "brauchst du zusätzlich noch Nadine aus dem Security-Team drauf"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Review-Ergebnis: Approve oder Request Changes?"
+    },
+    {
+      "id": "n9",
+      "type": "task",
+      "action": "Kommentare abarbeiten und denselben Reviewer erneut anfragen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Review-Kommentare"
+      ],
+      "outputs": [
+        "Ueberarbeiteter PR"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "arbeitest du die Kommentare ab und fragst danach denselben Reviewer nochmal an"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "task",
+      "action": "Nach 24 Stunden ohne Reaktion im Channel nachhaken",
+      "actor": "a1",
+      "inputs": [
+        "Ausstehender Review"
+      ],
+      "outputs": [
+        "Erinnerung im Channel"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Wenn nach 24 Stunden keiner reingeschaut hat, hak im Channel nach."
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "type": "task",
+      "action": "PR per Squash mergen, Branch loeschen, Ticket auf Done setzen",
+      "actor": "a1",
+      "inputs": [
+        "Freigegebener PR"
+      ],
+      "outputs": [
+        "Gemergter Code",
+        "Erledigtes Ticket"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Squash, nicht Merge-Commit. Danach Branch löschen und das Ticket auf \"Done\" ziehen"
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "type": "task",
+      "action": "Deployment auf Produktion dienstags oder donnerstags durchfuehren",
+      "actor": "a4",
+      "inputs": [
+        "Code auf Staging"
+      ],
+      "outputs": [
+        "Deployment auf Produktion"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Auf Produktion deployen wir nur dienstags und donnerstags und das mache ich"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "Pipeline gruen"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "Pipeline rot - warten"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6",
+      "condition": "kein Zahlungs-/Auth-Bezug"
+    },
+    {
+      "from": "n5",
+      "to": "n7",
+      "condition": "Zahlungsdienst oder Authentifizierung betroffen"
+    },
+    {
+      "from": "n6",
+      "to": "n8"
+    },
+    {
+      "from": "n7",
+      "to": "n8"
+    },
+    {
+      "from": "n8",
+      "to": "n9",
+      "condition": "Request Changes"
+    },
+    {
+      "from": "n9",
+      "to": "n8"
+    },
+    {
+      "from": "n8",
+      "to": "n11",
+      "condition": "Approved"
+    },
+    {
+      "from": "n11",
+      "to": "n12"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "Adrian Noah Wimmer <adrian.noah.wimmer@gmail.com>",
+      "to": "wimmera1998@web.de",
+      "date": "2026-08-29",
+      "subject": "Vergessen zu erwähnen"
+    }
+  ]
+}

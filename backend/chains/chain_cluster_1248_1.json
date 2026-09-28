@@ -1,0 +1,130 @@
+{
+  "id": "cluster_1248_1",
+  "title": "Wellesley Recruiting Team Koordination",
+  "summary": "Geynille Dillingham koordiniert das Wellesley-Recruiting-Team, laedt zu Meetings ein, meldet Ergebnisse und organisiert bei Terminkonflikten Ersatz.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Der Ablauf zeigt klare Zustaendigkeiten (Koordinatorin), wiederkehrende Schritte (Einladung, Bestaetigung, Ergebnisbericht, Ersatzregelung) ueber zwei Saisons hinweg.",
+  "tags": [
+    "recruiting",
+    "wellesley",
+    "teamkoordination",
+    "campus-recruiting"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Geynille Dillingham",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sally Beck",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Geynille Dillingham laedt das Team zum Kickoff-Meeting ein",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Meeting-Einladung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "We have arranged an evening meeting to discuss the details."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Sally Beck bestaetigt ihre Teilnahme am Meeting",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Meeting-Einladung"
+      ],
+      "outputs": [
+        "Teilnahmebestaetigung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I will be at the meeting on the 24th."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Geynille Dillingham fasst die Rekrutierungsergebnisse zusammen und stellt die Strategie fuer die naechste Saison vor",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Ergebnisbericht",
+        "Spring-Strategie"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "We extended 7 offers and we had 3 accepts, 1 decline, and 3 outstanding."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Geynille Dillingham bittet bei Terminkonflikten um sofortige Meldung, damit sie Ersatz organisieren kann",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Spring-Strategie"
+      ],
+      "outputs": [
+        "Ersatzregelung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "please call or e-mail me immediately so that I can find a replacement"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Antwort auf Einladung"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "im Falle eines Terminkonflikts"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com / sally.beck@enron.com",
+      "to": "sally.beck@enron.com",
+      "date": "2000-08-22/23",
+      "subject": "Wellesley Team Meeting"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "geynille.dillingham@enron.com",
+      "to": "team",
+      "date": "2001-01-19",
+      "subject": "Wellesley Spring Recruiting"
+    }
+  ]
+}

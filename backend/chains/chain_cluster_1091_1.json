@@ -1,0 +1,199 @@
+{
+  "id": "cluster_1091_1",
+  "title": "Eskalation der Handelskontrollen in Montreal und Chicago",
+  "summary": "Nachdem Joe Robertson einen abweichenden Vorschlag macht, stellt Rob Soeldner klar, dass die Handelskontrollen nicht verhandelbar sind; Andy Cornfield bestaetigt die interne Klaerung, Shona Wilson sagt zu, mit Marcelo Parra zu sprechen, und je nach Umsetzbarkeit der Kontrollen droht die Schliessung des Buero oder es wird weiter intern geklaert.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Der Ablauf zeigt klare Zustaendigkeiten (Rob Soeldner, Andy Cornfield, Shona Wilson, Marcelo Parra) und einen Entscheidungspunkt ueber Schliessung vs. Weiterbetrieb des Buero.",
+  "tags": [
+    "trading controls",
+    "escalation",
+    "compliance",
+    "Montreal",
+    "Chicago"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Rob Soeldner",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Joe Robertson",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Andrew Cornfield",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Bjorn Hagelmann",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "Shona Wilson",
+      "type": "person"
+    },
+    {
+      "id": "a6",
+      "name": "Marcelo Parra",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Rob Soeldner teilt Joe Robertson mit, dass die Handelskontrollen nicht verhandelbar sind und der vorgeschlagene Weg keine Option ist.",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Vorschlag von Joe Robertson"
+      ],
+      "outputs": [
+        "Klare Ansage zu Kontrollen"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Enron places great importance on trading controls. These are non-negotiatable."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Andrew Cornfield bestaetigt Bjorn Hagelmann, dass das Thema intern geklaert wird.",
+      "actor": "a3",
+      "recipient": "a4",
+      "inputs": [
+        "Aussage von Rob Soeldner"
+      ],
+      "outputs": [
+        "Interne Bestaetigung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "a note to confirm that this being dealt with internally."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Shona Wilson sagt zu, mit Marcelo Parra ueber die Umsetzung der Kontrollstruktur zu sprechen.",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [
+        "Interne Bestaetigung"
+      ],
+      "outputs": [
+        "Gespraech mit Marcelo geplant"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I'll talk to Marcelo, but if they can't implement the appropriate control structure, then they have to be shut."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Koennen Montreal/Chicago die geforderte Kontrollstruktur umsetzen?"
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Bjorn Hagelmann fragt nach Schliessung des Buero, falls die Kontrollen nicht umgesetzt werden koennen.",
+      "actor": "a4",
+      "recipient": "a5",
+      "inputs": [
+        "Entscheidung: Kontrollen nicht umsetzbar"
+      ],
+      "outputs": [
+        "Schliessung des Buero"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Should I call the locksmith or do I have any other volunteers?"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Shona Wilson fragt Andrew Cornfield nach genauer Klaerung, was \"intern geklaert\" konkret bedeutet.",
+      "actor": "a5",
+      "recipient": "a3",
+      "inputs": [
+        "Entscheidung: Kontrollen umsetzbar / weiter intern klaeren"
+      ],
+      "outputs": [
+        "Nachfrage zur Klaerung"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "What does internally mean?"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5",
+      "condition": "nein, nicht umsetzbar"
+    },
+    {
+      "from": "n4",
+      "to": "n6",
+      "condition": "ja, wird intern weiter geklaert"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "andrew.cornfield@enron.com",
+      "to": "bjorn.hagelmann@enron.com",
+      "date": "2000-11-09T03:17:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "shona.wilson@enron.com",
+      "to": "bjorn.hagelmann@enron.com",
+      "date": "2000-11-08T23:56:00-08:00",
+      "subject": "Re: Authorized Traders : Montreal & Chicago"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "shona.wilson@enron.com",
+      "to": "andrew.cornfield@enron.com",
+      "date": "2000-11-08T23:58:00-08:00",
+      "subject": "Re: Authorised Traders : Montreal & Chicago"
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "id": "cluster_1213_1",
+  "title": "Bearbeitung von Gegenpartei-Namensaenderungen und -Fusionen im Global Counterparty System",
+  "summary": "Rhonda Denton (Global Counterparty/Global Data Management) verarbeitet Fusionen, Uebernahmen und Namensaenderungen von Handelspartnern: sie meldet die Aenderung, ueberlagert den Datensatz in GCP, stimmt Kurznamensaenderungen mit ERMS-IT ab, deaktiviert alte Datensaetze und weist die Handelsabteilung an, kuenftige Geschaefte unter dem neuen Namen zu buchen; bereits bestehende, nicht uebertragene Geschaefte werden als Ausnahme separat gefuehrt.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Ueber mehrere Mails hinweg wird ein klar wiederkehrender interner Ablauf mit Zustaendigkeiten (GCP-Overlay, ERMS-IT-Abstimmung, Deaktivierung, Buchungsanweisung) und einer Ausnahmeregelung fuer zurueckbehaltene Geschaefte sichtbar, auch wenn jede einzelne Mail nur einen Ausschnitt davon zeigt.",
+  "tags": [
+    "gegenpartei",
+    "namensaenderung",
+    "fusion",
+    "global-counterparty",
+    "handel",
+    "erms"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Rhonda Denton (Global Counterparty)",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Handelsabteilung",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "ERMS-IT",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Meldet der Handelsabteilung Fusion/Uebernahme einer Gegenpartei",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Benachrichtigung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Almost all trades executed under Merrill Lynch have been assigned to Allegheny."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Ueberlagert den Gegenpartei-Datensatz in Global Counterparty (GCP)",
+      "actor": "a1",
+      "inputs": [
+        "Fusions-/Namensinformation"
+      ],
+      "outputs": [
+        "ueberlagerter GCP-Datensatz"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "The following record has been overlayed due to a legal name change"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Stimmt die Aenderung des ERMS-Kurznamens mit ERMS-IT ab",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "ueberlagerter GCP-Datensatz"
+      ],
+      "outputs": [
+        "geaenderter ERMS-Kurzname"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "ERMS Shortname change will be co-ordinated with ERMS-IT on Friday, September 7, 2001."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "gateway",
+      "gateway_type": "xor",
+      "label": "Wird das einzelne Geschaeft der neuen Gegenpartei zugeordnet?"
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Weist die Handelsabteilung an, kuenftige Geschaefte unter dem neuen Gegenparteinamen zu buchen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "neuer Gegenparteiname"
+      ],
+      "outputs": [
+        "Buchungsanweisung"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Please choose Northern States Power Company (NORTHERNST) for future deals with this counterparty."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Fuehrt eine Ausnahmeliste fuer nicht uebertragene (zurueckbehaltene) Geschaefte",
+      "actor": "a1",
+      "inputs": [],
+      "outputs": [
+        "Ausnahmeliste retained deals"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "The deals that Merrill will retain are as follows"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Deaktiviert den alten Gegenparteidatensatz nach Ablauf der Uebergangsfrist",
+      "actor": "a1",
+      "inputs": [
+        "Buchungsanweisung umgesetzt"
+      ],
+      "outputs": [
+        "deaktivierter Altdatensatz"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Records will be inactivated on Friday, February, 1, 2002."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n5",
+      "condition": "Geschaeft wird der neuen Gegenpartei zugeordnet"
+    },
+    {
+      "from": "n6",
+      "to": "n7",
+      "condition": "Geschaeft wird bei alter Gegenpartei belassen (retained deal)"
+    },
+    {
+      "from": "n5",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "rhonda.denton@enron.com",
+      "to": "tim.belden@enron.com et al.",
+      "date": "2001-03-21",
+      "subject": "Allegheny Energy Supply Company LLC - Merrill Lynch Capital Services, Inc."
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "l..denton@enron.com",
+      "to": "matt.motley@enron.com et al.",
+      "date": "2001-09-05",
+      "subject": "FirstEnergy Services Corp."
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "l..denton@enron.com",
+      "to": "andrea.dahlke@enron.com et al.",
+      "date": "2002-01-04",
+      "subject": "FW: Name Overlays - 01/04/02"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "l..denton@enron.com",
+      "to": "tim.belden@enron.com et al.",
+      "date": "2001-07-18",
+      "subject": "Xcel Energy Inc. to Northern States Power Company"
+    }
+  ]
+}

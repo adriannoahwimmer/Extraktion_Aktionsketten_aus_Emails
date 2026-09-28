@@ -1,0 +1,186 @@
+{
+  "id": "cluster_1098_1",
+  "title": "United Way Spendenkampagne bei Enron - Erinnerungs- und Reporting-Prozess",
+  "summary": "Sally Beck koordiniert die jaehrliche United-Way-Pledge-Kampagne bei Enron: sie erinnert Mitarbeiter an die Online-Abgabe, verweist auf Ansprechpartner, verschickt Folgeerinnerungen, meldet Teilnahmezahlen an das Management, und andere Fuehrungskraefte geben die Erinnerung an ihre Teams weiter.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Mehrere klar erkennbare Schritte (Erinnerung, Verweis auf Zustaendige, Folgeerinnerung, Reporting an Vorgesetzten, Weitergabe durch andere Manager) zeigen einen wiederkehrenden organisatorischen Ablauf, auch wenn die Verbindungen zwischen den Schritten teils implizit bleiben.",
+  "tags": [
+    "United Way",
+    "Spendenkampagne",
+    "interne Kommunikation",
+    "Reporting",
+    "Enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Sally Beck",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Energy Operations Mitarbeiter",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Patti Thompson",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "David Delainey",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "John Arnold",
+      "type": "person"
+    },
+    {
+      "id": "a6",
+      "name": "Team von John Arnold (Maggi, May, Keavey, Hoskins)",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Sally Beck erinnert Mitarbeiter daran, ihre Pledge-Karte vor der Frist online auszufuellen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Erinnerungs-E-Mail"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would encourage you to complete your pledges before Tuesday"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Patti Thompson informiert Mitarbeiter, wo sie die Online-Abgabe vornehmen koennen",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anleitung zur Pledge-Abgabe"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Patti Thompson can tell you where to go on line to do this."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Sally Beck versendet eine unternehmensweite Folgeerinnerung kurz vor Ende der Kampagne",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Zweite Erinnerungs-E-Mail"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "If you have not yet completed your electronic pledge, please consider doing so as soon as possible."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Sally Beck meldet die aktuellen Teilnahmezahlen an David Delainey",
+      "actor": "a1",
+      "recipient": "a4",
+      "inputs": [
+        "Teilnahmezahlen"
+      ],
+      "outputs": [
+        "Statusbericht"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "The record on Friday showed that 127 employees from Energy Operations had pledged dollars to the United Way campaign."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "John Arnold erinnert sein Team an das Ausfuellen der Pledge-Karte",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [],
+      "outputs": [
+        "Interne Team-Erinnerung"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Please remember to fill out your pledge card for United Way"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2",
+      "condition": "Mitarbeiter benoetigt Hilfe bei der Online-Abgabe"
+    },
+    {
+      "from": "n1",
+      "to": "n3",
+      "condition": "Pledge noch nicht abgegeben nach erster Erinnerung"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "nach Versand der Folgeerinnerung"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "brent.price@enron.com, peggy.hedstrom@enron.com",
+      "date": "2000-08-04",
+      "subject": "United Way Executive Solicitation"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "multiple Enron employees",
+      "date": "2000-08-18",
+      "subject": "Message from Sally Beck"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "sally.beck@enron.com",
+      "to": "david.delainey@enron.com",
+      "date": "2000-08-21",
+      "subject": "United Way"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "john.arnold@enron.com",
+      "to": "brian.hoskins@enron.com",
+      "date": "2000-08-21",
+      "subject": "Re:"
+    }
+  ]
+}

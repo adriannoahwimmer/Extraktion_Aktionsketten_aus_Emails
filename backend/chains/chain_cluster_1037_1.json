@@ -1,0 +1,215 @@
+{
+  "id": "cluster_1037_1",
+  "title": "Terminabstimmung fuer Messageboard-Demo",
+  "summary": "Fangming Zhu moechte Brian Hoskins und John Arnold eine Messageboard-Anwendung demonstrieren; die drei stimmen per E-Mail Datum und Uhrzeit fuer den Demo-Termin ab.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Es ist ein klarer mehrstufiger Abstimmungsablauf zwischen mehreren Akteuren erkennbar, aber es handelt sich im Kern nur um Terminfindung ohne weitere Prozessschritte.",
+  "tags": [
+    "terminabstimmung",
+    "demo",
+    "software",
+    "meeting"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Fangming Zhu",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Brian Hoskins",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "John Arnold",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Fangming schlaegt Demo-Termin vor und bittet um Zeitangabe",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Terminanfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Let me know if you have time for the messageboard application demo today."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Brian schlaegt Mittwochnachmittag vor und fragt John nach Verfuegbarkeit",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Terminanfrage"
+      ],
+      "outputs": [
+        "Terminvorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Wednesday afternoon looks good for me if you'd like to do it then.  John, does this work for you?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Fangming bittet um konkrete Uhrzeit fuer Mittwochnachmittag",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Terminvorschlag"
+      ],
+      "outputs": [
+        "Zeitanfrage"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Let me know when will be good for both you and John on next Wednesday afternoon."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Brian legt Zeitfenster 3 bis 3:30pm fest",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Zeitanfrage"
+      ],
+      "outputs": [
+        "Zeitfenster festgelegt"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Let's plan on meeting between 3 and 3:30pm on Wednesday."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "John bittet um spaeteren Termin",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [
+        "Zeitfenster festgelegt"
+      ],
+      "outputs": [
+        "Verschiebungswunsch"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Oops, I hadn't gotten to this one yet.  Can we do it any later?"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Brian schlaegt 4pm vor",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Verschiebungswunsch"
+      ],
+      "outputs": [
+        "neuer Zeitvorschlag"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "4pm?"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "John bestaetigt den Termin um 4pm",
+      "actor": "a3",
+      "recipient": "a2",
+      "inputs": [
+        "neuer Zeitvorschlag"
+      ],
+      "outputs": [
+        "Termin bestaetigt"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "yes"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "john.arnold@enron.com",
+      "to": "brian.hoskins@enron.com",
+      "date": "2000-10-05",
+      "subject": "Re: Demo"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "john.arnold@enron.com",
+      "to": "brian.hoskins@enron.com",
+      "date": "2000-10-05",
+      "subject": "Re: Demo"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "john.arnold@enron.com",
+      "to": "brian.hoskins@enron.com",
+      "date": "2000-10-06",
+      "subject": "Re: Demo"
+    }
+  ]
+}

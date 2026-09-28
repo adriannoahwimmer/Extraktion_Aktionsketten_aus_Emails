@@ -1,0 +1,94 @@
+{
+  "id": "cluster_1328_1",
+  "title": "Aufbau einer Sonoco-Taskforce",
+  "summary": "Craig Brown schlaegt nach einer Konferenz vor, eine Task Force fuer Enron/Sonoco-Chancen zu bilden und Sonoco vor Jahresende ein Angebot zu machen; der Fortschritt wird spaeter in den Meeting-Minutes berichtet.",
+  "prozess_wahrscheinlichkeit": 0.5,
+  "prozess_begruendung": "Es gibt eine klare Initiative (Vorschlag einer Task Force) mit spaeterem Statusbericht, aber die Zwischenschritte der Umsetzung fehlen.",
+  "tags": [
+    "taskforce",
+    "sonoco",
+    "vertrieb",
+    "statusbericht"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Craig Brown",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Sarah-Joy Hunter",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Derryl Cleaveland",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Craig Brown schlaegt vor, eine Task Force fuer Enron/Sonoco-Chancen zu bilden und ein Angebot vor Jahresende vorzubereiten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Konferenzergebnisse"
+      ],
+      "outputs": [
+        "Vorschlag Task Force"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I would like to put together a task force to address the Enron/Sonoco opportunities exclusive of what EES is doing and make the proposal to Sonoco before year end."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Derryl Cleaveland berichtet in den Meeting-Minutes ueber den Fortschritt: Craig und EES sollen Sonoco bei Produkten und Beschaffungsstrategie unterstuetzen",
+      "actor": "a3",
+      "recipient": null,
+      "inputs": [
+        "Vorschlag Task Force"
+      ],
+      "outputs": [
+        "Statusbericht Sonoco"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Sonoco.  Craig and EES to engage Enron on products Sonoco offers to assist on improving their operations.  Also looking for assistance to improve their procurement strategy."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "craig.brown@enron.com",
+      "to": "sarah-joy.hunter@enron.com",
+      "date": "2000-12-06",
+      "subject": "Sonoco Conference Update"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "karina.prizont@enron.com",
+      "to": "john.gillespie@enron.com, derryl.cleaveland@enron.com, robert.johansen@enron.com, calvin.eakins@enron.com, kelly.higgason@enron.com, drew.ries@enron.com, trang.dinh@enron.com, jennifer.medcalf@enron.com, george.wasaff@enron.com",
+      "date": "2000-12-14",
+      "subject": "Meeting Minutes - FINAL - 12/11/00"
+    }
+  ]
+}

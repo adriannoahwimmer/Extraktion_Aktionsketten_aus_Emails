@@ -1,0 +1,18 @@
+{
+  "batch_id": "b20260924_112100_6q0k",
+  "phase": "done",
+  "phasen_text": "Fertig",
+  "fortschritt": {
+    "aktuell": 6,
+    "gesamt": 6
+  },
+  "zahlen": {
+    "mails": 10,
+    "cluster": 2,
+    "rauschen": 4,
+    "ketten": 4
+  },
+  "fehler": null,
+  "gestartet": "2026-09-24T09:21:03Z",
+  "aktualisiert": "2026-09-24T09:28:14Z"
+}

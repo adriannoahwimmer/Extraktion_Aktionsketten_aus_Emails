@@ -1,0 +1,96 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_103127_eyb8
+Lese pst_test_data.pst ...
+PST fertig: 10 Mails gelesen, 0 uebersprungen (defekt).
+Fertig. 10 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_103127_eyb8\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_103127_eyb8
+HDBSCAN-Quelle: sklearn
+Mails vorher: 10  |  nach Deduplizierung: 10
+Embedde 10 neue Mails (Batch-Groesse 32) ...
+  10/10
+
+Reduziere Dimension (4096 -> 5) mit UMAP ...
+Nur 10 Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.
+Clustere mit HDBSCAN ...
+C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\sklearn\cluster\_hdbscan\hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+
+Ergebnis gespeichert in: C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_103127_eyb8\clusters.jsonl
+
+Cluster gefunden: 2
+Rauschen (Label -1): 4 von 10 Mails
+
+Groesste Cluster (bis zu 10), je 3 Beispiel-Betreffs + Chain-Score:
+  Cluster 0 (4 Mails, Chain-Score 0.38): 3/4 Mails sind Antworten (Re:/Fwd:); 1 unterschiedliche Absender
+    - 'WG: Angebot bis Unterschrift'
+    - 'WG: Rückfragen zum Angebot 2026-0318'
+    - 'AW: Rückfragen zum Angebot 2026-0318'
+  Cluster 1 (2 Mails, Chain-Score 0.0): 0/2 Mails sind Antworten (Re:/Fwd:); 1 unterschiedliche Absender
+    - 'Wie es nach der Unterschrift weitergeht'
+    - 'Übergabe Wenzel Anlagenbau'
+
+--- Burnet-Akzeptanztest ---
+  Keine Mails mit den Burnet-Phrasen gefunden.
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_103127_eyb8
+4 Einzelmails (Rauschen) werden zusaetzlich einzeln geprueft.
+6 Gruppen (Cluster + ggf. Einzelmails).
+Verarbeite 6 Gruppen: [0, 1, 'e00000', 'e00002', 'e00003', 'e00006']
+
+=== Cluster 0 (4 Mails, chain_score=0.38) ===
+  - mail_00009 | Thu, 24 Sep 2026 07:08:17 GMT | Betreff: 'Ablauf bei uns im Vertrieb'
+  - mail_00005 | Thu, 24 Sep 2026 07:11:24 GMT | Betreff: 'AW: Rückfragen zum Angebot 2026-0318'
+  - mail_00004 | Thu, 24 Sep 2026 07:11:29 GMT | Betreff: 'WG: Rückfragen zum Angebot 2026-0318'
+  - mail_00001 | Thu, 24 Sep 2026 07:11:40 GMT | Betreff: 'WG: Angebot bis Unterschrift'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+Antwort war kein gueltiges JSON, ueberspringe Cluster:
+ {
+  "cluster": 1,
+  "chains": [
+    {
+      "id": "chain_cluster_1_1",
+      "title": "Vertriebsprozess von Lead-Qualifizierung bis Demo",
+      "summary": "Marco erklaert Jasmin den Ablauf von der Lead-Qualifizierung ueber den Discovery Call bis zur Demo, inklusive Zustaendigkeiten von Kevin und Bene.",
+      "prozess_wahrscheinlichkeit": 0.9,
+      "prozess_begruendung": "Die Mail beschreibt einen klaren mehrstufigen Ablauf mit konkreten Fristen, Schwellenwerten und Zustaendigkeiten je Rolle.",
+      "tags": ["vertrieb", "lead-management", "qualifizierung", "demo", "onboarding"],
+      "actors": [
+        { "id": "a1", "name": "Marco Reinhardt", "type": "person" },
+        { "id": "a2", "name": "Jasmin Oezdemir", "type": "person" },
+        { "id": "a3", "name": "Kevin", "type": "person" },
+        { "id": "a4", "name": "Bene", "type": "person" },
+        { "id": "a5", "name": "Betreuender Account Executive", "type": "person" }
+      ],
+      "nodes": [
+        { "id": "n1", "type": "task", "action": "Jasmin nimmt Erstkontakt zum Lead innerhalb von 24 Stunden auf", "actor": "a2", "inputs": ["Neuer Lead in HubSpot"], "outputs": ["Erstkontakt dokumentiert"], "evidence": [{ "source": "src_1", "span": "Du hast 24 Stunden für den Erstkontakt." }] },
+        { "id": "n2", "type": "gateway", "gateway_type": "xor", "label": "Wie ist der Lead nach Mitarbeiterzahl und ARR zu qualifizieren?" },
+        { "id": "n3", "type": "task", "action": "Kevin behaelt kleine Leads im Inside Sales", "actor": "a3", "inputs": ["Lead unter 50 MA oder unter 12k ARR"], "outputs": ["Lead bleibt bei Kevin"], "evidence": [{ "source": "src_1", "span": "bleibt der Lead bei Kevin im Inside Sales, da fasst du gar nicht an" }] },
+        { "id": "n4", "type": "task", "action": "Jasmin uebernimmt qualifizierte Leads ab 50 Mitarbeitern und 12k ARR", "actor": "a2", "inputs": ["Lead ab 50 MA und 12k ARR"], "outputs": ["Lead bei Jasmin"], "evidence": [{ "source": "src_1", "span": "Ab 50 Mitarbeitern und a
+=== Cluster 1 (2 Mails, chain_score=0.0) ===
+  - mail_00008 | Thu, 24 Sep 2026 07:11:18 GMT | Betreff: 'Übergabe Wenzel Anlagenbau'
+  - mail_00007 | Thu, 24 Sep 2026 07:11:21 GMT | Betreff: 'Wie es nach der Unterschrift weitergeht'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  2 Kette(n) erkannt.
+  -> chain_b20260924_103127_eyb8_cluster_1_1.json  (5 Knoten, prozess_wahrscheinlichkeit=0.75)
+  -> chain_b20260924_103127_eyb8_cluster_1_2.json  (10 Knoten, prozess_wahrscheinlichkeit=0.85)
+
+=== Cluster e00000 (1 Mails, chain_score=None) ===
+Traceback (most recent call last):
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py", line 629, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py", line 623, in main
+    verarbeite_gruppe(cid, sortiere_chronologisch(gruppen[cid]), cluster_scores)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py", line 544, in verarbeite_gruppe
+    print(f"  - {m['id']} | {m.get('date','')} | Betreff: {m.get('subject','')!r}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 72-73: character maps to <undefined>
+
+FEHLER: extract_chains.py endete mit Code 1 (siehe pipeline.log)

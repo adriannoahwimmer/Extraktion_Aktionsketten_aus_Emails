@@ -1,0 +1,129 @@
+{
+  "id": "cluster_122_1",
+  "title": "Bearbeitung unterzeichneter Master Power Purchase and Sale Agreements",
+  "summary": "Rhonda Denton bestaetigt den Eingang unterzeichneter EEI Master Power Purchase and Sale Agreements von Vertragspartnern und leitet Kopien an die Rechtsabteilung und die Kreditabteilung weiter.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Die Mails beschreiben wiederholt denselben zweistufigen Ablauf (Eingangsbestaetigung, dann Verteilung an Legal und Credit), auch wenn nur eine Akteurin aktiv beschrieben wird.",
+  "tags": [
+    "vertragsmanagement",
+    "eei-agreement",
+    "legal",
+    "credit",
+    "enron"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Rhonda Denton",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Rechtsabteilung (Legal)",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Kreditabteilung (Credit)",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Eingang des unterzeichneten EEI Master Power Purchase and Sale Agreement bestaetigen",
+      "actor": "a1",
+      "inputs": [
+        "unterzeichnetes EEI Master Power Purchase and Sale Agreement"
+      ],
+      "outputs": [
+        "Bestaetigungs-E-Mail an interne Verteilerliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "We have received the executed Master Power Purchase and Sale Agreement (EEI) dated 1/10/2001 from the referenced CP."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "gateway",
+      "gateway_type": "and",
+      "label": "Kopien an beide Abteilungen verteilen?"
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Kopie des Agreements an die Rechtsabteilung weiterleiten",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "unterzeichnetes Agreement"
+      ],
+      "outputs": [
+        "Kopie bei Legal"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Copies will be given to legal and credit."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Kopie des Agreements an die Kreditabteilung weiterleiten",
+      "actor": "a1",
+      "recipient": "a3",
+      "inputs": [
+        "unterzeichnetes Agreement"
+      ],
+      "outputs": [
+        "Kopie bei Credit"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Copies will be distributed to Legal and Credit."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3",
+      "condition": "Verteilung an Legal"
+    },
+    {
+      "from": "n2",
+      "to": "n4",
+      "condition": "Verteilung an Credit"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "rhonda.denton@enron.com",
+      "to": "diverse Enron-Mitarbeiter",
+      "date": "2001-01-23",
+      "subject": "Wabash Valley Power Association, Inc."
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "rhonda.denton@enron.com",
+      "to": "diverse Enron-Mitarbeiter",
+      "date": "2001-01-29",
+      "subject": "Public Utility District No. 1 of Snohomish County"
+    }
+  ]
+}

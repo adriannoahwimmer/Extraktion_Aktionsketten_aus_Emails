@@ -1,0 +1,202 @@
+{
+  "id": "cluster_1323_1",
+  "title": "Bewertung von Postgebaeude-Investitionen",
+  "summary": "Phillip Allen prueft mehrere Postgebaeude-Investitionsangebote von Jim Wills, fordert detaillierte Spreadsheets an, lehnt ein Angebot ab und erhaelt daraufhin ein neues Angebot.",
+  "prozess_wahrscheinlichkeit": 0.75,
+  "prozess_begruendung": "Die Mails zeigen einen klaren mehrstufigen Bewertungsprozess mit wiederholten Anfragen, Analyse, Ablehnung und Folgeangebot zwischen zwei klar definierten Akteuren.",
+  "tags": [
+    "immobilien",
+    "investitionsbewertung",
+    "post office",
+    "spreadsheet",
+    "verhandlung"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Phillip Allen",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Jim Wills",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Phillip berechnet die IRR fuer zwei Postgebaeude und fragt nach der ueblichen Bewertungsmethode",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Spreadsheet Port Aransas/Roma"
+      ],
+      "outputs": [
+        "IRR-Berechnung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I tried to calculate the IRR on the port Aransas and Roma post offices."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip fordert ein Spreadsheet an, das die Attraktivitaet der Killeen-Investition belegt",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage nach Nachweis-Spreadsheet"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Can you prepare a spreadsheet that would show why the post office is such a good investment?"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Jim liefert das angeforderte Spreadsheet mit Renditeberechnung",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage von Phillip"
+      ],
+      "outputs": [
+        "Spreadsheet mit Rendite"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Your spreadsheet shows the same type of return I was calculating."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Phillip prueft das Spreadsheet, findet die Annahmen unrealistisch und lehnt den Kauf ab",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Spreadsheet von Jim"
+      ],
+      "outputs": [
+        "Ablehnung des Investments"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "I would not be comfortable purchasing a post office at this time."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Jim verteidigt seine Annahmen zu Versicherung, Reparaturen und Optionsverlaengerungen",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Ablehnung von Phillip"
+      ],
+      "outputs": [
+        "Gegenargumente"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "the insurance/repairs numbers are actually overstated; they are based on calculations from USPSL owners and agents"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Jim bietet Phillip ein neues Postgebaeude in McAllen zur Pruefung an",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [],
+      "outputs": [
+        "Neues Angebot McAllen"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "I have added another post office for your consideration."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jwills3@swbell.net",
+      "date": "2001-11-07",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jwills3@swbell.net",
+      "date": "2001-11-12",
+      "subject": "RE: new PO available"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jwills3@swbell.net",
+      "date": "2001-11-14",
+      "subject": "RE: new PO available"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jwills3@swbell.net",
+      "date": "2001-11-26",
+      "subject": "RE: PO spreadsheets"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "jwills3@swbell.net",
+      "to": "k..allen@enron.com",
+      "date": "2001-11-27",
+      "subject": "Re: PO spreadsheets"
+    }
+  ]
+}

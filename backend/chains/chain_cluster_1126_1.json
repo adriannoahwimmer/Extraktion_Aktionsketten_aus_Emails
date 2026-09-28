@@ -1,0 +1,138 @@
+{
+  "id": "cluster_1126_1",
+  "title": "Leadership Development Pilotprogramm Anmeldung",
+  "summary": "Susan Runkel organisiert einen Leadership-Development-Pilot mit Wilson Learning, bittet Fuehrungskraefte um Nominierung von Managern, laesst diese sich bei Gracie Presas anmelden und informiert anschliessend ueber den Anmeldestatus.",
+  "prozess_wahrscheinlichkeit": 0.8,
+  "prozess_begruendung": "Die Mails beschreiben einen klaren mehrstufigen Ablauf mit Zustaendigkeiten (Einladung, Registrierung, Rueckmeldung).",
+  "tags": [
+    "training",
+    "leadership development",
+    "registrierung",
+    "pilotprogramm"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Susan Runkel",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Business Unit Leiter (Sheila Glover, Brent Price, Leslie Reeves, Stephen Schwarz)",
+      "type": "organisation"
+    },
+    {
+      "id": "a3",
+      "name": "Gracie Presas",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Susan Runkel bittet die Leiter, 1-2 Manager fuer den Pilot zu benennen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Managernominierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "We ask that you invite 1-2 managers from your group to participate and evaluate the modules."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Nominierte Manager melden sich bei Gracie Presas zur Registrierung an",
+      "actor": "a2",
+      "recipient": "a3",
+      "inputs": [
+        "Managernominierung"
+      ],
+      "outputs": [
+        "Registrierung"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Please call Gracie Presas to register by February 1."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Susan Runkel versendet eine Ankuendigung und oeffnet die Anmeldung fuer weitere Mitarbeiter",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Registrierung"
+      ],
+      "outputs": [
+        "Erweiterte Anmeldung"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "We sent out an annoucement last night \"water dropping\" the classes and inviting others to participate."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Susan Runkel informiert ueber den Anmeldestatus und bietet an, Nachzuegler einzuplanen",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Erweiterte Anmeldung"
+      ],
+      "outputs": [
+        "Aktualisierte Teilnehmerliste"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "If you have a couple of folks you want to fit in and did not get time to get those to us, please give me a call or send me an e-mail and I will get them in."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "susan.runkel@enron.com",
+      "to": "sheila.glover@enron.com, brent.price@enron.com, leslie.reeves@enron.com, stephen.schwarz@enron.com",
+      "date": "2000-01-18",
+      "subject": "Leadership Development Progress"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "susan.runkel@enron.com",
+      "to": "sheila.glover@enron.com, brent.price@enron.com, leslie.reeves@enron.com, stephen.schwarz@enron.com",
+      "date": "2000-01-27",
+      "subject": "Leadership Development Progress"
+    }
+  ]
+}

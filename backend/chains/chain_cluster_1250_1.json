@@ -1,0 +1,153 @@
+{
+  "id": "cluster_1250_1",
+  "title": "Dokumentenaustausch fuer Verkauf der Stage-Immobilie",
+  "summary": "Jeff Smith und Phillip Allen tauschen wiederholt Unterlagen (Mietuebersicht, Betriebsabrechnung, Rent Roll, Flaechenangaben) fuer die Vermarktung und den Verkauf der Stage-Immobilie aus.",
+  "prozess_wahrscheinlichkeit": 0.6,
+  "prozess_begruendung": "Mehrere aufeinanderfolgende Dokumentenanfragen und -lieferungen zwischen zwei klar identifizierten Akteuren zeigen einen wiederkehrenden Ablauf, auch wenn Zustaendigkeiten nicht formal beschrieben sind.",
+  "tags": [
+    "immobilien",
+    "dokumentenaustausch",
+    "verkauf",
+    "rent roll"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Jeff Smith",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Phillip Allen",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Jeff Smith fordert die Jahresabrechnung 1999 und einen Rent Roll fuer das Marketingpaket an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "Anfrage nach Statement und Rent Roll"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "I also need the 1999 statement and a rent roll.  Please send ASAP."
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Phillip Allen sendet ein neues NOI-File und eine Betriebsabrechnung fuer 1999",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "Anfrage nach Statement und Rent Roll"
+      ],
+      "outputs": [
+        "NOI-Datei",
+        "Betriebsabrechnung 1999"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Hear is a new NOI file.  I have added an operating statement for 1999"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Phillip Allen sendet einen aktuellen Rent Roll und bittet um Zusendung der Closing Statements fuer Leander an seine Privatadresse",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "NOI-Datei",
+        "Betriebsabrechnung 1999"
+      ],
+      "outputs": [
+        "aktueller Rent Roll",
+        "Anfrage nach Closing Statements"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Here is a recent rentroll.  ... Please send them to my house (8855 Merlin Ct, Houston, TX 77055)."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Phillip Allen fordert erneut den Rent Roll per Fax sowie Unit Mix und Flaechenangaben an",
+      "actor": "a2",
+      "recipient": "a1",
+      "inputs": [
+        "aktueller Rent Roll"
+      ],
+      "outputs": [
+        "erneute Anfrage nach Rent Roll, Unit Mix, Flaechenangaben"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Can you fax me the rent roll?  713-646-2391.  Also please send the unit mix and square footages again."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4",
+      "condition": "erneute Anfrage nach denselben Unterlagen"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "jsmith@austintx.com",
+      "to": "phillip.k.allen@enron.com",
+      "date": "2000-12-12",
+      "subject": "RE: stage coach"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "jsmith@austintx.com",
+      "date": "2000-12-18",
+      "subject": ""
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "phillip.allen@enron.com",
+      "to": "jsmith@austintx.com",
+      "date": "2001-01-18",
+      "subject": ""
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "k..allen@enron.com",
+      "to": "jsmith@austintx.com",
+      "date": "2001-12-17",
+      "subject": ""
+    }
+  ]
+}

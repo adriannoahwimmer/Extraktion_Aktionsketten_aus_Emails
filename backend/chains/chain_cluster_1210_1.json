@@ -1,0 +1,117 @@
+{
+  "id": "cluster_1210_1",
+  "title": "Interview-Organisation fuer Mark Findsen",
+  "summary": "John Arnold bittet einen Kollegen um einen Interviewrundgang fuer einen Bewerber (Mark Findsen), woraufhin ein weiterer Mitarbeiter den Kontakt aufnimmt, den Lebenslauf erhaelt und den geplanten Interviewablauf bestaetigen laesst.",
+  "prozess_wahrscheinlichkeit": 0.55,
+  "prozess_begruendung": "Es sind mehrere aufeinander bezogene Handlungsschritte (Bitte, Kontaktaufnahme, Ruecksprache zur Interviewstruktur) erkennbar, auch wenn die Zustaendigkeiten nicht vollstaendig eindeutig dokumentiert sind.",
+  "tags": [
+    "recruiting",
+    "interview",
+    "bewerber",
+    "trading"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "John Arnold",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Andy Shankman",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Johnny Palmer",
+      "type": "person"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "John Arnold bittet Andy Shankman, einen Interviewrundgang fuer Mark Findsen zu organisieren",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [
+        "Hinweis auf Mark Findsen als Bewerber"
+      ],
+      "outputs": [
+        "Bitte um Organisation eines Interviewrundgangs"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "He asked if he could get a round of interviews at Enron.  Could you set up a round for him?"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Johnny Palmer spricht mit Mark Findsen und erhaelt dessen Lebenslauf",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Kontaktaufnahme zu Mark Findsen"
+      ],
+      "outputs": [
+        "Lebenslauf von Mark Findsen"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "I've spoken with Mark and I have received his resume."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Johnny Palmer laesst sich von John Arnold den geplanten Interviewablauf (Crude and Products Originators sowie ein Trader) bestaetigen",
+      "actor": "a3",
+      "recipient": "a1",
+      "inputs": [
+        "Lebenslauf von Mark Findsen"
+      ],
+      "outputs": [
+        "Bestaetigte Interviewstruktur"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Before I bring him in I just wanted to confirm that he is to interview with Crude and Products originators as well as one trader."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "to": "n3"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "john.arnold@enron.com",
+      "to": "a..shankman@enron.com",
+      "date": "2001-10-08",
+      "subject": ""
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "johnny.palmer@enron.com",
+      "to": "john.arnold@enron.com",
+      "date": "2001-10-16",
+      "subject": "Marc Findsen"
+    }
+  ]
+}

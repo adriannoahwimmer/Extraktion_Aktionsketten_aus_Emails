@@ -1,0 +1,112 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_112100_6q0k
+Lese pst_test_data.pst ...
+PST fertig: 10 Mails gelesen, 0 uebersprungen (defekt).
+Fertig. 10 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_112100_6q0k\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_112100_6q0k
+HDBSCAN-Quelle: sklearn
+Mails vorher: 10  |  nach Deduplizierung: 10
+Embedde 10 neue Mails (Batch-Groesse 32) ...
+  10/10
+
+Reduziere Dimension (4096 -> 5) mit UMAP ...
+Nur 10 Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.
+Clustere mit HDBSCAN ...
+C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\sklearn\cluster\_hdbscan\hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+
+Ergebnis gespeichert in: C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_112100_6q0k\clusters.jsonl
+
+Cluster gefunden: 2
+Rauschen (Label -1): 4 von 10 Mails
+
+Groesste Cluster (bis zu 10), je 3 Beispiel-Betreffs + Chain-Score:
+  Cluster 0 (4 Mails, Chain-Score 0.38): 3/4 Mails sind Antworten (Re:/Fwd:); 1 unterschiedliche Absender
+    - 'WG: Angebot bis Unterschrift'
+    - 'WG: Rückfragen zum Angebot 2026-0318'
+    - 'AW: Rückfragen zum Angebot 2026-0318'
+  Cluster 1 (2 Mails, Chain-Score 0.0): 0/2 Mails sind Antworten (Re:/Fwd:); 1 unterschiedliche Absender
+    - 'Wie es nach der Unterschrift weitergeht'
+    - 'Übergabe Wenzel Anlagenbau'
+
+--- Burnet-Akzeptanztest ---
+  Keine Mails mit den Burnet-Phrasen gefunden.
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260924_112100_6q0k
+4 Einzelmails (Rauschen) werden zusaetzlich einzeln geprueft.
+6 Gruppen (Cluster + ggf. Einzelmails).
+Verarbeite 6 Gruppen: [0, 1, 'e00000', 'e00002', 'e00003', 'e00006']
+
+=== Cluster 0 (4 Mails, chain_score=0.38) ===
+  - mail_00009 | Thu, 24 Sep 2026 07:08:17 GMT | Betreff: 'Ablauf bei uns im Vertrieb'
+  - mail_00005 | Thu, 24 Sep 2026 07:11:24 GMT | Betreff: 'AW: Rückfragen zum Angebot 2026-0318'
+  - mail_00004 | Thu, 24 Sep 2026 07:11:29 GMT | Betreff: 'WG: Rückfragen zum Angebot 2026-0318'
+  - mail_00001 | Thu, 24 Sep 2026 07:11:40 GMT | Betreff: 'WG: Angebot bis Unterschrift'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+Antwort war kein gueltiges JSON, ueberspringe Cluster:
+ {
+  "cluster": 1,
+  "chains": [
+    {
+      "id": "chain_cluster_1_1",
+      "title": "Lead-Qualifizierung und Demo-Prozess im Vertrieb",
+      "summary": "Marco erklaert Jasmin den Ablauf von der automatischen Lead-Erfassung ueber die Qualifizierung nach Mitarbeiterzahl und ARR bis zur Discovery-Call-Dokumentation und der Entscheidung, ob die Demo selbst oder mit Solution Engineering (Bene) durchgefuehrt wird.",
+      "prozess_wahrscheinlichkeit": 0.85,
+      "prozess_begruendung": "Die Mail beschreibt in einer einzigen Nachricht einen vollstaendigen, mehrstufigen Ablauf mit klaren Zustaendigkeiten und Entscheidungspunkten.",
+      "tags": ["vertrieb", "lead-qualifizierung", "demo", "crm", "onboarding"],
+      "actors": [
+        { "id": "a1", "name": "Jasmin Oezdemir", "type": "person" },
+        { "id": "a2", "name": "Kevin (Inside Sales)", "type": "person" },
+        { "id": "a3", "name": "Bene (Solution Engineering)", "type": "person" }
+      ],
+      "nodes": [
+        { "id": "n1", "type": "task", "action": "Jasmin qualifiziert eingehenden Lead anhand Mitarbeiterzahl und erwartetem ARR", "actor": "a1",
+          "inputs": ["Lead in HubSpot"], "outputs": ["Qualifizierungsentscheidung"],
+          "evidence": [ { "source": "src_1", "span": "Qualifizierung läuft über zwei Kriterien, Mitarbeiterzahl und erwarteter ARR." } ] },
+        { "id": "n2", "type": "gateway", "gateway_type": "xor", "label": "Wie wird der Lead qualifiziert?" },
+        { "id": "n3", "type": "task", "action": "Kevin uebernimmt den Lead im Inside Sales", "actor": "a2",
+          "inputs": ["Lead unter Schwellenwert"], "outputs": ["Lead bei Kevin"],
+          "evidence": [ { "source": "src_1", "span": "Unter 50 Mitarbeitern oder unter 12k ARR bleibt der Lead bei Kevin im Inside Sales, da fasst du gar nicht an." } ] },
+        { "id": "n4", "type": "task", "action": "Jasmin uebernimmt den Lead als Account Executive", "actor": "a1",
+          "inputs": ["Lead ueber Schwellenwert oder Bestandsku
+=== Cluster 1 (2 Mails, chain_score=0.0) ===
+  - mail_00008 | Thu, 24 Sep 2026 07:11:18 GMT | Betreff: 'Übergabe Wenzel Anlagenbau'
+  - mail_00007 | Thu, 24 Sep 2026 07:11:21 GMT | Betreff: 'Wie es nach der Unterschrift weitergeht'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  2 Kette(n) erkannt.
+  -> chain_b20260924_112100_6q0k_cluster_1_1.json  (3 Knoten, prozess_wahrscheinlichkeit=0.45)
+  -> chain_b20260924_112100_6q0k_cluster_1_2.json  (10 Knoten, prozess_wahrscheinlichkeit=0.9)
+
+=== Cluster e00000 (1 Mails, chain_score=None) ===
+  - mail_00000 | Thu, 24 Sep 2026 07:11:43 GMT | Betreff: 'WG: WG: Fwd: 😂😂 der muss von uns sein'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00002 (1 Mails, chain_score=None) ===
+  - mail_00002 | Thu, 24 Sep 2026 07:11:38 GMT | Betreff: 'AW: AW: Nordform — Demo am 19.'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  1 Kette(n) erkannt.
+  -> chain_b20260924_112100_6q0k_cluster_e00002_1.json  (4 Knoten, prozess_wahrscheinlichkeit=0.65)
+
+=== Cluster e00003 (1 Mails, chain_score=None) ===
+  - mail_00003 | Thu, 24 Sep 2026 07:11:31 GMT | Betreff: 'Sommerfest — Terminumfrage'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  1 Kette(n) erkannt.
+  -> chain_b20260924_112100_6q0k_cluster_e00003_1.json  (4 Knoten, prozess_wahrscheinlichkeit=0.6)
+
+=== Cluster e00006 (1 Mails, chain_score=None) ===
+  - mail_00006 | Thu, 24 Sep 2026 07:11:26 GMT | Betreff: '[HubSpot] Ihre wöchentliche Zusammenfassung'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+
+Fertig: 4 Ketten.

@@ -1,0 +1,55 @@
+{
+  "id": "chain_burnet_001",
+  "title": "Burnet-Grundstueck verkaufsbereit machen",
+  "summary": "Vor dem Verkauf muss Phillip den Bebauungsplan von Jeff beschaffen und die schriftliche Freigabe von Brenda einholen (die Bedenken zur Parzellierung hat).",
+  "tags": ["real-estate", "approval"],
+  "actors": [
+    { "id": "a1", "name": "Phillip Allen",    "type": "person" },
+    { "id": "a2", "name": "Jeff",             "type": "person" },
+    { "id": "a3", "name": "Brenda Key Stone", "type": "person" }
+  ],
+  "nodes": [
+    {
+      "id": "n1", "type": "task",
+      "action": "Bebauungsplan fuer Burnet anfordern",
+      "actor": "a1", "recipient": "a2", "outputs": ["site plan"],
+      "evidence": [{ "source": "src_11", "span": "I need to see the site plan for Burnet" }]
+    },
+    {
+      "id": "n2", "type": "task",
+      "action": "Details / Amortisationsplan an Brenda senden",
+      "actor": "a1", "recipient": "a3", "outputs": ["amortization schedule"],
+      "evidence": [{ "source": "src_12", "span": "I will find that amortization schedule and send it soon" }]
+    },
+    {
+      "id": "n3", "type": "task",
+      "action": "Schriftliche Freigabe von Brenda einholen",
+      "actor": "a1", "recipient": "a3",
+      "evidence": [{ "source": "src_11", "span": "I must get written approval from Brenda Key Stone before I can sell" }]
+    },
+    {
+      "id": "n4", "type": "gateway", "gateway_type": "xor",
+      "label": "Freigabe erteilt?"
+    },
+    {
+      "id": "n5", "type": "task",
+      "action": "Grundstueck verkaufen", "actor": "a1"
+    }
+  ],
+  "flows": [
+    { "from": "n1", "to": "n3" },
+    { "from": "n2", "to": "n3" },
+    { "from": "n3", "to": "n4" },
+    { "from": "n4", "to": "n5", "condition": "Freigabe erteilt" }
+  ],
+  "sources": [
+    { "id": "src_11", "type": "email", "from": "phillip.allen@enron.com", "to": "Jeff",   "date": "2000-09-18", "subject": "Re: burnet" },
+    { "id": "src_12", "type": "email", "from": "phillip.allen@enron.com", "to": "Brenda", "date": "2000-09-12", "subject": "Re: Sept 1 Payment" },
+    { "id": "src_14", "type": "email", "from": "phillip.allen@enron.com", "to": "Jeff",   "date": "2000-09-11", "subject": "Re: Chelsea Villas" }
+  ],
+  "metadata": {
+    "status": "gold",
+    "annotated_by": "human",
+    "note": "Erste manuelle Gold-Annotation. Prozess ueber 3 Mails mit unterschiedlichen Betreffs verteilt."
+  }
+}

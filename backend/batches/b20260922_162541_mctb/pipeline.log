@@ -1,0 +1,112 @@
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\parse_mailbox.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_162541_mctb
+Lese backup_junk.pst ...
+PST fertig: 12 Mails gelesen, 0 uebersprungen (defekt).
+Fertig. 12 Mails -> C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_162541_mctb\mails.jsonl
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\cluster_mails.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_162541_mctb
+HDBSCAN-Quelle: sklearn
+Mails vorher: 12  |  nach Deduplizierung: 12
+Embedde 12 neue Mails (Batch-Groesse 32) ...
+  12/12
+
+Reduziere Dimension (4096 -> 5) mit UMAP ...
+Nur 12 Mails - UMAP uebersprungen, clustere auf Roh-Embeddings.
+Clustere mit HDBSCAN ...
+C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Lib\site-packages\sklearn\cluster\_hdbscan\hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+
+Ergebnis gespeichert in: C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_162541_mctb\clusters.jsonl
+
+Cluster gefunden: 0
+Rauschen (Label -1): 12 von 12 Mails
+
+Groesste Cluster (bis zu 10), je 3 Beispiel-Betreffs + Chain-Score:
+
+--- Burnet-Akzeptanztest ---
+  Keine Mails mit den Burnet-Phrasen gefunden.
+
+$ C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\.venv\Scripts\python.exe -u C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\extract_chains.py --batch-dir C:\Users\Wimme\OneDrive\Dokumente\KIT\Practical Seminar\backend\batches\b20260922_162541_mctb
+11 Einzelmails (Rauschen) werden zusaetzlich einzeln geprueft.
+11 Gruppen (Cluster + ggf. Einzelmails).
+Verarbeite 11 Gruppen: ['e00000', 'e00001', 'e00003', 'e00004', 'e00005', 'e00006', 'e00007', 'e00008', 'e00009', 'e00010', 'e00011']
+
+=== Cluster e00000 (1 Mails, chain_score=None) ===
+  - mail_00000 | Fri, 11 Sep 2026 20:42:49 GMT | Betreff: "[Important notice] Spot Pods are gone. Here's what to use instead."
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00001 (1 Mails, chain_score=None) ===
+  - mail_00001 | Mon, 07 Sep 2026 16:14:27 GMT | Betreff: 'Live in Ludwigshafen am Rhein und Umgebung: Entdecke Top-Events in deiner Nähe!'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00003 (1 Mails, chain_score=None) ===
+  - mail_00003 | Fri, 11 Sep 2026 06:14:36 GMT | Betreff: 'Trumpf setzt auf Robotik, TSMC meldet Rekordumsatz & ZF setzt auf Chinas E-Lkw-Boom'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00004 (1 Mails, chain_score=None) ===
+  - mail_00004 | Thu, 10 Sep 2026 06:28:11 GMT | Betreff: 'Satelliten-Megafusion, 5.000 Raketen aus Sachsen & Stahlproduktion sinkt'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00005 (1 Mails, chain_score=None) ===
+  - mail_00005 | Wed, 09 Sep 2026 05:39:57 GMT | Betreff: 'MAN schmiedet Rüstungsallianz, Forschung wandert ab & GE kauft für 11,75 Milliarden'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00006 (1 Mails, chain_score=None) ===
+  - mail_00006 | Tue, 08 Sep 2026 05:13:40 GMT | Betreff: 'Autoindustrie bricht ein, Audi-Werk gewinnt Zeit & Isar Aerospace erreicht Orbit'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00007 (1 Mails, chain_score=None) ===
+  - mail_00007 | Mon, 07 Sep 2026 05:52:29 GMT | Betreff: 'Rheinmetall senkt Prognose, Anthropic greift Industrie an & Roboterproduktion explodiert'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00008 (1 Mails, chain_score=None) ===
+  - mail_00008 | Fri, 04 Sep 2026 05:38:21 GMT | Betreff: 'Spähversuche treffen Industrie, Maschinenbau lebt vom Ausland & Fraunhofer sieht Robotik-Wende'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00009 (1 Mails, chain_score=None) ===
+  - mail_00009 | Thu, 03 Sep 2026 05:30:49 GMT | Betreff: 'Siemens-Spaltung sorgt für Streit, Trumpf kühlt KI-Chips & Marine testet neue Rakete'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00010 (1 Mails, chain_score=None) ===
+  - mail_00010 | Wed, 02 Sep 2026 05:13:54 GMT | Betreff: 'Rheinmetall winken 45 Milliarden, SLB kauft Kelvion & WFT macht dicht'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+=== Cluster e00011 (1 Mails, chain_score=None) ===
+  - mail_00011 | Tue, 01 Sep 2026 05:13:42 GMT | Betreff: 'Rheinmetall rüstet Kassel auf, H&K wächst rasant & Quantum profitiert von CIA-Netzwerk'
+Schicke an google.claude-sonnet-5 (ueber https://ki-toolbox.scc.kit.edu/api/v1) ...
+  (Modell lehnt 'temperature' ab, versuche es ohne)
+  0 Kette(n) erkannt.
+  -> keine belegte Kette, nichts gespeichert.
+
+
+Fertig: 0 Ketten.

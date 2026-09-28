@@ -1,0 +1,266 @@
+{
+  "id": "cluster_111_1",
+  "title": "ERMS Diskontierungsproblem: Analyse, Korrektur und monatliches Reporting",
+  "summary": "Sheila Glover fordert einen Vergleichsbericht zur fehlerhaften Diskontierungsmethode im ERMS-System an, woraufhin ein Umsetzungstreffen angesetzt wird und Anita Luong ueber Monate hinweg Analysen verteilt, den Fehler dokumentiert und schliesslich die korrigierte Methode einfuehrt.",
+  "prozess_wahrscheinlichkeit": 0.65,
+  "prozess_begruendung": "Der Ablauf zeigt klare Zustaendigkeiten (Anfrage, Umsetzungstreffen, monatliche Verteilung, Fehlerkorrektur) ueber mehrere Monate, auch wenn einzelne Verbindungen zwischen den Mails nur implizit sind.",
+  "tags": [
+    "ERMS",
+    "Diskontierung",
+    "Reporting",
+    "Datenkorrektur",
+    "Finanzcontrolling"
+  ],
+  "actors": [
+    {
+      "id": "a1",
+      "name": "Sheila Glover",
+      "type": "person"
+    },
+    {
+      "id": "a2",
+      "name": "Daniel Falcone",
+      "type": "person"
+    },
+    {
+      "id": "a3",
+      "name": "Shona Wilson",
+      "type": "person"
+    },
+    {
+      "id": "a4",
+      "name": "Jeffrey Gossett",
+      "type": "person"
+    },
+    {
+      "id": "a5",
+      "name": "Anita Luong",
+      "type": "person"
+    },
+    {
+      "id": "a6",
+      "name": "ERMS Empfaengergruppe",
+      "type": "organisation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "task",
+      "action": "Fordert Bericht zum Vergleich des Barwerts (PV) mit aktueller und korrekter Diskontierungsmethode an",
+      "actor": "a1",
+      "recipient": "a2",
+      "inputs": [],
+      "outputs": [
+        "PV-Vergleichsbericht"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "Can we get a report which details by group: The PV of the book with the current system vs the PV of the book using the correct discounting methodology?"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "task",
+      "action": "Verteilt das ERMS Discounting Reserve Memo an die betroffene Gruppe",
+      "actor": "a2",
+      "recipient": "a6",
+      "inputs": [
+        "PV-Vergleichsbericht"
+      ],
+      "outputs": [
+        "ERMS Discounting Reserve Memo"
+      ],
+      "evidence": [
+        {
+          "source": "src_1",
+          "span": "1/29/2001 ERMS Discounting Reserve Memo"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "task",
+      "action": "Schlaegt Treffen zur Erarbeitung eines Umsetzungsansatzes fuer die Diskontierungsloesung vor",
+      "actor": "a3",
+      "recipient": "a4",
+      "inputs": [
+        "ERMS Discounting Reserve Memo"
+      ],
+      "outputs": [
+        "Umsetzungstermin"
+      ],
+      "evidence": [
+        {
+          "source": "src_2",
+          "span": "Let's meet tomorrow to go over an implementation approach."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "task",
+      "action": "Verteilt die monatliche ERMS Discounting Analyse fuer April 2001",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [],
+      "outputs": [
+        "ERMS Discounting Analyse April 2001"
+      ],
+      "evidence": [
+        {
+          "source": "src_3",
+          "span": "Attached is the ERMS Discounting Analysis as of Apri 26, 2001."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "task",
+      "action": "Verteilt die monatliche ERMS Discounting Analyse fuer Mai 2001",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [],
+      "outputs": [
+        "ERMS Discounting Analyse Mai 2001"
+      ],
+      "evidence": [
+        {
+          "source": "src_4",
+          "span": "Attached is the ERMS Discounting Analysis as of May 25, 2001."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "task",
+      "action": "Meldet fehlerhafte Diskontierung der Finanzkontrakte und kuendigt Korrekturprozess an",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [
+        "ERMS Discounting Analyse Mai 2001"
+      ],
+      "outputs": [
+        "Ankuendigung Korrekturprozess"
+      ],
+      "evidence": [
+        {
+          "source": "src_5",
+          "span": "We are currently working on a process to correct the model by next month."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "task",
+      "action": "Verteilt Memo mit neuer, korrigierter Diskontierungsmethode fuer September 2001",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [
+        "Ankuendigung Korrekturprozess"
+      ],
+      "outputs": [
+        "Korrigiertes Diskontierungsmodell"
+      ],
+      "evidence": [
+        {
+          "source": "src_6",
+          "span": "Please note that the 9/26/2001 balance is based on the new method of calculating the discounting amount."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "task",
+      "action": "Verteilt das ERMS Discounting Memo fuer Oktober 2001",
+      "actor": "a5",
+      "recipient": "a6",
+      "inputs": [
+        "Korrigiertes Diskontierungsmodell"
+      ],
+      "outputs": [
+        "ERMS Discounting Memo Oktober 2001"
+      ],
+      "evidence": [
+        {
+          "source": "src_7",
+          "span": "Attached is the ERMS Discounting Memo for October 2001."
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n5",
+      "to": "n6"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_1",
+      "type": "email",
+      "from": "sheila.glover@enron.com / daniel.falcone@enron.com",
+      "to": "daniel.falcone@enron.com / group",
+      "date": "2001-01-31",
+      "subject": "Re: 1/29/2001 ERMS Discounting Reserve Memo"
+    },
+    {
+      "id": "src_2",
+      "type": "email",
+      "from": "shona.wilson@enron.com",
+      "to": "jeffrey.gossett@enron.com",
+      "date": "2001-02-05",
+      "subject": "ERMS DISCOUNTING Solution"
+    },
+    {
+      "id": "src_3",
+      "type": "email",
+      "from": "anita.luong@enron.com",
+      "to": "group",
+      "date": "2001-04-30",
+      "subject": "ERMS Discounting Memo as of 4-26-2001"
+    },
+    {
+      "id": "src_4",
+      "type": "email",
+      "from": "anita.luong@enron.com",
+      "to": "group",
+      "date": "2001-06-01",
+      "subject": "ERMS Discount Memo as of May 25, 2001"
+    },
+    {
+      "id": "src_5",
+      "type": "email",
+      "from": "anita.luong@enron.com",
+      "to": "group",
+      "date": "2001-06-01",
+      "subject": "ERMS Discount Memo as of May 25, 2001"
+    },
+    {
+      "id": "src_6",
+      "type": "email",
+      "from": "anita.luong@enron.com",
+      "to": "group",
+      "date": "2001-10-23",
+      "subject": "ERMS Discounting Memo"
+    },
+    {
+      "id": "src_7",
+      "type": "email",
+      "from": "anita.luong@enron.com",
+      "to": "group",
+      "date": "2001-10-31",
+      "subject": "ERMS Discounting Memo for Oct. 2001"
+    }
+  ]
+}
