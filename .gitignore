@@ -27,7 +27,6 @@ backend/mails.jsonl
 backend/clusters.jsonl
 backend/embeddings_ids.json
 backend/verarbeitet.json
-backend/beispiele/
 
 # Upload-Batches und daraus extrahierte Ketten (private Postfaecher)
 backend/batches/

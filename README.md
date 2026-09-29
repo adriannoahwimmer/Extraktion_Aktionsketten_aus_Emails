@@ -169,7 +169,6 @@ das Modell `temperature` nicht unterstützt.
 │   ├── run_pipeline.py        steuert einen Upload-Batch, schreibt status.json
 │   ├── mail_utils.py          gemeinsame Reinigung, Deduplizierung, Heuristik
 │   ├── env_laden.py           liest den API-Key aus .env
-│   ├── explore_enron.py       Hilfsskript: Blick in den Rohkorpus
 │   ├── tune_clustering.py     Hilfsskript: UMAP/HDBSCAN-Parameter-Sweep
 │   ├── tools/pst/             Node-Werkzeug zum Lesen von .pst-Dateien
 │   └── chains/                extrahierte Aktionsketten (JSON)
