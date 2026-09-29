@@ -33,7 +33,6 @@ python extract_chains.py --alle   #    oder alle Cluster + Einzelmails
 | **`prepare_emails.py`** | Liest `data/emails.csv`, parst jede Mail, säubert den Body (Zitate/Forwards raus), normalisiert den Betreff → `mails.jsonl` (`{id, from, to, date, subject, subject_norm, body}`). |
 | **`cluster_mails.py`** | Lädt `mails.jsonl`, dedupliziert nach Body, bettet jede Mail über die KIT-Toolbox ein (`kit.qwen3-embedding-8b`, Cache `embeddings.npy`), reduziert mit UMAP auf 5 Dimensionen, clustert mit HDBSCAN → `clusters.jsonl` (`{id, cluster, chain_score, …}`). Dazu Konsolen-Report und Burnet-Akzeptanztest. |
 | **`extract_chains.py`** | Lädt `mails.jsonl` + `clusters.jsonl`, wählt die Cluster aus (Standard: 5 größte + Burnet-Kontrolle; `--alle`: alle Cluster + Einzelmails, fortsetzbar über `verarbeitet.json`), schickt jede Gruppe an das LLM (`google.claude-sonnet-5`) und speichert die Ketten als `chains/chain_cluster_<n>_<k>.json`. `--models` listet die verfügbaren Modelle. |
-| `explore_enron.py` | Hilfsskript: Blick in die CSV (Beispiele als `.txt` in `beispiele/`). |
 | `tune_clustering.py` | Hilfsskript: Parameter-Sweep für UMAP/HDBSCAN auf dem Embedding-Cache. |
 
 ---
