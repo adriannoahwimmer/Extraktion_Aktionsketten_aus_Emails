@@ -59,7 +59,7 @@ UMAP_MIN_MAILS = 15            # darunter wird UMAP uebersprungen (zu wenige Pun
 # Klein gewaehlt, weil echte Vorgaenge oft nur 2-3 Mails umfassen (Burnet: 3).
 # Hoehere Werte verschieben schwache Cluster nicht ins Rauschen, sondern
 # verschmelzen sie zu groesseren Fehlclustern (Parameter-Sweep mit
-# tune_clustering.py, siehe docs/PIPELINE_DOKUMENTATION.md, 5.3). Kleine
+# tune_clustering.py, siehe docs/archiv/PIPELINE_DOKUMENTATION.md, 5.3). Kleine
 # Fehlcluster sind harmloser; die Qualitaetskontrolle uebernimmt das LLM
 # ueber prozess_wahrscheinlichkeit.
 HDBSCAN_MIN_CLUSTER_SIZE = 2

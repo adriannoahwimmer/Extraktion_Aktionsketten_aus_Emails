@@ -188,15 +188,15 @@ das Modell `temperature` nicht unterstützt.
 
 ## Dokumentation
 
-- [docs/PROJEKT_ZUSAMMENFASSUNG.md](docs/PROJEKT_ZUSAMMENFASSUNG.md): Ziel,
-  Funktionsumfang, Methodik und Entscheidungen im Überblick
-- [docs/PIPELINE_DOKUMENTATION.md](docs/PIPELINE_DOKUMENTATION.md): Pipeline im
-  Detail, Experimente (Modellwahl, Heuristik, Parameter-Tuning)
-- [docs/UPLOAD_FEATURE_PLAN.md](docs/UPLOAD_FEATURE_PLAN.md): Konzept und Umsetzung
-  des Upload-Wegs
+- [docs/Seminarbericht.pdf](docs/Seminarbericht.pdf): Seminarbericht (Abgabefassung),
+  maßgebliche Beschreibung von Konzept, Umsetzung und Evaluation
+- [backend/eval/](backend/eval/): Skripte und Ergebnisse, aus denen die Zahlen im
+  Bericht stammen
 - [docs/aktionskettenstruktur.json](docs/aktionskettenstruktur.json): Vorlage des
   Aktionsketten-Schemas
 - [backend/README.md](backend/README.md): Übersicht der Skripte
+- [docs/archiv/](docs/archiv/): Entwicklungsprotokolle (Zwischenstände, nicht mehr
+  maßgeblich)
 
 ## Fehlerbehebung
 
