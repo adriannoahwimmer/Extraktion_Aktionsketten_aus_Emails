@@ -8,7 +8,7 @@ Parameterkombinationen auf den bereits gecachten Embeddings (kein API-Aufruf)
 jede Kombination die groessten Cluster zur qualitativen Pruefung.
 
 Grundlage der Parameterwahl in cluster_mails.py, Ergebnisse siehe
-docs/PIPELINE_DOKUMENTATION.md, Abschnitt 5.3.
+docs/archiv/PIPELINE_DOKUMENTATION.md, Abschnitt 5.3.
 
 Aufruf (aus backend/, nachdem cluster_mails.py den Embedding-Cache angelegt hat):
     python tune_clustering.py
