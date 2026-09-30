@@ -171,6 +171,7 @@ das Modell `temperature` nicht unterstützt.
 │   ├── env_laden.py           liest den API-Key aus .env
 │   ├── tune_clustering.py     Hilfsskript: UMAP/HDBSCAN-Parameter-Sweep
 │   ├── tools/pst/             Node-Werkzeug zum Lesen von .pst-Dateien
+│   ├── eval/                  Auswertung der Enron-Ketten (siehe eval/README.md)
 │   └── chains/                extrahierte Aktionsketten (JSON)
 ├── frontend/                  Next.js-Weboberfläche (src/app, src/components, src/lib)
 ├── docs/                      Dokumentation (siehe unten)
