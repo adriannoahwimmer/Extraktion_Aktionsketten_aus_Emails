@@ -24,6 +24,12 @@ bearbeiten.
 - **Enron-Pipeline** auf der Kommandozeile zur Reproduktion der Ergebnisse auf dem
   Enron-Korpus. 51 extrahierte Ketten liegen bereits im Repository.
 
+## Demo
+
+
+https://github.com/user-attachments/assets/3807b1a7-88a7-4fbb-96a7-d8bb84cf4d5c
+
+
 ## Architektur
 
 ```
